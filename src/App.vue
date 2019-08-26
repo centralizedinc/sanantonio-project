@@ -1,36 +1,33 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Ant-Design-Vue is successfully added to this project, you'll see an
-        <code v-text="'<a-button>'"></code>
-        below
-      </p>
-      <a-button type="primary">Primary</a-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <transition>
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.content {
+height:100vh;
+min-height:100vh;
+
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* margin-top:300px; */
+  /* background-color: red; */
+  /* color: white; */
+  z-index: 10;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

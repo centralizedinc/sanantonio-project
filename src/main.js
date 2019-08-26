@@ -5,7 +5,10 @@ import store from './store'
 import './registerServiceWorker'
 import './plugins/ant-design-vue.js'
 
+import axios from 'axios';
+
 Vue.config.productionTip = false
+Vue.prototype.$http=axios
 
 new Vue({
   router,
