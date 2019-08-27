@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="24">
+  <a-row type="flex" :gutter="8">
     <a-col :span="18">
         <a-tabs>
             <a-tab-pane tab="Mayor's Corner" key="1">
@@ -17,7 +17,7 @@
         </a-tabs>
     </a-col>
     <a-col :span="6">
-        <a-card title="Citizen Report">
+        <a-card title="Citizen Report" style="margin-top: 5vh">
             <p>What do you want to Report?</p>
             <a-form>
               <a-form-item>

@@ -30,7 +30,7 @@
         </a-menu-item>
       </a-menu>
       </a-layout-sider>
-    <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
+    <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
         <a-col :span="1"><a-avatar src="">JD</a-avatar></a-col>
         <a-col :span="10"><h3 style="color:#ffffff">Juan Dela Cruz</h3></a-col>

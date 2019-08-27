@@ -14,10 +14,15 @@ export default {
 </script>
 
 <style>
+.header {
+  position: fixed; 
+  z-index: 1;
+  width: 100%
+}
+
 .content {
 height:100vh;
 min-height:100vh;
-
 }
 .footer {
   position: fixed;
