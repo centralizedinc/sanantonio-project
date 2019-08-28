@@ -2,7 +2,7 @@
   <a-layout>
     <a-layout-sider collapsible theme="light"
       v-model="collapsed" :trigger="null">
-      <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png"  style="margin-top:10vh;width:100%" alt="">
+      <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png"  style="margin-top:10vh;width:100%" alt="asd">
       <a-menu  :defaultSelectedKeys="['1']" mode="inline">
         <a-menu-item key="1">
           <a-icon type="bars" />
