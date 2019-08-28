@@ -32,7 +32,7 @@
       </a-layout-sider>
     <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
-        <a-col :span="1"><a-avatar src="">JD</a-avatar></a-col>
+        <a-col :span="1"><a-avatar src="https://randomuser.me/api/portraits/thumb/men/65.jpg"></a-avatar></a-col>
         <a-col :span="10"><h3 style="color:#ffffff">Juan Dela Cruz</h3></a-col>
         <a-col :span="10">
           <a-input-search
@@ -54,8 +54,8 @@
     <a-layout-content class="content" style="margin-top:10vh; margin-left:1vh; margin-right:1vh;">
       <router-view></router-view>
     </a-layout-content>
-    <a-layout-footer class="footer" style="background-color:#0F82E0; color:#ffffff">
-      lucena city @2019
+    <a-layout-footer class="footer" >
+      Lucena City
     </a-layout-footer>
   </a-layout>
 </template>

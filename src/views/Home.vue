@@ -1,62 +1,111 @@
 <template>
-  <a-layout>
-    <a-layout-header class="header">
-      <h3 style="color:white">Lucena City</h3>
+  <a-layout >
+    <a-layout-header class="header" :style="headerStyle">
+      <a-row type="flex" justify="start" :gutter="8">
+        <a-col :span="1">
+          <a-avatar src="https://www.lucenacity.gov.ph/img/Lucena_Seal200.png" :size="50"></a-avatar>
+        </a-col>
+        <a-col :span="3">
+          <h3 style="color:white">Lucena City</h3>
+        </a-col>
+        <a-col :span="2" :push="16">
+         <a-button ghost block>LOGIN</a-button>
+        </a-col>
+        <a-col :span="2" :push="16">
+         <a-button ghost block>ABOUT</a-button>
+        </a-col>
+      </a-row>
     </a-layout-header>
-    <a-layout-content style="height:100vh; min-height:100vh;background-image:url('https://i.postimg.cc/MpjqbY8K/lucena-bg.jpg'); height:100%;background-position: center;
-  background-repeat: no-repeat;
+    <a-layout-content>
+      <div style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
   background-size: cover">
-    <a-row type="flex" :gutter="16" justify="center" style="opacity:0.96; margin-top: 15vh; margin-left:5vh; margin-right: 5vh"> 
-      <a-col :span="24">
-        <a-card >
-          <a-row>
-            <a-col :xl="12" :lg="12">
-              <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="80%"/>
+      <a-row style="height:100vh" type="flex" justify="start">
+        <a-col :span="20" style="margin-top:25vh; margin-left:15vh">
+          <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
+          <span style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</span>
+        </a-col>
+        <!-- <a-col :span="8" style="margin-top:20vh;">
+          <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%">
+        </a-col> -->
+        <a-col :span="4" style="margin-top:-20vh; margin-left:15vh">
+          <a-row :gutter="16">
+            <a-col :span="12">
+              <a-button size="large" block type="primary">Learn More</a-button>
             </a-col>
-            <a-col :xl="12" :lg="12">
-              <a-card>
-                <h1>Login</h1>
-                <a-divider></a-divider>
-                <a-form>
-                  <a-form-item>
-                    <a-input placeholder="Username"></a-input>
-                  </a-form-item>
-                  <a-form-item>
-                     <a-input placeholder="Password"></a-input>
-                  </a-form-item>
-                </a-form>
-                <a-divider></a-divider>
-                <a-button block type="primary" @click="$router.push('/app')">Continue</a-button>
-              </a-card>
+            <a-col :span="12">
+              <a-button size="large" block type="primary">Sign-up</a-button>
             </a-col>
-          </a-row>
-        </a-card>
-      </a-col>
-    </a-row>
+          </a-row>         
+        </a-col>
+      </a-row>
+      </div>
+      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh" :gutter="8">
+        <a-col :span="8">
+          <a-card title="News/Announcements">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <a-divider></a-divider>
+          <a-button type="primary">Read More</a-button>
+          </a-card>
+        </a-col>
+         <a-col :span="8">
+          <a-card title="Permits and Certificates">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <a-divider></a-divider>
+          <a-button type="primary">Apply Now</a-button> 
+          </a-card>
+        </a-col>
+         <a-col :span="8">
+          <a-card title=" Report Emergency/Calamity">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+          <a-divider></a-divider>
+          <a-button type="primary">Report</a-button>
+          </a-card>
+        </a-col>
+      </a-row>
+      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
+        <a-col :span="24">
+          <h1>Get in touch</h1>
+          <a-divider></a-divider>
+        </a-col>
+      </a-row>
+      
     </a-layout-content>
-    <a-layout-footer class="footer">
-      lucena @2019
-    </a-layout-footer>
+    <a-layout-footer style="background-color: #1A1693; color: #ffffff">Lucena City - Ease of Doing Business @2019</a-layout-footer>
   </a-layout>
 </template>
 
 <script>
 export default {
-
+  data(){
+    return {
+      topLocation:0
+    }
+  },
+  methods: {
+    handleScroll (event) {
+      // Any code to be executed when the window is scrolled
+      console.log('event ::: ',JSON.stringify(window.top.scrollY))
+      this.topLocation = window.top.scrollY;
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  computed:{
+    headerStyle(){
+      if(this.topLocation < 150){
+        return 'background-color: transparent'
+      }else{
+        return 'background-color: #1A1693'
+      }
+    }
+  }
 }
 </script>
 
 <style>
-.bg { 
-  /* The image used */
-  background-image: url('https://postimg.cc/qN0PpyR9');
 
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 </style>
