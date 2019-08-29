@@ -225,14 +225,66 @@
 
           <template v-if="step_curr==3">
             <a-row>
-              <a-col :span="6"></a-col>
+              <a-col :span="6">
+                <a-steps direction="vertical" size="small" :current="step_pay">
+                  <a-step title="Payment Information" />
+                  <a-step title="Billing Details " />
+                  <a-step title="Review" />
+                  <a-step title="Pay" />
+                </a-steps>
+              </a-col>
               <a-col :span="18">
                 <a-card style="textAlign:'center'">
-                  <a-card>
-                    <p class="text-md-center"> 
-                      <h3>Business Clearance</h3>
-                      <h5>₱1500.00</h5>
-                    </p>
+                  <a-card v-if="step_pay==0">
+                    <div align="center">
+                      <h1>Business Clearance</h1>
+                      <h1>₱1500.00</h1>
+                      <h1>PAYMENT METHOD</h1>
+                      <a-row :gutter="8">
+                        <a-col :span="9">
+                          <div align="right">
+                            <img
+                              src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
+                              alt="1055px-7-eleven-logo-tile"
+                              border="0"
+                              width="60"
+                              height="60"
+                            />
+                          </div>
+                        </a-col>
+                        <a-col :span="15">
+                          <h2 align="left" type="bold">OVER THE COUNTER</h2>
+                          <h5 align="left">
+                            Cebuana Lhullier, M Lhuillier,
+                            7-11 or Coins.ph
+                          </h5>
+                        </a-col>
+                      </a-row>
+                    </div>
+                  </a-card>
+                  <a-card v-if="step_pay==1">
+                    <h4>Customer Information</h4>
+                    <a-input placeholder="E-mail Address" v-model="form.email"></a-input>
+                    <a-input placeholder="Phone/Mobile" v-model="form.phone"></a-input>
+                    <a-input placeholder="Name" v-model="form.name"></a-input>
+                  </a-card>
+                  <a-card v-if="step_pay==2">
+                    <a-card title="Payment Information">
+                      <a-card-grid style="width:50%;textAlign:left">Description</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">Business Clearance</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">Amount</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">₱1500.00</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">Payment Method</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">Over the Counter</a-card-grid>
+                    </a-card>
+                    <a-card title="Billing Details">
+                      <a-card-grid style="width:50%;textAlign:left">Name</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">{{form.name}}</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">E-mail</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">{{form.email}}</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">Phone/Mobile</a-card-grid>
+                      <a-card-grid style="width:50%;textAlign:'center'">{{form.phone}}</a-card-grid>
+                    </a-card>
                   </a-card>
                 </a-card>
               </a-col>
@@ -257,6 +309,8 @@ export default {
   data() {
     return {
       step_curr: 0,
+      step_pay: 0,
+      pay: false,
       form: {},
       activities: [],
       value: 1,
@@ -310,6 +364,24 @@ export default {
         }
       ]
     };
+  },
+  watch: {
+    step_curr() {
+      console.log("step curr data: " + JSON.stringify(this.step_curr));
+      console.log("step pay data: " + JSON.stringify(this.step_pay));
+      if (this.step_curr > 3) {
+        this.pay = true;
+        this.step_pay++;
+        this.step_curr = 3;
+      } else if (this.pay && this.step_pay != 0 && this.step_curr == 2) {
+        this.step_pay--;
+        this.step_curr = 3;
+        if (this.step_pay == 0) {
+          this.pay = false;
+          this.step_curr = 2;
+        }
+      }
+    }
   },
   methods: {
     onChange(e) {
