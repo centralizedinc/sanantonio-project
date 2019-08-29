@@ -9,7 +9,7 @@
           <h3 style="color:white">Lucena City</h3>
         </a-col>
         <a-col :span="2" :push="16">
-         <a-button ghost block>LOGIN</a-button>
+         <a-button ghost block @click="visible=true">LOGIN</a-button>
         </a-col>
         <a-col :span="2" :push="16">
          <a-button ghost block>ABOUT</a-button>
@@ -71,6 +71,31 @@
       
     </a-layout-content>
     <a-layout-footer style="background-color: #1A1693; color: #ffffff">Lucena City - Ease of Doing Business @2019</a-layout-footer>
+    <a-modal v-model="visible">
+      <!-- <div style="background:rgba(25, 25, 25, .5)"> -->
+        <!-- <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%" /> -->
+        <a-row type="flex" justify="center">
+          <a-col :span="16">
+            <a-avatar src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" shape="square" :size="300"></a-avatar>
+          </a-col>
+          <a-col :span="24">
+             <a-form style="margin-top:-10vh">
+              <a-form-item>
+                <a-input placeholder="Username"></a-input>
+              </a-form-item>
+              <a-form-item>
+                <a-input placeholder="Password" type="password"></a-input>
+              </a-form-item>
+            </a-form>
+          </a-col>
+        </a-row>             
+      <template slot="footer">
+        <a-button key="submit" type="primary" :loading="loading" @click="$router.push('/app')">
+          Login
+        </a-button>
+        </template>
+      <!-- </div> -->
+    </a-modal>
   </a-layout>
 </template>
 
@@ -78,6 +103,7 @@
 export default {
   data(){
     return {
+      visible:false,
       topLocation:0
     }
   },
@@ -107,5 +133,4 @@ export default {
 </script>
 
 <style>
-
 </style>
