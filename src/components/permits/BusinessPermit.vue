@@ -178,7 +178,66 @@
             </a-form-item>
           </template>
 
-          <template v-if="step_curr==2"></template>
+          <template v-if="step_curr==2">
+            <a-row :gutter="8">
+              <a-col :span="12">
+                <a-button block>AIG</a-button>
+                <a-button block>AXA Philippines</a-button>
+                <a-button block>Malayan</a-button>
+                <a-button block>MAPRE Philippines</a-button>
+                <a-card title="Card Title" :style="{ marginTop: '16px' }">
+                  <a-card-grid style="width:50%;textAlign:left">
+                    <p>
+                      Lorem ipsum
+                      Dolor sit amet
+                      Consetetur sadipscing elitr
+                      Sed diam n voluptua
+                      At vero eos et accusam
+                    </p>
+                  </a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">
+                    <p>
+                      Lorem ipsum
+                      Dolor sit amet
+                      Consetetur sadipscing elitr
+                      Sed diam n voluptua
+                      At vero eos et accusam
+                    </p>
+                  </a-card-grid>
+                </a-card>
+              </a-col>
+              <a-col :span="11">
+                <a-card title="Payment Details">
+                  <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱15,000.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">LRF(Legal Research Fee)</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱150.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">Interest</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱0.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">Surcharge</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱0.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">Total</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱15,150.00</a-card-grid>
+                </a-card>
+              </a-col>
+            </a-row>
+          </template>
+
+          <template v-if="step_curr==3">
+            <a-row>
+              <a-col :span="6"></a-col>
+              <a-col :span="18">
+                <a-card style="textAlign:'center'">
+                  <a-card>
+                    <p class="text-md-center"> 
+                      <h3>Business Clearance</h3>
+                      <h5>₱1500.00</h5>
+                    </p>
+                  </a-card>
+                </a-card>
+              </a-col>
+            </a-row>
+          </template>
         </a-form>
       </a-col>
     </a-row>
