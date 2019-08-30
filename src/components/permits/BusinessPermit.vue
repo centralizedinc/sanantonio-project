@@ -7,11 +7,14 @@
           <a-step title="Business Details"></a-step>
           <a-step title="Owner Information"></a-step>
           <a-step title="Requirements"></a-step>
+          <a-step title="Business Insurance"></a-step>
+          <a-step title="Payments"></a-step>
         </a-steps>
         <a-divider></a-divider>
       </a-col>
       <a-col :span="24">
         <a-form>
+          <!-- application details -->
           <template v-if="step_curr==0">
             <a-form-item label="Application" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
               <a-radio-group v-model="form.application_type">
@@ -48,7 +51,7 @@
               <a-input placeholder="Registration Number"></a-input>
             </a-form-item>
           </template>
-
+          <!-- business details -->
           <template v-if="step_curr==1">
             <a-form-item
               label="Kind of Onwership"
@@ -286,6 +289,29 @@
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.phone}}</a-card-grid>
                     </a-card>
                   </a-card>
+                  <a-modal v-model="visible" data-backdrop="static" data-keyboard="false">
+                    <template slot="footer">
+                      <a-button>
+                        <a-icon type="download" />Download
+                      </a-button>
+                      <a-button>Confirm</a-button>
+                    </template>
+                    <div align="center">
+                      <h2>Amount Due (before fee)</h2>
+                      <h1 style="color:#0F82E0">₱1500</h1>
+                      <h3>Payment Instructions:</h3>
+                      <h5>1. Go to the nearest 7-Eleven store.</h5>
+                      <h5>
+                        2. Request for a 7-Connect payment at the cashier
+                        <br />
+                        with Reference Number: {{ref_num}}
+                      </h5>
+                      <h2>OR</h2>
+                      <h3>SCAN BARCODE</h3>
+                      <barcode v-bind:value="barcodeValue">Show this if the rendering fails.</barcode>
+                      <h5>3. Complete your payment and you have paid the payment request.</h5>
+                    </div>
+                  </a-modal>
                 </a-card>
               </a-col>
             </a-row>
@@ -305,13 +331,21 @@
 </template>
 
 <script>
+import VueBarcode from "vue-barcode";
+
 export default {
+  components: {
+    barcode: VueBarcode
+  },
   data() {
     return {
       step_curr: 0,
       step_pay: 0,
       pay: false,
+      visible: false,
+      barcodeValue: "123-456-789",
       form: {},
+      ref_num: "123-456-789",
       activities: [],
       value: 1,
       dataSource: [
@@ -373,6 +407,9 @@ export default {
         this.pay = true;
         this.step_pay++;
         this.step_curr = 3;
+        if (this.step_pay == 3) {
+          this.visible = true;
+        }
       } else if (this.pay && this.step_pay != 0 && this.step_curr == 2) {
         this.step_pay--;
         this.step_curr = 3;
@@ -381,6 +418,10 @@ export default {
           this.step_curr = 2;
         }
       }
+    },
+    visible() {
+      console.log("visible status: " + JSON.stringify(this.visible));
+      this.visible = true;
     }
   },
   methods: {
