@@ -34,6 +34,9 @@
               </a-form-item>
             </a-form>
         </a-card>
+        <a-card title="Incident Map" style="margin-top: 5vh">
+            
+        </a-card>
     </a-col>
   </a-row>
 </template>

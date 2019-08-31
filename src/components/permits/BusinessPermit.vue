@@ -132,7 +132,7 @@
               <template
                 v-for="col in ['line_business', 'capital', 'receipts']"
                 :slot="col"
-                slot-scope="text, record, index"
+                slot-scope="text, record"
               >
                 <div :key="col">
                   <a-input
@@ -144,7 +144,7 @@
                   <template v-else>{{text}}</template>
                 </div>
               </template>
-              <template slot="operation" slot-scope="text, record, index">
+              <template slot="operation" slot-scope="text, record">
                 <div class="editable-row-operations">
                   <a-popconfirm
                     v-if="dataSource.length"

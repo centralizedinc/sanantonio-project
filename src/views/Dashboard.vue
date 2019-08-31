@@ -54,9 +54,9 @@
     <a-layout-content class="content" style="margin-top:10vh; margin-left:1vh; margin-right:1vh;">
       <router-view></router-view>
     </a-layout-content>
-    <a-layout-footer class="footer" >
+    <!-- <a-layout-footer class="footer" >
       Lucena City
-    </a-layout-footer>
+    </a-layout-footer> -->
   </a-layout>
 </template>
 
