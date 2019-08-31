@@ -5,12 +5,13 @@ import store from './store'
 import './registerServiceWorker'
 import './plugins/ant-design-vue.js'
 
+
 import axios from 'axios';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import VueGeolocation from 'vue-browser-geolocation';
 
 Vue.config.productionTip = false
-Vue.prototype.$http=axios
+Vue.prototype.$http = axios
 
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {
