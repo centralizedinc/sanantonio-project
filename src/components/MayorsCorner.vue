@@ -38,10 +38,16 @@
     <a-col :span="24">
         <a-card>
             <div v-for="i in 4" :key="i">
+<<<<<<< HEAD
                 <a-skeleton  active avatar :paragraph="{rows: 4}" />
                 <a-divider></a-divider>
             </div>
                 
+=======
+                <a-skeleton  active avatar :paragraph="{rows: 2}" width="12" />
+                <a-divider></a-divider>
+            </div>
+>>>>>>> 0042bfa7d900d19df1ef35fa984fe059271a2870
         </a-card>
         
     </a-col>
@@ -78,10 +84,17 @@ export default {
 
 <style>
 .ant-skeleton-content .ant-skeleton-title{
+<<<<<<< HEAD
     height: 9px;
 }
 
 .ant-skeleton-content .ant-skeleton-paragraph > li{
     height: 9px;
+=======
+    height:1vh
+}
+.ant-skeleton-content .ant-skeleton-paragraph .li{
+    height:1vh
+>>>>>>> 0042bfa7d900d19df1ef35fa984fe059271a2870
 }
 </style>
