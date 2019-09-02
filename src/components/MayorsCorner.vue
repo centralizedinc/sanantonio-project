@@ -1,6 +1,6 @@
 <template>
   <a-row type="flex" :gutter="16">
-    <a-col :span="12">
+    <!-- <a-col :span="12">
         <a-card title="Create Post">
             <a-row type="flex" :gutter="8">
               <a-col :span="4">
@@ -34,12 +34,14 @@
                 </a-col>
             </a-row>
         </a-card>
-    </a-col>
+    </a-col> -->
     <a-col :span="24">
         <a-card>
-            <template>
-                <a-skeleton v-for="i in 2" :key="i" active avatar :paragraph="{rows: 4}" />
-            </template>
+            <div v-for="i in 4" :key="i">
+                <a-skeleton  active avatar :paragraph="{rows: 4}" />
+                <a-divider></a-divider>
+            </div>
+                
         </a-card>
         
     </a-col>
@@ -75,5 +77,11 @@ export default {
 </script>
 
 <style>
+.ant-skeleton-content .ant-skeleton-title{
+    height: 9px;
+}
 
+.ant-skeleton-content .ant-skeleton-paragraph > li{
+    height: 9px;
+}
 </style>

@@ -83,16 +83,14 @@
             <a-form-item label="Email Address" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Business Email"></a-input>
             </a-form-item>
-            <a-form-item
-              label="Business Address"
-              :label-col="{ span: 8 }"
-            >
+            <a-form-item label="Business Address" :label-col="{ span: 8 }">
               <a-textarea rows="3" placeholder="Full Business Address"></a-textarea>
             </a-form-item>
             <a-form-item
-            :label-col="{ span: 8 }"
+              :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
-            label="Applicant's/Owner's/Manager's Address">
+              label="Applicant's/Owner's/Manager's Address"
+            >
               <a-checkbox @change="same_address">Check if same with business address</a-checkbox>
             </a-form-item>
             <a-form-item label="Business Area" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">

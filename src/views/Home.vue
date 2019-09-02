@@ -2,16 +2,16 @@
   <a-layout >
     <a-layout-header class="header" :style="headerStyle">
       <a-row type="flex" justify="start" :gutter="8">
-        <a-col :span="1">
+        <a-col :span="2">
           <a-avatar src="https://www.lucenacity.gov.ph/img/Lucena_Seal200.png" :size="50"></a-avatar>
         </a-col>
-        <a-col :span="3">
+        <a-col :span="4">
           <h3 style="color:white">Lucena City</h3>
         </a-col>
-        <a-col :span="2" :push="16">
+        <a-col :span="2" :push="14">
          <a-button ghost block @click="visible=true">LOGIN</a-button>
         </a-col>
-        <a-col :span="2" :push="16">
+        <a-col :span="2" :push="14">
          <a-button ghost block>ABOUT</a-button>
         </a-col>
       </a-row>
@@ -27,10 +27,10 @@
         <!-- <a-col :span="8" style="margin-top:20vh;">
           <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%">
         </a-col> -->
-        <a-col :span="4" style="margin-top:-20vh; margin-left:15vh">
+        <a-col :span="8" style="margin-top:-20vh; margin-left:15vh">
           <a-row :gutter="16">
             <a-col :span="12">
-              <a-button size="large" block type="primary">Learn More</a-button>
+              <a-button size="large" block type="primary">Read More</a-button>
             </a-col>
             <a-col :span="12">
               <a-button size="large" block type="primary">Sign-up</a-button>
@@ -60,6 +60,24 @@
           <a-divider></a-divider>
           <a-button type="primary">Report</a-button>
           </a-card>
+        </a-col>
+      </a-row>
+      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
+        <a-col :span="24">
+          <h1>News/Announcements</h1>
+          <a-divider></a-divider>
+        </a-col>
+      </a-row>
+      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
+        <a-col :span="24">
+          <h1>Permits and Certificates</h1>
+          <a-divider></a-divider>
+        </a-col>
+      </a-row>
+      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
+        <a-col :span="24">
+          <h1>Report Emergency/Calamity</h1>
+          <a-divider></a-divider>
         </a-col>
       </a-row>
       <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
