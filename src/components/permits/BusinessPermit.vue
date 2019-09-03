@@ -5,7 +5,6 @@
         <a-steps size="small" :current="step_curr">
           <a-step title="Application Details"></a-step>
           <a-step title="Business Details"></a-step>
-          <a-step title="Owner Information"></a-step>
           <a-step title="Requirements"></a-step>
           <a-step title="Business Insurance"></a-step>
           <a-step title="Payments"></a-step>
@@ -84,17 +83,54 @@
               <a-input placeholder="Business Email"></a-input>
             </a-form-item>
             <a-form-item label="Business Address" :label-col="{ span: 8 }">
-              <a-textarea rows="3" placeholder="Full Business Address"></a-textarea>
+              <a-textarea rows="3" placeholder="Full Business Address" style="width: 605px"></a-textarea>
+              <div align="center">
+                <a-checkbox @change="sameAddress" defaultChecked>Check if same with business address</a-checkbox>
+              </div>
             </a-form-item>
-            <a-form-item
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-              label="Applicant's/Owner's/Manager's Address"
-            >
-              <a-checkbox @change="same_address">Check if same with business address</a-checkbox>
-            </a-form-item>
+            <template v-if="!same_address">
+              <div>
+                <a-form-item label="Applicant's/Owner's/Manager's Address" :label-col="{ span: 8 }">
+                  <a-textarea
+                    rows="3"
+                    placeholder="Full Applicant's/Owner's/Manager's Address"
+                    style="width: 605px"
+                  ></a-textarea>
+                </a-form-item>
+                <a-form-item
+                  label="Contact Number"
+                  :label-col="{ span: 8 }"
+                  :wrapper-col="{ span: 16 }"
+                >
+                  <a-input placeholder="Applicant's/Owner's/Manager's Telephone Number"></a-input>
+                </a-form-item>
+                <a-form-item
+                  label="Email Address"
+                  :label-col="{ span: 8 }"
+                  :wrapper-col="{ span: 16 }"
+                >
+                  <a-input placeholder="Applicant's/Owner's/Manager's Email"></a-input>
+                </a-form-item>
+              </div>
+            </template>
+            <!-- Applicant's/Owner's/Manager's Address -->
             <a-form-item label="Business Area" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Lot Area in square meters (sqm)"></a-input>
+            </a-form-item>
+            <a-form-item
+              label="Number of Owners"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16 }"
+            >
+              <a-input-number :min="1" :defaultValue="1"></a-input-number>
+            </a-form-item>
+            <a-form-item
+              label="Number of Employees"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16 }"
+            >
+              <a-input-number :defaultValue="1" />Professional
+              <a-input-number :defaultValue="1" />Non-Professional
             </a-form-item>
             <a-form-item label="Rented/Owned" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-radio-group v-model="form.address_ownership">
@@ -126,13 +162,14 @@
               </a-form-item>
             </template>
             <a-divider orientation="left">Business Activities</a-divider>
+            <!-- ///////////////////////////////////////////////////////////////////////// -->
             <!-- <a-table :columns="cols" :dataSource="activities"></a-table> -->
-            <a-button class="editable-add-btn" @click="handleAdd">Add</a-button>
-            <a-table :columns="columns" :dataSource="dataSource">
-              <!-- <template slot="name" slot-scope="text, record">
-                <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)" />
-              </template>-->
-              <template
+            <!-- <a-button class="editable-add-btn" @click="handleAdd">Add</a-button>
+            <a-table :columns="columns" :dataSource="dataSource">-->
+            <!-- <template slot="line_business" slot-scope="text, record">
+                <editable-cell :text="text" @change="onCellChange(record.key, 'line_business', $event)" />
+            </template>-->
+            <!-- <template
                 v-for="col in ['line_business', 'capital', 'receipts']"
                 :slot="col"
                 slot-scope="text, record, index"
@@ -156,8 +193,8 @@
                   >
                     <a href="javascript:;">Delete</a>
                   </a-popconfirm>
-                </div>
-                <div class="editable-row-operations">
+            </div>-->
+            <!-- <div class="editable-row-operations">
                   <span v-if="record.editable">
                     <a @click="() => save(record.key)">Save</a>
                     <p>&nbsp;</p>
@@ -168,9 +205,37 @@
                   <span v-else>
                     <a @click="() => edit(record.key)">Edit</a>
                   </span>
-                </div>
+            </div>-->
+            <!-- </template>
+            </a-table>-->
+            <!-- ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] -->
+            <a-input placeholder="Line of Business" v-model="line_business"></a-input>
+            <a-input placeholder="Capitalization" v-model="capital"></a-input>
+            <a-input placeholder="Gross Sales/Receipts" v-model="receipts"></a-input>
+            <a-button class="editable-add-btn" @click="addBusinessActivities" v-if="!editing">Add</a-button>
+            <a-button class="editable-add-btn" @click="saveEdit" v-if="editing">Edit</a-button>
+            <a-button class="editable-add-btn" @click="onCancel" v-if="editing">Cancel</a-button>
+
+            <a-table bordered :dataSource="business_activities" :columns="columns">
+              <template slot="operation" slot-scope="text, record, index">
+                <a-popconfirm
+                  v-if="business_activities.length"
+                  title="Sure to delete?"
+                  @confirm="() => onEdit(record, index)"
+                >
+                  <a href="javascript:;">Edit</a>
+                </a-popconfirm>
+                <a-popconfirm
+                  v-if="business_activities.length"
+                  title="Sure to delete?"
+                  @confirm="() => onDelete(index)"
+                >
+                  <a href="javascript:;">Delete</a>
+                </a-popconfirm>
               </template>
             </a-table>
+
+            <!-- ///////////////////////////////////////////////////////////////////////// -->
             <a-form-item
               label="Mode of Pyament"
               :label-col="{ span: 8 }"
@@ -180,17 +245,35 @@
                 <a-radio :value="1">Annual/Full</a-radio>
                 <a-radio :value="2">Quarterly</a-radio>
               </a-radio-group>
-              <a-input v-if="form.mode_payment == 2" placeholder="No. of Quarters"></a-input>
+              <a-input-number
+                v-if="form.mode_payment == 2"
+                size="small"
+                :min="1"
+                :max="4"
+                placeholder="No. of QTR"
+              ></a-input-number>
             </a-form-item>
           </template>
 
           <template v-if="step_curr==2">
+            <a-upload-dragger name="file" :multiple="true" @change="upload">
+              <p class="ant-upload-drag-icon">
+                <a-icon type="inbox" />
+              </p>
+              <p class="ant-upload-text">Click or drag file to this area to upload</p>
+              <p
+                class="ant-upload-hint"
+              >Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+            </a-upload-dragger>
+          </template>
+
+          <template v-if="step_curr==3">
             <a-row :gutter="8">
               <a-col :span="12">
-                <a-button block>AIG</a-button>
-                <a-button block>AXA Philippines</a-button>
-                <a-button block>Malayan</a-button>
-                <a-button block>MAPRE Philippines</a-button>
+                <a-button block @click="insured(1)">AIG</a-button>
+                <a-button block @click="insured(2)">AXA Philippines</a-button>
+                <a-button block @click="insured(3)">Malayan</a-button>
+                <a-button block @click="insured(4)">MAPRE Philippines</a-button>
                 <a-card title="Card Title" :style="{ marginTop: '16px' }">
                   <a-card-grid style="width:50%;textAlign:left">
                     <p>
@@ -215,21 +298,23 @@
               <a-col :span="11">
                 <a-card title="Payment Details">
                   <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱15,000.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱{{insurance.fee}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">LRF(Legal Research Fee)</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱150.00</a-card-grid>
+                  <a-card-grid style="width:50%;textAlign:'center'">₱{{insurance.fee*0.01}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Interest</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">₱0.00</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Surcharge</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">₱0.00</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Total</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱15,150.00</a-card-grid>
+                  <a-card-grid
+                    style="width:50%;textAlign:'center'"
+                  >₱{{insurance.fee + (insurance.fee*0.1)}}</a-card-grid>
                 </a-card>
               </a-col>
             </a-row>
           </template>
 
-          <template v-if="step_curr==3">
+          <template v-if="step_curr==4">
             <a-row>
               <a-col :span="6">
                 <a-steps direction="vertical" size="small" :current="step_pay">
@@ -297,7 +382,7 @@
                       <a-button>
                         <a-icon type="download" />Download
                       </a-button>
-                      <a-button>Confirm</a-button>
+                      <a-button @click="redirect('mainView')">Confirm</a-button>
                     </template>
                     <div align="center">
                       <h2>Amount Due (before fee)</h2>
@@ -342,8 +427,13 @@ export default {
   },
   data() {
     return {
+      insurance: {
+        name: "",
+        fee: 0
+      },
       step_curr: 0,
       step_pay: 0,
+      same_address: true,
       pay: false,
       visible: false,
       barcodeValue: "123-456-789",
@@ -351,15 +441,19 @@ export default {
       ref_num: "123-456-789",
       activities: [],
       value: 1,
+      line_business: "",
+      capital: "",
+      receipts: "",
+      business_activities: [],
+      editing: false,
+      key: 0,
       dataSource: [
         {
-          key: "0",
           line_business: "Edward King 0",
           capital: "32",
           receipts: "London, Park Lane no. 0"
         },
         {
-          key: "1",
           line_business: "Edward King 1",
           capital: "32",
           receipts: "London, Park Lane no. 1"
@@ -406,19 +500,41 @@ export default {
     step_curr() {
       console.log("step curr data: " + JSON.stringify(this.step_curr));
       console.log("step pay data: " + JSON.stringify(this.step_pay));
-      if (this.step_curr > 3) {
+      if (this.step_curr > 4) {
         this.pay = true;
         this.step_pay++;
-        this.step_curr = 3;
+        this.step_curr = 4;
+        console.log("step > 4");
         if (this.step_pay == 3) {
+          console.log("step_pay == 4");
           this.visible = true;
         }
-      } else if (this.pay && this.step_pay != 0 && this.step_curr == 2) {
+      } else if (this.pay && this.step_pay != 0 && this.step_curr == 3) {
+        console.log(
+          "else if step curr data: " + JSON.stringify(this.step_curr)
+        );
+        console.log("else if step pay data: " + JSON.stringify(this.step_pay));
         this.step_pay--;
-        this.step_curr = 3;
+        this.step_curr = 4;
         if (this.step_pay == 0) {
           this.pay = false;
-          this.step_curr = 2;
+          this.step_curr = 4;
+        }
+      } else if (this.step_pay === 1) {
+        console.log("step pay ");
+        if (
+          this.form.email == null &&
+          this.form.email == "" &&
+          this.form.email == undefined &&
+          this.form.phone == null &&
+          this.form.phone == "" &&
+          this.form.phone == undefined &&
+          this.form.name == null &&
+          this.form.name == "" &&
+          this.form.name == undefined
+        ) {
+          console.log("fill it up");
+          this.step_pay = 1;
         }
       }
     },
@@ -428,8 +544,70 @@ export default {
     }
   },
   methods: {
+    insured(key) {
+      var product = [
+        {
+          name: "",
+          fee: 0
+        },
+        {
+          name: "AIG",
+          fee: 15000
+        },
+        {
+          name: "AXA Philippines",
+          fee: 16000
+        },
+        {
+          name: "Malayan",
+          fee: 17000
+        },
+        {
+          name: "MAPRE Philippines",
+          fee: 18000
+        }
+      ];
+      this.insurance = product[key];
+    },
+    redirect(nav) {
+      this.$emit("redirect", nav);
+    },
+    upload(info) {
+      const status = info.file.status;
+      if (status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (status === "done") {
+        this.$message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === "error") {
+        this.$message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    addBusinessActivities() {
+      if (
+        this.line_business != null &&
+        this.line_business != "" &&
+        this.capital != null &&
+        this.capital != "" &&
+        this.receipts != null &&
+        this.receipts != ""
+      ) {
+        this.business_activities.push({
+          line_business: this.line_business,
+          capital: this.capital,
+          receipts: this.receipts
+        });
+        this.line_business = "";
+        this.capital = "";
+        this.receipts = "";
+      }
+    },
     onChange(e) {
       console.log(`checked = ${e.target.checked}`);
+    },
+    sameAddress(e) {
+      this.same_address = e.target.checked;
+      console.log("same address value: " + JSON.stringify(this.same_address));
     },
     onCellChange(key, dataIndex, value) {
       const dataSource = [...this.dataSource];
@@ -450,6 +628,7 @@ export default {
     edit(key) {
       const newData = [...this.dataSource];
       const target = newData.filter(item => key === item.key)[0];
+      console.log("taget edit data: " + JSON.stringify(target));
       if (target) {
         target.editable = true;
         this.dataSource = newData;
@@ -477,17 +656,41 @@ export default {
       }
     },
     onDelete(key) {
-      const dataSource = [...this.dataSource];
-      this.dataSource = dataSource.filter(item => item.key !== key);
+      console.log("on delete key data: " + JSON.stringify(key));
+      this.business_activities.splice(key);
+      console.log(
+        "business_activities data: " + JSON.stringify(this.business_activities)
+      );
+    },
+    onEdit(record, key) {
+      console.log("on edit key data: " + JSON.stringify(key));
+      this.line_business = this.business_activities[key].line_business;
+      this.capital = this.business_activities[key].capital;
+      this.receipts = this.business_activities[key].receipts;
+      this.editing = true;
+      this.key = key;
+    },
+    saveEdit() {
+      this.business_activities[this.key].line_business = this.line_business;
+      this.business_activities[this.key].capital = this.capital;
+      this.business_activities[this.key].receipts = this.receipts;
+      this.onCancel();
+    },
+    onCancel() {
+      this.editing = false;
+      this.line_business = "";
+      this.capital = "";
+      this.receipts = "";
     },
     handleAdd() {
       const { count, dataSource } = this;
-      const newData = {
+      var newData = {
         key: count,
         line_business: `Click here`,
         capital: "Click here",
         receipts: `Click here`
       };
+      newData.editable = true;
       this.dataSource = [...dataSource, newData];
       this.count = count + 1;
     }
