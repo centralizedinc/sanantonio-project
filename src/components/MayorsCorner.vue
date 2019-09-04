@@ -1,58 +1,76 @@
 <template>
   <a-row type="flex" :gutter="16">
-    <!-- <a-col :span="12">
-        <a-card title="Create Post">
-            <a-row type="flex" :gutter="8">
-              <a-col :span="4">
-                  <a-avatar>AB</a-avatar>
-              </a-col>
-              <a-col :span="20">
-                  <a-textarea :rows="5" placeholder="Write something..."></a-textarea>
-              </a-col>
-            </a-row>
-            <a-row type="flex" justify="end" :gutter="8" style="margin-top:1vh">
-              <a-col :span="6">
-                  <a-button type="primary">Post <a-icon type="export"></a-icon></a-button>
-              </a-col>
-            </a-row>
-        </a-card>
-    </a-col>
-    <a-col :span="12">
-        <a-card title="Subscribers">
-            <a-row type="flex" :gutter="8">
-                <a-col :span="12" v-for="sub in subscribers" :key="sub.login.uuid">
-                    <a-card >
-                        <a-row type="flex" :gutter="8"> 
-                            <a-col :span="8" >
-                                <a-avatar :src="sub.picture.thumbnail"></a-avatar>
-                            </a-col>
-                            <a-col :span="16" >
-                                <p>{{sub.name.first}} {{sub.name.last}}</p>
-                            </a-col>
-                        </a-row>
-                    </a-card>
-                </a-col>
-            </a-row>
-        </a-card>
-    </a-col> -->
     <a-col :span="24">
         <a-card>
-            <div v-for="i in 4" :key="i">
+          <template v-if="loading">
+            <div v-for="i in 4" :key="i" >
                 <a-skeleton  active avatar :paragraph="{rows: 4}" />
                 <a-divider></a-divider>
             </div>
-                
-        </a-card>
-        
+          </template>
+          <template v-else>
+            <a-comment v-for="i in 4" :key="i">
+              <template slot="actions">
+                <span>
+                  <a-tooltip title="Like">
+                    <a-icon
+                      type="like"
+                      :theme="action === 'liked' ? 'filled' : 'outlined'"
+                      @click="like"
+                    />
+                  </a-tooltip>
+                  <span style="padding-left: '8px';cursor: 'auto'">
+                    {{likes}}
+                  </span>
+                </span>
+                <span>
+                  <a-tooltip title="Dislike">
+                    <a-icon
+                      type="dislike"
+                      :theme="action === 'disliked' ? 'filled' : 'outlined'"
+                      @click="dislike"
+                    />
+                  </a-tooltip>
+                  <span style="padding-left: '8px';cursor: 'auto'">
+                    {{dislikes}}
+                  </span>
+                </span>
+              </template>
+              <a slot="author">Han Solo</a>
+              <a-avatar
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                alt="Han Solo"
+                slot="avatar"
+              />
+              <p slot="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <a-row type="flex" justify="center" :gutter="8">
+                  <a-col :span="8" v-for="i in 3" :key="i">
+                    <img :src="`https://picsum.photos/300?random=${i}`" width="250vh">
+                    </a-col>
+                </a-row>
+              </p>
+              <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
+                <span>{{moment().fromNow()}}</span>
+              </a-tooltip>
+          </a-comment>  
+        </template>              
+        </a-card>        
     </a-col>
   </a-row>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     data(){
         return {
-            subscribers:[]
+            subscribers:[],
+            moment,
+            likes: 0,
+            dislikes: 0,
+            action: null,
+            loading:false,
         }
     },
     created(){
@@ -60,13 +78,16 @@ export default {
     },
     methods:{
         init(){
+            this.loading = true
             this.$http.get('https://randomuser.me/api/?results=4')
             .then(results=>{
                 console.log('::::',JSON.stringify(results))
                 this.subscribers = results.data.results
+                this.loading=false;
             })
             .catch(err=>{
                 console.log(err);
+                this.loading=false;
                 // this.$notification.error({
                     
                 // })
