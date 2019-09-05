@@ -1,31 +1,30 @@
 <template>
-    <component v-bind:is="currentView" @redirect="redirect">
-    </component>
+  <component v-bind:is="currentView" @redirect="redirect"></component>
 </template>
 
 <script>
-import mainView from '@/components/permits/main'
-import BusinessPermit from '@/components/permits/BusinessPermit'
+import mainView from "@/components/permits/main";
+import BusinessPermit from "@/components/permits/BusinessPermit";
+import Transactions from "@/components/permits/Transactions";
 export default {
-  components:{
+  components: {
     mainView,
-    BusinessPermit
+    BusinessPermit,
+    Transactions
   },
-  data(){
+  data() {
     return {
-      currentView:'mainView'
-    }
+      currentView: "mainView"
+    };
   },
-  methods:{
-    redirect(nav){
-      console.log(nav)
-      this.currentView=nav
+  methods: {
+    redirect(nav) {
+      console.log(nav);
+      this.currentView = nav;
     }
   }
-
-}
+};
 </script>
 
 <style>
-
 </style>
