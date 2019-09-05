@@ -73,17 +73,16 @@
             </a-form> -->
         </a-card>
         <a-card title="Incident Map">
-             <GmapMap id="map" ref="map"
-            :center="{lat:coordinates.lat, lng:coordinates.lng}"
+             <GmapMap id="map1" ref="map1"
+            :center="{lat:13.9413957, lng:121.6234471}"
             :zoom="16"
             map-type-id="terrain"
-            draggable="true"
-            style="width: 100%"
+            map-type-control="false"
+            style="width: 100%; height: 300px"
         >
             <GmapMarker
                 :draggable="true"
                 :position="coordinates"
-                :animation="animation"
             />
         </GmapMap>
         </a-card>

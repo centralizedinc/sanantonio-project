@@ -13,11 +13,14 @@ import VueGeolocation from 'vue-browser-geolocation';
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
+console.log(' process.env.VUE_APP_GOOGLE_MAP_KEY ::: ',process.env.VUE_APP_GOOGLE_MAP_KEY)
+
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {
   load: {
     // key: 'AIzaSyCHB6d8PoTLPZ2dtnxSPSHFpeu3pxkiA6s' || process.env.VUE_APP_GOOGLE_MAP_KEY,
-    key:  process.env.VUE_APP_GOOGLE_MAP_KEY
+    key:  process.env.VUE_APP_GOOGLE_MAP_KEY,
+    
   },
   installComponents: true
 })
