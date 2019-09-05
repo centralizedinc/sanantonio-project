@@ -33,7 +33,7 @@
               <a-button size="large" block type="primary">Read More</a-button>
             </a-col>
             <a-col :span="12">
-              <a-button size="large" block type="primary">Sign-up</a-button>
+              <a-button size="large" block type="primary" @click="signup_visible=true">Sign-up</a-button>
             </a-col>
           </a-row>         
         </a-col>
@@ -89,6 +89,55 @@
       
     </a-layout-content>
     <a-layout-footer style="background-color: #1A1693; color: #ffffff">Lucena City - Ease of Doing Business @2019</a-layout-footer>
+    <a-modal v-model="signup_visible" title="Register">
+      <!-- <div style="background:rgba(25, 25, 25, .5)"> -->
+        <!-- <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%" /> -->
+        <a-row type="flex" justify="center" :gutter="16">
+          <!-- <a-col :span="16">
+            <a-avatar src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" shape="square" :size="300"></a-avatar>
+          </a-col> -->
+          <a-col :span="24">
+            <p>Register with facebook or google</p>
+          </a-col>
+          <a-col :span="12">           
+            <a-button block size="large" type="primary"> <a-icon type="facebook"></a-icon>Facebook</a-button>
+          </a-col>
+          <a-col :span="12">
+            <a-button block size="large" style="background-color:#DE4935; color:#FFFFFF"> <a-icon type="google"></a-icon>Google</a-button>
+          </a-col>
+           <a-col :span="24">
+            <a-divider>Or</a-divider>
+          </a-col>
+          <a-col :span="24">
+             <a-form >
+               <a-form-item>
+                <a-input placeholder="First Name"></a-input>
+              </a-form-item>
+              <a-form-item>
+                <a-input placeholder="Last Name"></a-input>
+              </a-form-item>
+              <a-form-item>
+                <a-input placeholder="Email"></a-input>
+              </a-form-item>
+              <a-form-item>
+                <a-input placeholder="Password" type="password"></a-input>
+              </a-form-item>
+               <a-form-item>
+                <a-input placeholder="Confirm Password" type="password"></a-input>
+              </a-form-item>
+            </a-form>
+          </a-col>
+
+         
+        </a-row>             
+      <!-- <template slot="footer">
+        <a-button key="submit" type="primary" :loading="loading" @click="$router.push('/app')">
+          Submit
+        </a-button>
+        </template> -->
+      <!-- </div> -->
+    </a-modal>
+    
     <a-modal v-model="visible">
       <!-- <div style="background:rgba(25, 25, 25, .5)"> -->
         <!-- <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%" /> -->
@@ -106,6 +155,7 @@
               </a-form-item>
             </a-form>
           </a-col>
+
         </a-row>             
       <template slot="footer">
         <a-button key="submit" type="primary" :loading="loading" @click="$router.push('/app')">
@@ -121,6 +171,7 @@
 export default {
   data(){
     return {
+      signup_visible:false,
       visible:false,
       topLocation:0
     }

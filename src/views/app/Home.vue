@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="8">
+  <a-row type="flex" :gutter="8" >
     <a-col :span="18">
         <a-tabs>
             <a-tab-pane tab="Mayor's Corner" key="1">
@@ -17,9 +17,47 @@
         </a-tabs>
     </a-col>
     <a-col :span="6">
-        <a-card title="Citizen Report" style="margin-top: 5vh">
+        <a-card title="Citizen Report" style="margin-top: 10vh" >
             <p>What do you want to Report?</p>
-            <a-form>
+            <a-row>
+              <a-col :span="12">
+                  <a-card style="background-color:#1A1693">
+                      <a-row type="flex" justify="center">
+                          <a-col :span="12">
+                              <a-icon type="fire"  @click="report(1)" style="color:#ffffff;font-size:24px" ></a-icon>
+                          </a-col>
+                      </a-row>
+                  </a-card>                  
+              </a-col>
+              <a-col :span="12">
+                  <a-card style="background-color:#1A1693">
+                      <a-row type="flex" justify="center">
+                          <a-col :span="12">
+                              <a-icon type="sound"  @click="report(1)" style="color:#ffffff;font-size:24px" ></a-icon>
+                          </a-col>
+                      </a-row>
+                  </a-card>                  
+              </a-col>
+              <a-col :span="12">
+                  <a-card style="background-color:#1A1693">
+                      <a-row type="flex" justify="center">
+                          <a-col :span="12">
+                              <a-icon type="alert"  @click="report(1)" style="color:#ffffff;font-size:24px" ></a-icon>
+                          </a-col>
+                      </a-row>
+                  </a-card>                 
+              </a-col>
+              <a-col :span="12">
+                  <a-card style="background-color:#1A1693; cursor:pointer">
+                      <a-row type="flex" justify="center">
+                          <a-col :span="12">
+                              <a-icon type="safety"  @click="report(1)" style="color:#ffffff;font-size:24px" ></a-icon>
+                          </a-col>
+                      </a-row>
+                  </a-card>                 
+              </a-col>
+            </a-row>
+            <!-- <a-form>
               <a-form-item>
                   <a-button block type="primary" @click="report(1)">Fire <a-icon type="fire"></a-icon></a-button>
               </a-form-item>
@@ -32,10 +70,22 @@
               <a-form-item>
                   <a-button block type="primary">Crime <a-icon type="safety"></a-icon></a-button>
               </a-form-item>
-            </a-form>
+            </a-form> -->
         </a-card>
-        <a-card title="Incident Map" style="margin-top: 5vh">
-            
+        <a-card title="Incident Map">
+             <GmapMap id="map" ref="map"
+            :center="{lat:coordinates.lat, lng:coordinates.lng}"
+            :zoom="16"
+            map-type-id="terrain"
+            draggable="true"
+            style="width: 100%"
+        >
+            <GmapMarker
+                :draggable="true"
+                :position="coordinates"
+                :animation="animation"
+            />
+        </GmapMap>
         </a-card>
     </a-col>
     <a-modal :visible="visible" title="Report Incident">
