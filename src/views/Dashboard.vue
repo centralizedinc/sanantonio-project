@@ -1,5 +1,8 @@
 <template>
   <a-layout>
+    <a-back-top>
+      <a-avatar><a-icon type="up"></a-icon></a-avatar>
+    </a-back-top>
     <a-layout-sider collapsible theme="light"
       v-model="collapsed" :trigger="null">
       <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png"  style="margin-top:15vh;width:100%" alt="asd">
