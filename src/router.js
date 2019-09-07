@@ -12,6 +12,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/auth',
+      name: 'Authorization',
+      component: () => import(/* webpackChunkName: "about" */ './views/Auth.vue'),
+    },
+    {
       path: '/app',
       component: () => import(/* webpackChunkName: "about" */ './views/Dashboard.vue'),
       children:[

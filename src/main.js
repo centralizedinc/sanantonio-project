@@ -11,9 +11,11 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import VueGeolocation from 'vue-browser-geolocation';
 
 Vue.config.productionTip = false
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URI
 Vue.prototype.$http = axios
 
 console.log(' process.env.VUE_APP_GOOGLE_MAP_KEY ::: ',process.env.VUE_APP_GOOGLE_MAP_KEY)
+console.log(' process.env.VUE_APP_BASE_API_URI ::: ',process.env.VUE_APP_BASE_API_URI)
 
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {

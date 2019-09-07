@@ -9,7 +9,7 @@
           <h3 style="color:white">Lucena City</h3>
         </a-col>
         <a-col :span="2" :push="14">
-         <a-button ghost block @click="visible=true">LOGIN</a-button>
+         <a-button ghost block @click="signup_visible=true">SIGN-UP</a-button>
         </a-col>
         <a-col :span="2" :push="14">
          <a-button ghost block>ABOUT</a-button>
@@ -19,24 +19,48 @@
     <a-layout-content>
       <div style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
   background-size: cover">
-      <a-row style="height:100vh" type="flex" justify="start">
-        <a-col :span="20" style="margin-top:25vh; margin-left:15vh">
+      <a-row style="height:100vh" type="flex" justify="start" :gutter="8">
+        <a-col :push="1" :span="12" style="margin-top:25vh">
           <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
-          <span style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</span>
+          <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
+          <a-button size="large" type="primary">Read More</a-button>  
         </a-col>
-        <!-- <a-col :span="8" style="margin-top:20vh;">
-          <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%">
+        <a-col :push="2" :span="8" style="margin-top:20vh;">
+          <a-card style="background: rgba(59, 79, 99, 0.62)">
+            <template slot="title">
+              <div style="color:#ffffff">Enter Crendetials</div>
+            </template>
+             <a-form>
+              <a-form-item>
+                <a-input size="large" placeholder="Email">
+                  <a-icon slot="prefix" type="mail" />
+                </a-input>
+              </a-form-item>
+              <a-form-item>
+                <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
+                  <a-icon slot="prefix" type="lock" />
+                  <a-icon slot="suffix" :type="reveal?'eye':'eye-invisible'" @click="reveal=!reveal"/>
+                </a-input>
+              </a-form-item>
+              <a-button size="large" block ghost >Login</a-button>
+              <a-divider></a-divider>
+              <p style="color:white">Login using facebook or google accounts</p>
+              <a-row type="flex" gutter="16">
+                <a-col :span="12">
+                  <a-button block type="primary" @click="registerFacebook"> <a-icon type="facebook"></a-icon>Facebook</a-button>
+                </a-col>
+                <a-col :span="12">
+                  <a-button block @click="registerGoogle" style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"> <a-icon type="google"></a-icon>Google</a-button>
+                </a-col>
+              </a-row>
+              
+              
+            </a-form> 
+          </a-card>
+        </a-col>
+        <!-- <a-col :push="1" :span="4" >
+          <a-button size="large" block type="primary">Read More</a-button>                  
         </a-col> -->
-        <a-col :span="8" style="margin-top:-20vh; margin-left:15vh">
-          <a-row :gutter="16">
-            <a-col :span="12">
-              <a-button size="large" block type="primary">Read More</a-button>
-            </a-col>
-            <a-col :span="12">
-              <a-button size="large" block type="primary" @click="signup_visible=true">Sign-up</a-button>
-            </a-col>
-          </a-row>         
-        </a-col>
       </a-row>
       </div>
       <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh" :gutter="8">
@@ -99,11 +123,11 @@
           <a-col :span="24">
             <p>Register with facebook or google</p>
           </a-col>
-          <a-col :span="12">           
-            <a-button block size="large" type="primary"> <a-icon type="facebook"></a-icon>Facebook</a-button>
+          <a-col :span="12">             
+            <a-button block size="large" type="primary" @click="registerFacebook"> <a-icon type="facebook"></a-icon>Facebook</a-button>
           </a-col>
           <a-col :span="12">
-            <a-button block size="large" style="background-color:#DE4935; color:#FFFFFF"> <a-icon type="google"></a-icon>Google</a-button>
+            <a-button block size="large" @click="registerGoogle" style="background-color:#DE4935; color:#FFFFFF"> <a-icon type="google"></a-icon>Google</a-button>
           </a-col>
            <a-col :span="24">
             <a-divider>Or</a-divider>
@@ -126,9 +150,7 @@
                 <a-input placeholder="Confirm Password" type="password"></a-input>
               </a-form-item>
             </a-form>
-          </a-col>
-
-         
+          </a-col>         
         </a-row>             
       <!-- <template slot="footer">
         <a-button key="submit" type="primary" :loading="loading" @click="$router.push('/app')">
@@ -138,7 +160,7 @@
       <!-- </div> -->
     </a-modal>
     
-    <a-modal v-model="visible">
+    <a-modal v-model="visible" :footer="null">
       <!-- <div style="background:rgba(25, 25, 25, .5)"> -->
         <!-- <img src="https://i.postimg.cc/VNqw2L6x/lucena-image1.png" width="100%" /> -->
         <a-row type="flex" justify="center">
@@ -157,11 +179,11 @@
           </a-col>
 
         </a-row>             
-      <template slot="footer">
+      <!-- <template slot="footer">
         <a-button key="submit" type="primary" :loading="loading" @click="$router.push('/app')">
           Login
         </a-button>
-        </template>
+        </template> -->
       <!-- </div> -->
     </a-modal>
   </a-layout>
@@ -173,7 +195,8 @@ export default {
     return {
       signup_visible:false,
       visible:false,
-      topLocation:0
+      topLocation:0,
+      reveal:false
     }
   },
   methods: {
@@ -181,6 +204,14 @@ export default {
       // Any code to be executed when the window is scrolled
       console.log('event ::: ',JSON.stringify(window.top.scrollY))
       this.topLocation = window.top.scrollY;
+    },
+    registerFacebook(){
+      window.open(`http://localhost:4000/auth/facebook`, "", "width=500,height=450")
+      this.signup_visible = false;
+    },
+    registerGoogle(){
+      window.open(`http://localhost:4000/auth/google`, "", "width=500,height=450")
+      this.signup_visible = false;
     }
   },
   created () {
@@ -188,7 +219,9 @@ export default {
   },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll);
+    
   },
+
   computed:{
     headerStyle(){
       if(this.topLocation < 150){

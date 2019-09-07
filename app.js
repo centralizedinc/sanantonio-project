@@ -14,6 +14,7 @@ app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
 app.use(serveStatic(__dirname + "/dist"));
+app.use('/auth', require('./api/routes/auth'))
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_5d8vctdf:ojeeck5qn5rumhsoomlb8n8tt9@ds143132.mlab.com:43132/heroku_5d8vctdf"
 mongoose.connect(MONGODB_URI, {

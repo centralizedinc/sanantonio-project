@@ -32,8 +32,8 @@
       </a-layout-sider>
     <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
-        <a-col :span="1"><a-avatar src="https://randomuser.me/api/portraits/thumb/men/65.jpg"></a-avatar></a-col>
-        <a-col :span="10"><h3 style="color:#ffffff">Juan Dela Cruz</h3></a-col>
+        <a-col :span="1"><a-avatar :src="user.avatar"></a-avatar></a-col>
+        <a-col :span="10"><h3 style="color:#ffffff">{{user.fname}} {{user.lname}}</h3></a-col>
         <a-col :span="10">
           <a-input-search
             placeholder="Search"
@@ -47,7 +47,7 @@
           <a-icon type="setting" style="color:#ffffff"></a-icon>
         </a-col>
         <a-col :span="1">
-          <a-icon type="logout" style="color:#ffffff"></a-icon>
+          <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
     </a-layout-header>
@@ -57,7 +57,13 @@
     <!-- <a-layout-footer class="footer" >
       Lucena City
     </a-layout-footer> -->
+    <!-- <a-modal :visible="logout" title="Confirm Logout" :closable="false">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </a-modal> -->
   </a-layout>
+  
 </template>
 
 <script>
@@ -65,7 +71,33 @@
 export default {
   data(){
     return {
-      collapsed:false
+      collapsed:false,
+      user:{}
+    }
+  },
+  created(){
+    this.init()
+  },
+  methods:{
+    init(){
+      this.user = this.$store.state.user_session.user
+      // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+    },
+    logout(){
+      var _self = this
+      this.$confirm({
+        title: 'Logout Confirmation', 
+        content: 'Are you sure you want to logout?',
+        okText: 'Yes',
+        cancelText: 'No',
+        onOk() {
+          console.log('OK');
+          _self.$router.push('/')
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
     }
   }
 }

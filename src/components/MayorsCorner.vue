@@ -13,11 +13,7 @@
               <template slot="actions">
                 <span>
                   <a-tooltip title="Like">
-                    <a-icon
-                      type="like"
-                      :theme="action === 'liked' ? 'filled' : 'outlined'"
-                      @click="like"
-                    />
+                    <a-icon type="like" :theme="action === 'liked' ? 'filled' : 'outlined'" @click="like"/>
                   </a-tooltip>
                   <span style="padding-left: '8px';cursor: 'auto'">
                     {{likes}}
