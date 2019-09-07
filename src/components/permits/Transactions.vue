@@ -68,7 +68,7 @@ export default {
     return {
       form: {
         permit: "",
-        app_type: "",
+        type: "",
         ref_no: "",
         pbr_date: "",
         lgu_date: "",
@@ -83,18 +83,38 @@ export default {
       },
       transac: [
         {
-          reference_no: 1,
+          ref_no: 1,
           permit: "Business Permit",
           type: "Initial",
           status: "On Process",
-          current_task: "Payment"
+          current_task: "Payment",
+          pbr_date: "09/05/2019",
+          lgu_date: "09/05/2019",
+          reg_no: "01",
+          ownership: "owned",
+          tin: 123456789,
+          sss: 123456789,
+          business_name: "negosyo",
+          contact_num: 321,
+          email: "email@email.email",
+          business_address: "location"
         },
         {
           reference_no: 2,
           permit: "Business Permit",
           type: "Initial",
           status: "On Process",
-          current_task: "Payment"
+          current_task: "Payment",
+          pbr_date: "09/05/2019",
+          lgu_date: "09/05/2019",
+          reg_no: "01",
+          ownership: "owned",
+          tin: 123456789,
+          sss: 123456789,
+          business_name: "negosyo",
+          contact_num: 321,
+          email: "email@email.email",
+          business_address: "location"
         }
       ],
       cols: [
