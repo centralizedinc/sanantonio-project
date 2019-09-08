@@ -2,7 +2,7 @@
 
 const router = require("express").Router();
 
-var PermitDao = require('../dao/Permitdao');
+var PermitDao = require('../dao/PermitDao');
 
 router
     .route('/apply')
