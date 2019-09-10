@@ -4,9 +4,15 @@ const helmet = require('helmet')
 const serveStatic = require('serve-static');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 //application server
 const app = express()
+
+console.log('process.env.VUE_APP_GOOGLE_MAP_KEY ::: ',process.env.VUE_APP_GOOGLE_MAP_KEY)
+console.log('process.env.VUE_APP_BASE_API_URI ::: ',process.env.VUE_APP_BASE_API_URI)
+console.log('process.env.VUE_APP_HOME_URI ::: ',process.env.VUE_APP_HOME_URI)
+
 
 app.use(cors())
 app.use(helmet())
