@@ -9,14 +9,18 @@
           <a-avatar style="cursor:pointer" @click="$router.push('/')" src="https://www.lucenacity.gov.ph/img/Lucena_Seal200.png" :size="50"></a-avatar>
         </a-col>
         <a-col :span="4">
-          <h3 style="color:white">Lucena City</h3>
+          <h3 style="color:white; margin-left: -6vh">Lucena City</h3>
         </a-col>
-        <a-col :span="2" :push="14">
+        <a-col :span="2" :push="12">
+         <a-button ghost block>NEWS</a-button>
+        </a-col>
+        <a-col :span="2" :push="12">
+         <a-button ghost block>REPORT</a-button>
+        </a-col>
+        <a-col :span="2" :push="12">
          <a-button ghost block @click="signup_visible=true">SIGN-UP</a-button>
         </a-col>
-        <a-col :span="2" :push="14">
-         <a-button ghost block>ABOUT</a-button>
-        </a-col>
+        
       </a-row>
     </a-layout-header>
     <a-layout-content >

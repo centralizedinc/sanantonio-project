@@ -2,7 +2,7 @@
   <div>
       <div style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
   background-size: cover">
-      <a-row style="height:100vh" type="flex" justify="start" :gutter="8">
+      <a-row style="height:100vh" type="flex" justify="start" >
         <a-col :push="1" :span="12" style="margin-top:20vh">
           <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
           <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
@@ -23,7 +23,7 @@
               <a-form-item>
                 <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
                   <a-icon slot="prefix" type="lock" />
-                  <a-icon slot="suffix" :type="reveal?'eye':'eye-invisible'" @click="reveal=!reveal"/>
+                  <a-icon slot="suffix" :type="reveal?'eye':'eye-invisible'" @click="reveal=!reveal" style="cursor:pointer"/>
                 </a-input>
               </a-form-item>
               <a-button size="large" block ghost >Login</a-button>
@@ -65,7 +65,7 @@
           </a-card>
         </a-col>
       </a-row>
-      <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh;">
+      <a-row :gutter="16" type="flex" align="middle" style="margin-top:10vh; margin-left:5vh; margin-right:5vh;">
         <a-col :span="24">
           <h1>News/Announcements</h1>
           <a-divider></a-divider>
@@ -105,24 +105,23 @@
           <img width="100%" src="https://bjango.com/images/mac/skalapreview2/skala-preview-hero.jpg" alt="">
         </a-col>
       </a-row>
-      <!-- <a-row type="flex" style="margin-top:10vh; margin-left:5vh; margin-right:5vh">
-        <a-col :span="24">
-          <h1>Get in touch</h1>
-          <a-divider></a-divider>
-        </a-col>
-      </a-row> -->
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return {
+      reveal:false
+    }
+  },
     methods:{
         registerFacebook(){
-            window.open(`http://localhost:4000/auth/facebook`, "", "width=500,height=450")
+            window.open(`${process.env.VUE_APP_BASE_API_URI}/auth/facebook`, "", "width=500,height=450")
             this.signup_visible = false;
         },
         registerGoogle(){
-            window.open(`http://localhost:4000/auth/google`, "", "width=500,height=450")
+            window.open(`${process.env.VUE_APP_BASE_API_URI}/auth/google`, "", "width=500,height=450")
             this.signup_visible = false;
         }
     }
