@@ -1,9 +1,9 @@
 <template>
   <a-row type="flex" :gutter="24">
-      <a-col :span="24">
+      <!-- <a-col :span="24">
           <h3>Downloadable Forms</h3>
           <p>Business Forms and Affidavit</p>
-      </a-col>
+      </a-col> -->
     <a-col :span="24">
       <a-card v-for="i in 4" :key="i">
         <a-row>

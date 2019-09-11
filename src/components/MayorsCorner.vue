@@ -2,15 +2,19 @@
   <a-row type="flex" :gutter="16">
     
     <a-col :span="24">
-        <a-card>
+       
           <template v-if="loading">
+             <a-card>
             <div v-for="i in 4" :key="i" >
                 <a-skeleton  active avatar :paragraph="{rows: 4}" />
                 <a-divider></a-divider>
             </div>
+             </a-card>
           </template>
+          
           <template v-else>
-            <a-comment v-for="(sub,indx) in subscribers" :key="sub.name.first">
+            <a-card  v-for="(sub,indx) in subscribers" :key="sub.name.first" style="margin-bottom: 2vh">
+            <a-comment>
               <template slot="actions">
                 <span>
                   <a-tooltip title="Like">
@@ -43,16 +47,16 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 <a-row type="flex" justify="center" :gutter="8">
                   <a-col :span="8" v-for="i in 3" :key="i">
-                    <img :src="`https://picsum.photos/300?random=${indx}${i}`" width="250vh">
+                    <img :src="`https://picsum.photos/300?random=${indx}${i}`" width="200vw">
                     </a-col>
                 </a-row>
               </p>
               <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
                 <span>{{moment().fromNow()}}</span>
               </a-tooltip>
-          </a-comment>  
-        </template>              
-        </a-card>        
+          </a-comment>
+          </a-card>  
+        </template>        
     </a-col>
   </a-row>
 </template>
