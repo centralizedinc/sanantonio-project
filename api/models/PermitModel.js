@@ -1,6 +1,9 @@
 var mongoose = require('mongoose')
 var PermitModelSchema = new mongoose.Schema({
     application: {
+        permit_type: {
+            type: String
+        },
         app_type: {
             type: Number
             //1 - New
@@ -44,8 +47,11 @@ var PermitModelSchema = new mongoose.Schema({
         business_address: {
             type: String
         },
-        // AMO - Applicat/Manager/Owner
+        // AMO - Applicant/Manager/Owner
         amo: {
+            name: {
+                type: String
+            },
             address: {
                 type: String
             },
@@ -84,6 +90,23 @@ var PermitModelSchema = new mongoose.Schema({
             },
             lessor_address: {
                 type: String
+            },
+            lessor_contact: {
+                type: Number
+            },
+            lessor_email: {
+                type: String
+            }
+        },
+        property_pin: {
+            land: {
+                type: Number
+            },
+            building: {
+                type: Number
+            },
+            machinery: {
+                type: Number
             }
         },
         business_activities: [],
@@ -138,6 +161,17 @@ var PermitModelSchema = new mongoose.Schema({
         },
         contact: {
             type: Number
+        }
+    },
+    progress: {
+        status: {
+            type: String
+        },
+        current_task: {
+            type: String
+        },
+        previous_task: {
+            type: String
         }
     }
 })

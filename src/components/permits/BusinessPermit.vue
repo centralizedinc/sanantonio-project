@@ -90,8 +90,20 @@
             <a-form-item label="Email Address" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Business Email" v-model="form.business.email"></a-input>
             </a-form-item>
-            <a-form-item label="Business Address" :label-col="{ span: 8 }"> 
-              <a-textarea rows="3" placeholder="Full Business Address" style="width: 605px" v-model="form.business.business_address"></a-textarea>
+            <a-form-item label="Business Address" :label-col="{ span: 8 }">
+              <a-textarea
+                rows="3"
+                placeholder="Full Business Address"
+                style="width: 605px"
+                v-model="form.business.business_address"
+              ></a-textarea>
+            </a-form-item>
+            <a-form-item
+              label="Name of Application/Owner/Manager"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16}"
+            >
+              <a-input placeholder="Surname, First name, MI" v-model="form.business.amo.name"></a-input>
               <div align="center">
                 <a-checkbox
                   @change="sameAddress"
@@ -114,20 +126,29 @@
                   :label-col="{ span: 8 }"
                   :wrapper-col="{ span: 16 }"
                 >
-                  <a-input placeholder="Applicant's/Owner's/Manager's Telephone Number" v-model="form.business.amo.contact"></a-input>
+                  <a-input
+                    placeholder="Applicant's/Owner's/Manager's Telephone Number"
+                    v-model="form.business.amo.contact"
+                  ></a-input>
                 </a-form-item>
                 <a-form-item
                   label="Email Address"
                   :label-col="{ span: 8 }"
                   :wrapper-col="{ span: 16 }"
                 >
-                  <a-input placeholder="Applicant's/Owner's/Manager's Email" v-model="form.business.amo.email"></a-input>
+                  <a-input
+                    placeholder="Applicant's/Owner's/Manager's Email"
+                    v-model="form.business.amo.email"
+                  ></a-input>
                 </a-form-item>
               </div>
             </template>
             <!-- Applicant's/Owner's/Manager's Address -->
             <a-form-item label="Business Area" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <a-input placeholder="Lot Area in square meters (sqm)" v-model="form.business.business_area"></a-input>
+              <a-input
+                placeholder="Lot Area in square meters (sqm)"
+                v-model="form.business.business_area"
+              ></a-input>
             </a-form-item>
             <a-form-item
               label="Number of Owners"
@@ -141,14 +162,27 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              <a-input-number :defaultValue="1" v-model="form.business.employees_no.professional"/>Professional
-              <a-input-number :defaultValue="1" v-model="form.business.employees_no.non_professional"/>Non-Professional
+              <a-input-number :defaultValue="1" v-model="form.business.employees_no.professional" />Professional
+              <a-input-number
+                :defaultValue="1"
+                v-model="form.business.employees_no.non_professional"
+              />Non-Professional
             </a-form-item>
             <a-form-item label="Rented/Owned" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-radio-group v-model="form.business.business_type">
                 <a-radio :value="1">Rented</a-radio>
                 <a-radio :value="2">Owned</a-radio>
               </a-radio-group>
+            </a-form-item>
+            <a-form-item
+              label="Property Index Number (P.I.N.)"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16 }"
+            >
+              Land
+              <a-input-number v-model="form.business.property_pin.land" />Building
+              <a-input-number v-model="form.business.property_pin.building" />Machinery
+              <a-input-number v-model="form.business.property_pin.machinery" />
             </a-form-item>
             <template v-if="form.business.business_type==1">
               <a-form-item
@@ -163,14 +197,41 @@
                 :label-col="{ span: 8 }"
                 :wrapper-col="{ span: 16 }"
               >
-                <a-input placeholder="Rent per Month in Peso(Php)" v-model="form.business.rented.monthly_rental"></a-input>
+                <a-input
+                  placeholder="Rent per Month in Peso(Php)"
+                  v-model="form.business.rented.monthly_rental"
+                ></a-input>
               </a-form-item>
               <a-form-item
                 label="Lessor's Address"
                 :label-col="{ span: 8 }"
                 :wrapper-col="{ span: 16 }"
               >
-                <a-textarea rows="3" placeholder="Full Address" v-model="form.business.rented.lessor_address"></a-textarea>
+                <a-textarea
+                  rows="3"
+                  placeholder="Full Address"
+                  v-model="form.business.rented.lessor_address"
+                ></a-textarea>
+              </a-form-item>
+              <a-form-item
+                label="Lessor's Contact Number"
+                :label-col="{ span: 8 }"
+                :wrapper-col="{ span: 16 }"
+              >
+                <a-input
+                  placeholder="Lessor's Telephone Number"
+                  v-model="form.business.rented.lessor_contact"
+                ></a-input>
+              </a-form-item>
+              <a-form-item
+                label="Lessor's E-mail Address"
+                :label-col="{ span: 8 }"
+                :wrapper-col="{ span: 16 }"
+              >
+                <a-input
+                  placeholder="Lessor's E-mail Address"
+                  v-model="form.business.rented.lessor_email"
+                ></a-input>
               </a-form-item>
             </template>
             <a-divider orientation="left">Business Activities</a-divider>
@@ -228,17 +289,17 @@
             <a-button class="editable-add-btn" @click="saveEdit" v-if="editing">Edit</a-button>
             <a-button class="editable-add-btn" @click="onCancel" v-if="editing">Cancel</a-button>
 
-            <a-table bordered :dataSource="business_activities" :columns="columns">
+            <a-table bordered :dataSource="form.business.business_activities" :columns="columns">
               <template slot="operation" slot-scope="text, record, index">
                 <a-popconfirm
-                  v-if="business_activities.length"
+                  v-if="form.business.business_activities.length"
                   title="Sure to delete?"
                   @confirm="() => onEdit(record, index)"
                 >
                   <a href="javascript:;">Edit</a>
                 </a-popconfirm>
                 <a-popconfirm
-                  v-if="business_activities.length"
+                  v-if="form.business.business_activities.length"
                   title="Sure to delete?"
                   @confirm="() => onDelete(index)"
                 >
@@ -269,7 +330,12 @@
           </template>
 
           <template v-if="step_curr==2">
-            <a-upload-dragger v-model="form.documents" name="file" :multiple="true" @change="upload">
+            <a-upload-dragger
+              v-model="form.documents"
+              name="file"
+              :multiple="true"
+              @change="upload"
+            >
               <p class="ant-upload-drag-icon">
                 <a-icon type="inbox" />
               </p>
@@ -311,13 +377,19 @@
               <a-col :span="11">
                 <a-card title="Payment Details">
                   <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.app_fee}}</a-card-grid>
+                  <a-card-grid
+                    style="width:50%;textAlign:'center'"
+                  >₱{{form.business_insurance.app_fee}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">LRF(Legal Research Fee)</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.lrf}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Interest</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.interest}}</a-card-grid>
+                  <a-card-grid
+                    style="width:50%;textAlign:'center'"
+                  >₱{{form.business_insurance.interest}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Surcharge</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.surcharge}}</a-card-grid>
+                  <a-card-grid
+                    style="width:50%;textAlign:'center'"
+                  >₱{{form.business_insurance.surcharge}}</a-card-grid>
                   <a-card-grid style="width:50%;textAlign:'center'">Total</a-card-grid>
                   <a-card-grid
                     style="width:50%;textAlign:'center'"
@@ -377,7 +449,9 @@
                       <a-card-grid style="width:50%;textAlign:left">Description</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">Amount</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">₱{{form.payment_info.amount}}</a-card-grid>
+                      <a-card-grid
+                        style="width:50%;textAlign:'center'"
+                      >₱{{form.payment_info.amount}}</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">Payment Method</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
                     </a-card>
@@ -387,7 +461,9 @@
                       <a-card-grid style="width:50%;textAlign:'center'">E-mail</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">Phone/Mobile</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.contact}}</a-card-grid>
+                      <a-card-grid
+                        style="width:50%;textAlign:'center'"
+                      >{{form.billing_info.contact}}</a-card-grid>
                     </a-card>
                   </a-card>
                   <a-modal v-model="visible" data-backdrop="static" data-keyboard="false">
@@ -395,7 +471,7 @@
                       <a-button>
                         <a-icon type="download" />Download
                       </a-button>
-                      <a-button @click="redirect('mainView')">Confirm</a-button>
+                      <a-button @click="confirm()">Confirm</a-button>
                     </template>
                     <div align="center">
                       <h2>Amount Due (before fee)</h2>
@@ -433,6 +509,7 @@
 
 <script>
 import VueBarcode from "vue-barcode";
+import axios from "axios";
 
 export default {
   components: {
@@ -453,6 +530,7 @@ export default {
       // **************************************
       form: {
         application: {
+          permit_type: "Business Permit",
           app_type: null,
           reference_no: null,
           pbr_date: null,
@@ -469,6 +547,7 @@ export default {
           business_address: "",
           // AMO - Applicat/Manager/Owner
           amo: {
+            name: "",
             address: "",
             contact: null,
             email: ""
@@ -483,10 +562,20 @@ export default {
           rented: {
             lessor: "",
             monthly_rental: null,
-            lessor_address: ""
-        },
+            lessor_address: "",
+            lessor_conatct: null,
+            lessor_email: ""
+          },
+          property_pin: {
+            land: null,
+            building: null,
+            machinery: null
+          },
           business_activities: [],
-          payment_mode: null
+          payment: {
+            mode: null,
+            qrtly: null
+          }
         },
         documents: [],
         business_insurance: {
@@ -506,6 +595,11 @@ export default {
           name: "",
           email: "",
           contact: null
+        },
+        progress: {
+          status: "On Progress",
+          current_task: "Payment",
+          previous_task: ""
         }
       },
       // ***************************************
@@ -655,7 +749,7 @@ export default {
         }
       ];
       // this.insurance = product[key];
-      this.form.business_insurance = product[key]
+      this.form.business_insurance = product[key];
     },
     redirect(nav) {
       this.$emit("redirect", nav);
@@ -680,7 +774,8 @@ export default {
         this.receipts != null &&
         this.receipts != ""
       ) {
-        this.business_activities.push({
+        console.log("addBusinessActivities");
+        this.form.business.business_activities.push({
           line_business: this.line_business,
           capital: this.capital,
           receipts: this.receipts
@@ -745,23 +840,28 @@ export default {
     },
     onDelete(key) {
       console.log("on delete key data: " + JSON.stringify(key));
-      this.business_activities.splice(key);
+      this.form.business.business_activities.splice(key);
       console.log(
-        "business_activities data: " + JSON.stringify(this.business_activities)
+        "business_activities data: " +
+          JSON.stringify(this.form.business.business_activities)
       );
     },
     onEdit(record, key) {
       console.log("on edit key data: " + JSON.stringify(key));
-      this.line_business = this.business_activities[key].line_business;
-      this.capital = this.business_activities[key].capital;
-      this.receipts = this.business_activities[key].receipts;
+      this.line_business = this.form.business.business_activities[
+        key
+      ].line_business;
+      this.capital = this.form.business.business_activities[key].capital;
+      this.receipts = this.form.business.business_activities[key].receipts;
       this.editing = true;
       this.key = key;
     },
     saveEdit() {
-      this.business_activities[this.key].line_business = this.line_business;
-      this.business_activities[this.key].capital = this.capital;
-      this.business_activities[this.key].receipts = this.receipts;
+      this.form.business.business_activities[
+        this.key
+      ].line_business = this.line_business;
+      this.form.business.business_activities[this.key].capital = this.capital;
+      this.form.business.business_activities[this.key].receipts = this.receipts;
       this.onCancel();
     },
     onCancel() {
@@ -781,6 +881,21 @@ export default {
       newData.editable = true;
       this.dataSource = [...dataSource, newData];
       this.count = count + 1;
+    },
+    confirm() {
+      console.log("confirm button data: " + JSON.stringify(this.form));
+      if (this.same_address == true) {
+        var amo = {
+          address: this.form.business.business_address,
+          contact: this.form.business.contact,
+          email: this.form.business.email
+        };
+        this.form.business.amo = amo;
+      }
+      axios.post("permit/apply", this.form).then(save_permit => {
+        console.log("saved permit" + JSON.stringify(save_permit));
+        this.redirect("mainView");
+      });
     }
   }
 };
