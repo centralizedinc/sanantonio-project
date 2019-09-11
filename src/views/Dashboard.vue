@@ -30,7 +30,7 @@
           <a-card style="margin-top:10vh; margin-bottom:2vh; background: linear-gradient(to right, #0575e6, #021b79);">
             <a-row type="flex" justify="center"> 
               <a-col :span="8">
-                <a-avatar :src="user.avatar" :size="54" style="margin-top:-10vh"></a-avatar>
+                <a-avatar :src="user.avatar" :size="54" style="margin-top:-10vh; border: 2px solid #ffffff"></a-avatar>
               </a-col>
               <a-col :span="24">
                 <a-row type="flex" justify="center">
