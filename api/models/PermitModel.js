@@ -153,6 +153,9 @@ var PermitModelSchema = new mongoose.Schema({
         }
     },
     billing_info: {
+        credit_number: {
+            type: Number
+        },
         name: {
             type: String
         },

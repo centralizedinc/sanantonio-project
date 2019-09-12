@@ -411,11 +411,29 @@
               </a-col>
               <a-col :span="18">
                 <a-card style="textAlign:'center'">
+                  <a-card v-if="step_pay==0"></a-card>
                   <a-card v-if="step_pay==0">
-                    <div align="center">
-                      <h1>{{form.payment_info.desc}}</h1>
-                      <h1>₱{{form.payment_info.amount}}</h1>
-                      <h1>PAYMENT METHOD</h1>
+                    <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
+                      <a-row :gutter="8">
+                        <a-col :span="9">
+                          <div align="right">
+                            <img
+                              src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
+                              alt="1055px-7-eleven-logo-tile"
+                              border="0"
+                              width="60"
+                              height="60"
+                            />
+                          </div>
+                        </a-col>
+                        <a-col :span="15">
+                          <h2 align="left" type="bold">Credit Card</h2>
+                          <h5 align="left">Visa, Master, JCB or American Express</h5>
+                        </a-col>
+                        <a-button @click="payment_method(0)">Pay using credit card</a-button>
+                      </a-row>
+                    </a-card-grid>
+                    <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
                       <a-row :gutter="8">
                         <a-col :span="9">
                           <div align="right">
@@ -435,14 +453,63 @@
                             7-11 or Coins.ph
                           </h5>
                         </a-col>
+                        <a-button @click="payment_method(1)">Pay over the counter</a-button>
+                      </a-row>
+                    </a-card-grid>
+
+                    <div align="center" v-if="pay_type != null">
+                      <h1>{{form.payment_info.desc}}</h1>
+                      <h1>₱{{form.payment_info.amount}}</h1>
+                      <h1>PAYMENT METHOD</h1>
+                      <a-row :gutter="8" v-if="pay_type == 1">
+                        <a-col :span="9">
+                          <div align="right">
+                            <img
+                              src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
+                              alt="1055px-7-eleven-logo-tile"
+                              border="0"
+                              width="60"
+                              height="60"
+                            />
+                          </div>
+                        </a-col>
+                        <a-col :span="15">
+                          <h2 align="left" type="bold">OVER THE COUNTER</h2>
+                          <h5 align="left">
+                            Cebuana Lhullier, M Lhuillier,
+                            7-11 or Coins.ph
+                          </h5>
+                        </a-col>
+                      </a-row>
+                      <a-row :gutter="8" v-else>
+                        <a-col :span="9">
+                          <div align="right">
+                            <img
+                              src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
+                              alt="1055px-7-eleven-logo-tile"
+                              border="0"
+                              width="60"
+                              height="60"
+                            />
+                          </div>
+                        </a-col>
+                        <a-col :span="15">
+                          <h2 align="left" type="bold">Credit Card</h2>
+                          <h5 align="left">Visa, Master, JCB or American Express</h5>
+                        </a-col>
                       </a-row>
                     </div>
                   </a-card>
                   <a-card v-if="step_pay==1">
                     <h4>Customer Information</h4>
+                    <a-input placeholder="Name" v-model="form.billing_info.name"></a-input>
+                    <a-input
+                      v-if="pay_type == 0"
+                      placeholder="Credit Card Number"
+                      v-model="form.billing_info.credit_number"
+                    ></a-input>
                     <a-input placeholder="E-mail Address" v-model="form.billing_info.email"></a-input>
                     <a-input placeholder="Phone/Mobile" v-model="form.billing_info.contact"></a-input>
-                    <a-input placeholder="Name" v-model="form.billing_info.name"></a-input>
                   </a-card>
                   <a-card v-if="step_pay==2">
                     <a-card title="Payment Information">
@@ -458,6 +525,14 @@
                     <a-card title="Billing Details">
                       <a-card-grid style="width:50%;textAlign:left">Name</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
+                      <a-card-grid
+                        style="width:50%;textAlign:'center'"
+                        v-if="pay_type == 0"
+                      >Credit Card Number</a-card-grid>
+                      <a-card-grid
+                        style="width:50%;textAlign:'center'"
+                        v-if="pay_type == 0"
+                      >{{form.billing_info.credit_number}}</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">E-mail</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
                       <a-card-grid style="width:50%;textAlign:'center'">Phone/Mobile</a-card-grid>
@@ -527,6 +602,7 @@ export default {
       pay: false,
       visible: false,
       barcodeValue: "123-456-789",
+      pay_type: null,
       // **************************************
       form: {
         application: {
@@ -587,11 +663,12 @@ export default {
           total: 0
         },
         payment_info: {
-          desc: "Business Clearance",
+          desc: "Business Permit",
           amount: 1500,
-          method: "Over the Counter"
+          method: ""
         },
         billing_info: {
+          credit_number: null,
           name: "",
           email: "",
           contact: null
@@ -675,6 +752,7 @@ export default {
           this.visible = true;
         }
       } else if (this.pay && this.step_pay != 0 && this.step_curr == 3) {
+        this.pay_type = null;
         console.log(
           "else if step curr data: " + JSON.stringify(this.step_curr)
         );
@@ -709,6 +787,15 @@ export default {
     }
   },
   methods: {
+    payment_method(data) {
+      console.log("payment method: " + data);
+      this.pay_type = data;
+      if (data == 0) {
+        this.form.payment_info.method = "Credit Card";
+      } else {
+        this.form.payment_info.method = "Over the Counter";
+      }
+    },
     insured(key) {
       var product = [
         {

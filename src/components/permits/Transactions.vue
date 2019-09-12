@@ -5,6 +5,10 @@
         <a href="javascript:;">{{text}}</a>
         <a slot="action" slot-scope="text" href="javascript:;" @click="view_data">View</a>
       </template>
+      <template slot="application.app_type" slot-scope="text, record">
+        <p v-if="text == 1">New</p>
+        <p v-else>Renewal</p>
+      </template>
       <template slot="action" slot-scope="text, record, index">
         <div>
           <a @click="() => view_data(record)">View</a>
@@ -12,8 +16,13 @@
       </template>
       <template slot="title">All Permit Transaction</template>
     </a-table>
-    <a-drawer width="75%" placement="right" :closable="true" :visible="draw_show">
-      <a-card style="textAlign:'center'">
+    <a-drawer width="75%" placement="right" :closable="false" @close="onClose" :visible="draw_show">
+      <a-menu v-model="current" mode="horizontal">
+        <a-menu-item key="permit">Permit</a-menu-item>
+        <a-menu-item key="insurance">Insurance</a-menu-item>
+        <a-menu-item key="payment">Payment</a-menu-item>
+      </a-menu>
+      <a-card style="textAlign:'center'" v-show="current =='permit'">
         <a-row>
           <div align="center">
             <p>
@@ -24,8 +33,9 @@
               {{form.application.permit_type}} and Licensing Office
               <br />Telephone no. +63 42 710-8892
               <br />
-              <br />
-              Application: {{form.application.app_type}}
+              <br />Application:
+              <u v-if="form.application.app_type == 1">New</u>
+              <u v-else>Renewal</u>
             </p>
           </div>
         </a-row>
@@ -122,7 +132,7 @@
             <p class="inset">Name of Applicant/Owner/Manager: {{form.business.amo.name}}</p>
           </a-col>
         </a-row>
-        <a-row>
+        <a-row type="flex">
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Address: {{form.business.business_address}}</p>
             <!-- <a-form-item
@@ -214,7 +224,7 @@
         <a-row>
           <a-col :span="24" style="margin-top:-15px">
             <p class="inset">
-              <a-radio-group v-model="form.business.business_type">
+              <a-radio-group v-model="form.business.business_type" disabled="true">
                 <a-radio :value="1">Rented</a-radio>
                 <a-radio :value="2">Owned</a-radio>
               </a-radio-group>If place of business is RENTED, please identify the following
@@ -274,9 +284,32 @@
           </a-col>
         </a-row>
         <a-row>
-          <a-table :columns="columns" :dataSource="form.business.business_activities">
-            <!-- <template slot="name" slot-scope="name">{{name.first}} {{name.last}}</template> -->
-          </a-table>
+          <a-col :span="24" style="margin-top: -15px">
+            <p class="inset">Business Activity(ies)</p>
+          </a-col>
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">Line of Business</p>
+          </a-col>
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">Capitalization</p>
+          </a-col>
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">Gross Sales/Receipts</p>
+          </a-col>
+        </a-row>
+        <a-row v-for="i in form.business.business_activities.length" :key="i=0">
+          <!-- <a-table :columns="columns" :dataSource="form.business.business_activities"> -->
+          <!-- <template slot="name" slot-scope="name">{{name.first}} {{name.last}}</template> -->
+          <!-- </a-table> -->
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">{{form.business.business_activities[i].line_business}}</p>
+          </a-col>
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">{{form.business.business_activities[i].capital}}</p>
+          </a-col>
+          <a-col :span="8" style="margin-top: -15px">
+            <p class="inset">{{form.business.business_activities[i].receipts}}</p>
+          </a-col>
         </a-row>
 
         <!-- <a-col :span="12" style="margin-top: -25px">
@@ -296,7 +329,8 @@
               <a-radio-group v-model="form.business.payment.mode" disabled="true">
                 <a-radio :value="1">Annual/Full</a-radio>
                 <a-radio :value="2">Quarterly</a-radio>
-              </a-radio-group>
+              </a-radio-group>No. of Quarters
+              <u>{{form.business.payment.qrtly}}</u>
             </p>
             <!-- <a-form-item label="payment mode" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <p>{{form.business.payment.mode}}</p>
@@ -310,8 +344,15 @@
           </a-col>-->
         </a-row>
         <a-row>
-          <!-- documents -->
-          <a-col :span="12">
+          <div align="right">
+            <a-button>
+              <a-icon type="download" />Download
+            </a-button>
+          </div>
+        </a-row>
+        <!-- <a-row> -->
+        <!-- documents -->
+        <!-- <a-col :span="12">
             <a-form-item
               label="uploaded documents"
               :label-col="{ span: 8 }"
@@ -319,109 +360,178 @@
             >
               <p>{{form.documents}}</p>
             </a-form-item>
-          </a-col>
-          <!-- business insurance -->
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance provider"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.provider}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance app fee"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.app_fee}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance lrf"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.lrt}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance interest"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.interest}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance surcharge"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.surcharge}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-              label="business insurance total"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business_insurance.total}}</p>
-            </a-form-item>
-          </a-col>
-          <!-- payment info -->
-          <a-col :span="12">
-            <a-form-item label="description" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.payment_info.desc}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="amount" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.payment_info.amount}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="method" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.payment_info.method}}</p>
-            </a-form-item>
-          </a-col>
-          <!-- billing info -->
-          <a-col :span="12">
-            <a-form-item label="name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.billing_info.name}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.billing_info.email}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.billing_info.contact}}</p>
-            </a-form-item>
-          </a-col>
-          <!-- progress-->
-          <a-col :span="12">
-            <a-form-item label="status" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.progress.status}}</p>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="current_task" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.progress.current_task}}</p>
-            </a-form-item>
-          </a-col>
-          <!-- <a-col :span="12">
+        </a-col>-->
+
+        <!-- <a-col :span="12">
             <description-item title="">{{}}</description-item>
-          </a-col>-->
-        </a-row>
+        </a-col>-->
+        <!-- </a-row> -->
+      </a-card>
+      <a-card style="textAlign:'center'" v-show="current =='insurance'">
+        <div align="center">
+          <a-card hoverable style="width: 300px">
+            <img
+              v-if="form.business_insurance.provider == 'Malayan'"
+              alt="example"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToEd_HUEVcw8aW1xYzakaludSmpdQyREP_JAxx5KFsRXqxQj8D"
+              slot="cover"
+            />
+            <img
+              v-if="form.business_insurance.provider == 'AIG'"
+              alt="example"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/AIG_logo.svg/1200px-AIG_logo.svg.png"
+              slot="cover"
+            />
+            <img
+              v-if="form.business_insurance.provider == 'AXA Philippines'"
+              alt="example"
+              src="https://pbs.twimg.com/profile_images/1039861366918508544/AYFe5Ooj_400x400.jpg"
+              slot="cover"
+            />
+            <img
+              v-if="form.business_insurance.provider == 'MAPRE Philippines'"
+              alt="example"
+              src="https://www.mapfre.com.ph/insurance-ph/images/1200x630-logo-mapfre_tcm844-83355.jpg"
+              slot="cover"
+            />
+            <div align="center">
+              <h3>{{form.business_insurance.provider}}</h3>
+            </div>
+
+            <a-card-grid style="width:50%;textAlign:'center'">Fee:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.app_fee}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">LRF:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.lrf}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Interest:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.interest}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Surcharge:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.surcharge}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Total:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.total}}</a-card-grid>
+          </a-card>
+        </div>
+
+        <!-- business insurance
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance provider"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.provider}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance app fee"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.app_fee}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance lrf"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.lrf}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance interest"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.interest}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance surcharge"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.surcharge}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="business insurance total"
+            :label-col="{ span: 8 }"
+            :wrapper-col="{ span: 16 }"
+          >
+            <p>{{form.business_insurance.total}}</p>
+          </a-form-item>
+        </a-col>-->
+      </a-card>
+      <a-card style="textAlign:'center'" v-show="current =='payment'">
+        <a-card title="Payment Details">
+          <a-card-grid style="width:50%;textAlign:'center'">Permit Type:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">Fee:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.amount}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">Payment Method:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">Name:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">Email:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">Contact:</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.contact}}</a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">
+            <p>Status:</p>
+          </a-card-grid>
+          <a-card-grid style="width:50%;textAlign:'center'">
+            <p v-if="form.progress.current_task != 'Payment'" text-color="success">Paid</p>
+            <p v-else text-color="error">UnPaid</p>
+          </a-card-grid>
+        </a-card>
+        <!-- payment info -->
+        <!-- <a-col :span="12">
+          <a-form-item label="description" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.payment_info.desc}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="amount" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.payment_info.amount}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="method" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.payment_info.method}}</p>
+          </a-form-item>
+        </a-col>
+        <!-- billing info-->
+        <a-col :span="12">
+          <a-form-item label="name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.billing_info.name}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.billing_info.email}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.billing_info.contact}}</p>
+          </a-form-item>
+        </a-col>
+        <!-- progress-->
+        <a-col :span="12">
+          <a-form-item label="status" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.progress.status}}</p>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="current_task" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+            <p>{{form.progress.current_task}}</p>
+          </a-form-item>
+        </a-col>-->
       </a-card>
     </a-drawer>
   </a-card>
@@ -434,6 +544,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      current: ["permit"],
       form: {
         application: {
           permit_type: "",
@@ -569,7 +680,8 @@ export default {
         },
         {
           title: "Type",
-          dataIndex: "application.app_type"
+          dataIndex: "application.app_type",
+          scopedSlots: { customRender: "application.app_type" }
         },
         {
           title: "Status",
@@ -589,6 +701,7 @@ export default {
     };
   },
   created() {
+    console.log();
     axios.get("permit/apply").then(data => {
       console.log("get all saved data: " + JSON.stringify(data));
       data.data.forEach(element => {
@@ -601,6 +714,9 @@ export default {
       this.form = data;
       console.log("viewed item: " + JSON.stringify(data));
       this.draw_show = true;
+    },
+    onClose() {
+      this.draw_show = false;
     }
   }
 };
