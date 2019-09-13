@@ -94,7 +94,7 @@
               <a-textarea
                 rows="3"
                 placeholder="Full Business Address"
-                style="width: 605px"
+                style="width: 550px"
                 v-model="form.business.business_address"
               ></a-textarea>
             </a-form-item>
@@ -330,24 +330,26 @@
           </template>
 
           <template v-if="step_curr==2">
-            <a-upload-dragger
-              v-model="form.documents"
-              name="file"
-              :multiple="true"
-              @change="upload"
-            >
-              <p class="ant-upload-drag-icon">
-                <a-icon type="inbox" />
-              </p>
-              <p class="ant-upload-text">Click or drag file to this area to upload</p>
-              <p
-                class="ant-upload-hint"
-              >Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
-            </a-upload-dragger>
+            <div style="margin-bottom:50px">
+              <a-upload-dragger
+                v-model="form.documents"
+                name="file"
+                :multiple="true"
+                @change="upload"
+              >
+                <p class="ant-upload-drag-icon">
+                  <a-icon type="inbox" />
+                </p>
+                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                <p
+                  class="ant-upload-hint"
+                >Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+              </a-upload-dragger>
+            </div>
           </template>
 
           <template v-if="step_curr==3">
-            <a-row :gutter="8">
+            <a-row :gutter="8" style="margin-bottom:50px">
               <a-col :span="12">
                 <a-button block @click="insured(1)">AIG</a-button>
                 <a-button block @click="insured(2)">AXA Philippines</a-button>
@@ -374,7 +376,7 @@
                   </a-card-grid>
                 </a-card>
               </a-col>
-              <a-col :span="11">
+              <a-col :span="12">
                 <a-card title="Payment Details">
                   <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
                   <a-card-grid
@@ -409,9 +411,8 @@
                   <a-step title="Pay" />
                 </a-steps>
               </a-col>
-              <a-col :span="18">
+              <a-col :span="18" style="margin-bottom:25px">
                 <a-card style="textAlign:'center'">
-                  <a-card v-if="step_pay==0"></a-card>
                   <a-card v-if="step_pay==0">
                     <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
                       <a-row :gutter="8">
@@ -427,7 +428,7 @@
                           </div>
                         </a-col>
                         <a-col :span="15">
-                          <h2 align="left" type="bold">Credit Card</h2>
+                          <h2 align="left" type="bold" style="margin-bottom:42px">Credit Card</h2>
                           <h5 align="left">Visa, Master, JCB or American Express</h5>
                         </a-col>
                         <a-button @click="payment_method(0)">Pay using credit card</a-button>
@@ -456,12 +457,12 @@
                         <a-button @click="payment_method(1)">Pay over the counter</a-button>
                       </a-row>
                     </a-card-grid>
-
+                    <!-- ***************************************************** -->
                     <div align="center" v-if="pay_type != null">
                       <h1>{{form.payment_info.desc}}</h1>
                       <h1>₱{{form.payment_info.amount}}</h1>
                       <h1>PAYMENT METHOD</h1>
-                      <a-row :gutter="8" v-if="pay_type == 1">
+                      <a-row :gutter="8" v-if="pay_type == 1" style="margin-bottom:25px">
                         <a-col :span="9">
                           <div align="right">
                             <img
@@ -481,7 +482,7 @@
                           </h5>
                         </a-col>
                       </a-row>
-                      <a-row :gutter="8" v-else>
+                      <a-row :gutter="8" v-else style="margin-bottom:25px">
                         <a-col :span="9">
                           <div align="right">
                             <img

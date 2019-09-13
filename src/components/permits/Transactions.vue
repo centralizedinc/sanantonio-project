@@ -468,27 +468,38 @@
         </a-col>-->
       </a-card>
       <a-card style="textAlign:'center'" v-show="current =='payment'">
-        <a-card title="Payment Details">
-          <a-card-grid style="width:50%;textAlign:'center'">Permit Type:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">Fee:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.amount}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">Payment Method:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">Name:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">Email:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">Contact:</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.contact}}</a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">
-            <p>Status:</p>
-          </a-card-grid>
-          <a-card-grid style="width:50%;textAlign:'center'">
-            <p v-if="form.progress.current_task != 'Payment'" text-color="success">Paid</p>
-            <p v-else text-color="error">UnPaid</p>
-          </a-card-grid>
-        </a-card>
+        <div align="center">
+          <a-card title="Payment Details" style="width:50%">
+            <a-card-grid style="width:50%;textAlign:'center'">Permit Type:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Fee:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.amount}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Payment Method:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Name:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
+            <a-card-grid
+              style="width:50%;textAlign:'center'"
+              v-if="form.billing_info.credit_card != null"
+            >Credit Card Number:</a-card-grid>
+            <a-card-grid
+              style="width:50%;textAlign:'center'"
+              v-if="form.billing_info.credit_card
+            !=null"
+            >{{form.billing_info.credit_card}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Email:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">Contact:</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.contact}}</a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">
+              <p>Status:</p>
+            </a-card-grid>
+            <a-card-grid style="width:50%;textAlign:'center'">
+              <p v-if="form.progress.current_task != 'Payment'" text-color="success">Paid</p>
+              <p v-else text-color="error">UnPaid</p>
+            </a-card-grid>
+          </a-card>
+        </div>
         <!-- payment info -->
         <!-- <a-col :span="12">
           <a-form-item label="description" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
@@ -506,7 +517,7 @@
           </a-form-item>
         </a-col>
         <!-- billing info-->
-        <a-col :span="12">
+        <!-- <a-col :span="12">
           <a-form-item label="name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
             <p>{{form.billing_info.name}}</p>
           </a-form-item>
@@ -520,9 +531,9 @@
           <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
             <p>{{form.billing_info.contact}}</p>
           </a-form-item>
-        </a-col>
+        </a-col>-->
         <!-- progress-->
-        <a-col :span="12">
+        <!-- <a-col :span="12">
           <a-form-item label="status" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
             <p>{{form.progress.status}}</p>
           </a-form-item>
@@ -609,6 +620,7 @@ export default {
           method: "Over the Counter"
         },
         billing_info: {
+          credit_number: null,
           name: "",
           email: "",
           contact: null
