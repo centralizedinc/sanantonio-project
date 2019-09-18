@@ -43,30 +43,26 @@
             
           </a-card>
            <a-affix :offsetTop="100">
-            <a-menu  :defaultSelectedKeys="['1']" mode="inline" >
-              <a-menu-item key="1">
-                <a-icon type="bars" />
-                <span>Posts</span>
+            <a-menu  :defaultSelectedKeys="['/app']" mode="inline" @click="nav" >
+              <a-menu-item key="/app">
+                <a-icon type="layout" />
+                <span>Home</span>
               </a-menu-item>
-              <a-menu-item key="2">
+              <a-menu-item key="/app/permits">
                 <a-icon type="file-exclamation" />
-                <span>Reports</span>
+                <span>My Permits</span>
               </a-menu-item>
-              <a-menu-item key="3">
+              <a-menu-item key="/app/taxes">
                 <a-icon type="file-protect" />
-                <span>Reviews</span>
+                <span>My Taxes</span>
               </a-menu-item>
-              <a-menu-item key="4">
+              <a-menu-item key="/app/account">
                 <a-icon type="user-add" />
-                <span>Jobs</span>
+                <span>My Account</span>
               </a-menu-item>
-              <a-menu-item key="5">
-                <a-icon type="schedule" />
-                <span>Events</span>
-              </a-menu-item>
-              <a-menu-item key="6">
-                <a-icon type="team" />
-                <span>Community</span>
+              <a-menu-item  key="logout">
+                <a-icon type="logout" />
+                <span>Logout</span>
               </a-menu-item>
             </a-menu>
            </a-affix>
@@ -170,6 +166,14 @@ export default {
     init(){
       this.user = this.$store.state.user_session.user
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+    },
+    nav(e){
+      if(e.key === 'logout'){
+        this.logout()        
+      }else{
+        this.$router.push(e.key)
+      }
+      
     },
     report(num){
       this.visible=true;

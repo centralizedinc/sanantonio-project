@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="24">
+  <a-row type="flex" :gutter="24" data-aos="fade-left">
       <!-- <a-col :span="24">
           <h3>Downloadable Forms</h3>
           <p>Business Forms and Affidavit</p>

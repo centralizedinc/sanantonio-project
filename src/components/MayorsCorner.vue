@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="16">
+  <a-row type="flex" :gutter="16" data-aos="fade-left">
     <a-col :span="24">
        
           <template v-if="loading">
@@ -12,7 +12,7 @@
           </template>
           
           <template v-else>
-            <a-card  v-for="(sub,indx) in subscribers" :key="sub.name.first" style="margin-bottom: 2vh">
+            <a-card  v-for="(sub,indx) in subscribers" :key="sub.name.first" style="margin-bottom: 2vh" data-aos="fade-up">
             <a-comment>
               <template slot="actions">
                 <span>

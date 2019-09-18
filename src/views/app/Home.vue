@@ -2,7 +2,10 @@
   <div style="margin-top:10vh">
         <a-affix :offsetTop="60">
         <a-tabs style="background-color:#FFFFFF; z-index:1000" @change="changeView">
-            <a-tab-pane tab="Mayor's Corner" key="0">
+            <a-tab-pane key="0">
+                <template slot="tab">
+                    <span><a-avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPcIfiVKrngrFEYE89cWRGk-OQurEm6TTHjtNFDROtKUwKh6U"></a-avatar> Mayor's Corner</span>
+                </template>
                 
             </a-tab-pane>
             <a-tab-pane tab="Public Service" key="1">
@@ -11,13 +14,16 @@
             <a-tab-pane tab="Permits" key="2">
                 <!-- <permits></permits> -->
             </a-tab-pane>
-            <a-tab-pane tab="Downloadable Forms" key="3">
+            <a-tab-pane tab="Local Taxes" key="3">
+                <!-- <permits></permits> -->
+            </a-tab-pane>
+            <a-tab-pane tab="Downloadable Forms" key="4">
                 <!-- <downloadable-forms></downloadable-forms> -->
             </a-tab-pane>        
         </a-tabs>
         </a-affix>
-        <div style="margin-top: 5vh">
-            <component v-bind:is="currentView"></component>
+        <div style="margin-top: 5vh; margin-bottom: 5vh">
+            <component v-bind:is="currentView" :full="true"></component>
         </div>
   </div>
 </template>
@@ -26,12 +32,14 @@
 import MayorsCorner from '@/components/MayorsCorner'
 import PublicService from '@/components/PublicService'
 import Permits from '@/components/Permits'
+import LocalTaxes from '@/components/Taxes'
 import DownloadableForms from '@/components/DownloadableForms'
 export default {
     components:{
         MayorsCorner,
         PublicService,
         Permits,
+        LocalTaxes,
         DownloadableForms
     },
     data(){
@@ -39,7 +47,7 @@ export default {
             currentView:"MayorsCorner",
             visible:false,
             
-            tabView:['MayorsCorner','PublicService', 'Permits', 'DownloadableForms']
+            tabView:['MayorsCorner','PublicService', 'Permits', 'LocalTaxes','DownloadableForms']
         }
     },
     methods:{

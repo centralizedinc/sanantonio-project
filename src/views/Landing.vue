@@ -69,6 +69,13 @@
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
       <a-col :span="8" data-aos="fade-up" data-aos-duration="30000" >
+        <a-card title=" Report Emergency/Calamity">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis a cras semper auctor neque. Pharetra diam sit amet nisl suscipit adipiscing bibendum est. Sed risus ultricies tristique nulla aliquet enim tortor at auctor. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Congue nisi vitae suscipit tellus mauris a. Viverra adipiscing at in tellus integer feugiat. Etiam sit amet nisl purus in. Curabitur gravida arcu ac tortor dignissim. Magna fermentum iaculis eu non diam phasellus vestibulum.
+          <a-divider></a-divider>
+          <a-button type="primary">Report</a-button>
+        </a-card>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up" data-aos-duration="30000" >
         <a-card title="News/Announcements">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <a-divider></a-divider>
@@ -82,13 +89,7 @@
           <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
         </a-card>
       </a-col>
-      <a-col :span="8" data-aos="fade-up" data-aos-duration="30000" >
-        <a-card title=" Report Emergency/Calamity">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis a cras semper auctor neque. Pharetra diam sit amet nisl suscipit adipiscing bibendum est. Sed risus ultricies tristique nulla aliquet enim tortor at auctor. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Congue nisi vitae suscipit tellus mauris a. Viverra adipiscing at in tellus integer feugiat. Etiam sit amet nisl purus in. Curabitur gravida arcu ac tortor dignissim. Magna fermentum iaculis eu non diam phasellus vestibulum.
-          <a-divider></a-divider>
-          <a-button type="primary">Report</a-button>
-        </a-card>
-      </a-col>
+      
     </a-row>
     <a-row 
       :gutter="16"

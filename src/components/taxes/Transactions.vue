@@ -1,5 +1,5 @@
 <template>
-  <a-card data-aos="fade-up">
+  <a-card style="margin-top: 10vh; margin-bottom: 5vh" data-aos="fade-up">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
       <a-col :span="22">
          <a-input-search
@@ -11,7 +11,7 @@
         <a-button type="primary" ><a-icon type="plus"></a-icon></a-button>
       </a-col>
     </a-row>
-    <a-divider></a-divider>
+    <a-divider></a-divider> 
     <a-table :columns="cols" :dataSource="transac" :loading="loading">
       <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
@@ -566,7 +566,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      loading:false,
       current: ["permit"],
       form: {
         application: {
@@ -662,6 +661,40 @@ export default {
         }
       ],
       transac: [
+        // {
+        //   ref_no: 1,
+        //   permit: "Business Permit",
+        //   type: "Initial",
+        //   status: "On Process",
+        //   current_task: "Payment",
+        //   pbr_date: "09/05/2019",
+        //   lgu_date: "09/05/2019",
+        //   reg_no: "01",
+        //   ownership: "owned",
+        //   tin: 123456789,
+        //   sss: 123456789,
+        //   business_name: "negosyo",
+        //   contact_num: 321,
+        //   email: "email@email.email",
+        //   business_address: "location"
+        // },
+        // {
+        //   reference_no: 2,
+        //   permit: "Business Permit",
+        //   type: "Initial",s
+        //   status: "On Process",
+        //   current_task: "Payment",
+        //   pbr_date: "09/05/2019",
+        //   lgu_date: "09/05/2019",
+        //   reg_no: "01",
+        //   ownership: "owned",
+        //   tin: 123456789,
+        //   sss: 123456789,
+        //   business_name: "negosyo",
+        //   contact_num: 321,
+        //   email: "email@email.email",
+        //   business_address: "location"
+        // }
       ],
       cols: [
         {
@@ -692,11 +725,11 @@ export default {
   },
   created() {
     console.log();
-    this.loading = true;
-    axios.get("permit/apply")
-    .then(results => {
-      this.loading = false;
-      this.transac = results.data
+    axios.get("permit/apply").then(data => {
+      console.log("get all saved data: " + JSON.stringify(data));
+      data.data.forEach(element => {
+        this.transac.push(element);
+      });
     });
   },
   methods: {
