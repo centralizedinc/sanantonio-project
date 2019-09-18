@@ -6,7 +6,7 @@
           <a-step title="Application Details"></a-step>
           <a-step title="Business Details"></a-step>
           <a-step title="Requirements"></a-step>
-          <a-step title="Business Insurance"></a-step>
+          <a-step title="Insurance"></a-step>
           <a-step title="Payments"></a-step>
         </a-steps>
         <a-divider></a-divider>

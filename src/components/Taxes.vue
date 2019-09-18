@@ -4,18 +4,27 @@
 
 <script>
 import mainView from "@/components/taxes/main";
-import BusinessPermit from "@/components/permits/BusinessPermit";
-import Transactions from "@/components/permits/Transactions";
+import fullView from "@/components/taxes/fullView";
+import RealEstateTax from "@/components/taxes/RealEstateTax";
+import Transactions from "@/components/taxes/Transactions";
 export default {
+  props:['full'],
   components: {
     mainView,
-    BusinessPermit,
+    fullView,
+    RealEstateTax,
     Transactions
   },
   data() {
     return {
       currentView: "mainView"
     };
+  },
+  created(){
+    console.log("fullView:::", this.full)
+    if(this.full){
+      this.currentView = "fullView"
+    }
   },
   methods: {
     redirect(nav) {

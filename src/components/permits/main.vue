@@ -1,5 +1,11 @@
 <template>
   <a-row type="flex" :gutter="24" justify="center">
+    <a-col :span="18">
+      <a-card>
+      <h3>Check the status of your application:</h3>
+      <a-input-search size="large" placeholder="Enter Application Reference Number"></a-input-search>
+      </a-card>
+    </a-col>
 
     <a-col :span="18" style="margin-top:2vh">
       <a-card data-aos="fade-up">
@@ -10,7 +16,7 @@
             </a-avatar>
           </a-col>
           <a-col :span="18">
-             <h3>Business Permit</h3>
+             <h3>Apply for Mayor's Permit (Business Permit)</h3>
              <a-divider style="margin-top:-1vh"></a-divider>
              <p>Business licenses are permits issued by government agencies that allow individuals or companies to conduct business within the government's geographical jurisdiction.</p>
           </a-col>
@@ -27,7 +33,7 @@
             </a-avatar>
           </a-col>
           <a-col :span="18">
-             <h3>Occupancy Permit</h3>
+             <h3>Apply for Occupancy Permit</h3>
              <a-divider style="margin-top:-1vh"></a-divider>
              <p>An Occupancy Permit is a document issued by Department of Building Official that serves as a proof that the structure built completed all the building work and suitable for occupation.</p>
           </a-col>
@@ -44,7 +50,7 @@
             </a-avatar>
           </a-col>
           <a-col :span="18">
-             <h3>Building Permit</h3>
+             <h3>Apply for Building Permit</h3>
              <a-divider style="margin-top:-1vh"></a-divider>
              <p>A Building Permit is a document issued by the Building Official to an. owner/applicant to proceed with the construction, installation, addition, alteration, renovation, conversion, repair, moving, demolition or other work.</p>
           </a-col>
@@ -61,7 +67,7 @@
             </a-avatar>
           </a-col>
           <a-col :span="18">
-             <h3>Barangay Clearance</h3>
+             <h3>Apply for Barangay Clearance</h3>
              <a-divider style="margin-top:-1vh"></a-divider>
              <p>An Occupancy Permit is a document issued by Department of Building Official that serves as a proof that the structure built completed all the building work and suitable for occupation.</p>
           </a-col>
