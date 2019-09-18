@@ -1,7 +1,7 @@
 <template>
   <a-layout >
     <a-back-top>
-      <a-avatar><a-icon type="up"></a-icon></a-avatar>
+      <a-avatar><a-icon type="up" :size="42"></a-icon></a-avatar>
     </a-back-top>
     <a-layout-header class="header" :style="headerStyle">
       <a-row type="flex" justify="start" :gutter="8">
@@ -27,7 +27,7 @@
       <router-view></router-view>
     </a-layout-content>
     <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
-      <a-row>
+      <a-row >
         <a-col :span="24">
           <h1 style="color:#ffffff">Get in touch</h1>
           <!-- <a-divider></a-divider> -->
