@@ -64,32 +64,19 @@
 <script>
 import Payment from "@/components/Payment";
 export default {
-<<<<<<< HEAD
   components: {
     Payment
   },
   data() {
     return {
-      curr_step: 0
+      curr_step: 0,
+      estate_tax: {
+        tax_type: "Real Estate Tax",
+        amount: "5,000.00"
+      }
     };
   }
 };
-=======
-    components:{
-        Payment
-    },
-    data(){
-        return {
-            curr_step:0,
-            estate_tax:{
-              tax_type: 'Real Estate Tax',
-              amount:'5,000.00',              
-            }
-        }
-    }
-
-}
->>>>>>> ffa6256ff6feed4a218ba3e20e5ee150be54ef6f
 </script>
 
 <style>
