@@ -1,7 +1,14 @@
+import constant_helper from './constant_helper';
+
 export default {
 
     install(Vue) {
         Vue.mixin({
+            data() {
+                return {
+                    constant_helper
+                }
+            },
             methods: {
                 deepCopy(obj) {
                     return JSON.parse(JSON.stringify(obj));

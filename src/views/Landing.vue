@@ -1,8 +1,8 @@
 <template>
   <div>
     <div
-      style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
-  background-size: cover"
+      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+  background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">
         <a-col
@@ -12,7 +12,7 @@
           :span="12"
           style="margin-top:20vh"
         >
-          <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
+          <div style="font-size: 52px; color:#ffffff; ">{{constant_helper.home_header.label}}</div>
           <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
           <p style="margin-top:2vh ; color:#e4e2e2" class="textShadow">
             Ease of Doing Business Portal of Lucena City is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act.
