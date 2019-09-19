@@ -3,8 +3,12 @@
     <a-row>
       <a-col :span="24">
         <a-steps size="small" :current="step_curr">
-          <a-step title="Application Details"></a-step>
-          <a-step title="Business Details"></a-step>
+          <a-step title="Application">
+            <span slot="description">Details</span>
+          </a-step>
+          <a-step title="Business">
+            <span slot="description">Details</span>
+          </a-step>
           <a-step title="Requirements"></a-step>
           <a-step title="Insurance"></a-step>
           <a-step title="Payments"></a-step>

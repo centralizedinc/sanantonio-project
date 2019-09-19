@@ -11,7 +11,7 @@
           <a-avatar src="https://www.lucenacity.gov.ph/img/Lucena_Seal200.png" :size="50"></a-avatar>
         </a-col>
         <a-col :span="10">
-          <h3 style="color:#ffffff; ">Lucena City</h3>
+          <h3 style="color:#ffffff;margin-left:20px ">Lucena City</h3>
         </a-col>
         <a-col :span="10">
           <a-input-search placeholder="Search" @search="onSearch" />
@@ -92,7 +92,7 @@
                       @click="report(1)"
                     >
                       <a-row type="flex" justify="center">
-                        <a-col :span="12">
+                        <a-col :span="20">
                           <a-icon type="fire" style="color:#ffffff;font-size:24px"></a-icon>
                         </a-col>
                       </a-row>
@@ -108,7 +108,7 @@
                       @click="report(2)"
                     >
                       <a-row type="flex" justify="center">
-                        <a-col :span="12">
+                        <a-col :span="20">
                           <a-icon type="sound" style="color:#ffffff;font-size:24px"></a-icon>
                         </a-col>
                       </a-row>
@@ -124,7 +124,7 @@
                       @click="report(3)"
                     >
                       <a-row type="flex" justify="center">
-                        <a-col :span="12">
+                        <a-col :span="20">
                           <a-icon type="alert" style="color:#ffffff;font-size:24px"></a-icon>
                         </a-col>
                       </a-row>
@@ -140,15 +140,15 @@
                       @click="report(4)"
                     >
                       <a-row type="flex" justify="center">
-                        <a-col :span="12">
-                          <a-icon type="safety" style="color:#ffffff;font-size:24px"></a-icon>
+                        <a-col :span="20">
+                          <a-icon type="safety" style="color:#ffffff;font-size:24px; "></a-icon>
                         </a-col>
                       </a-row>
                     </a-card>
                   </a-tooltip>
                 </a-col>
                 <a-col :span="24" style="margin-top:2vh">
-                  <a-button block ghost type="primary" @click="report(0)">View Incident Reports</a-button>
+                  <a-button block ghost type="primary" @click="report(0)">View Reports</a-button>
                 </a-col>
               </a-row>
             </a-card>

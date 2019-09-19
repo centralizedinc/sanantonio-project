@@ -1,7 +1,6 @@
 <template>
   <a-row type="flex" :gutter="16">
     <a-col :span="24">
-<<<<<<< HEAD
       <template v-if="loading">
         <a-card>
           <div v-for="i in 4" :key="i">
@@ -44,11 +43,16 @@
             />
             <span slot="content">
               INGAT PO TAYO AT MAGING ALERTO:
-              <br /><br />NDRRMC (4:30PM, 13Sept2019)
-              <br /><br />Isang MLv5.5 Magnitude na lindol ang naganap sa Burdeos, Quezon kaninang 4:28PM. Damages at aftershocks ay inaasahan. Maging handa at siguraduhin ligtas ang sarili at pamilya.
+              <br />
+              <br />NDRRMC (4:30PM, 13Sept2019)
+              <br />
+              <br />Isang MLv5.5 Magnitude na lindol ang naganap sa Burdeos, Quezon kaninang 4:28PM. Damages at aftershocks ay inaasahan. Maging handa at siguraduhin ligtas ang sarili at pamilya.
               <a-row type="flex" justify="left" :gutter="8">
-                <a-col :span="8" >
-                  <img src="https://i.postimg.cc/8PGxP99m/Screen-Shot-2019-09-19-at-12-25-23-PM.png" width="200vw" />
+                <a-col :span="8">
+                  <img
+                    src="https://i.postimg.cc/8PGxP99m/Screen-Shot-2019-09-19-at-12-25-23-PM.png"
+                    width="200vw"
+                  />
                 </a-col>
               </a-row>
             </span>
@@ -85,10 +89,19 @@
             <a slot="author">Mayor Roderick "Don Don" Alcala</a>
             <a-avatar src="https://i.postimg.cc/d3vrh9Jx/images.jpg" alt slot="avatar" />
             <span slot="content">
-              PAALALA SA LAHAT:<br/><br/>Habang hinihihintay ng lokal na pamahalaan ang resulta ng pagsusuri ng BFAR kaugnay ng nangyaring fish kill, pinagbabawalan ang lahat na manghuli at kumain ng anumang uri ng isda mula sa Iyam river.<br/><br/>Pinapayuhan din ang lahat na huwag munang maligo at magsagawa ng anumang gawain na makakaapekto sa kalusugan ng tao at lahat ng may buhay.<br/><br/>Maraming salamat po!
+              PAALALA SA LAHAT:
+              <br />
+              <br />Habang hinihihintay ng lokal na pamahalaan ang resulta ng pagsusuri ng BFAR kaugnay ng nangyaring fish kill, pinagbabawalan ang lahat na manghuli at kumain ng anumang uri ng isda mula sa Iyam river.
+              <br />
+              <br />Pinapayuhan din ang lahat na huwag munang maligo at magsagawa ng anumang gawain na makakaapekto sa kalusugan ng tao at lahat ng may buhay.
+              <br />
+              <br />Maraming salamat po!
               <a-row type="flex" justify="left" :gutter="8">
                 <a-col :span="8">
-                  <img src="https://cdn.pixabay.com/photo/2015/10/18/19/11/fish-995050_960_720.png" width="200vw" />
+                  <img
+                    src="https://cdn.pixabay.com/photo/2015/10/18/19/11/fish-995050_960_720.png"
+                    width="200vw"
+                  />
                 </a-col>
                 <a-col :span="8">
                   <img src="https://image.flaticon.com/icons/svg/1661/1661940.svg" width="200vw" />
@@ -147,60 +160,6 @@
             <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
               <span>{{moment().fromNow()}}</span>
             </a-tooltip>
-=======
-       
-          <template v-if="loading">
-             <a-card>
-            <div v-for="i in 4" :key="i" >
-                <a-skeleton  active avatar :paragraph="{rows: 4}" />
-                <a-divider></a-divider>
-            </div>
-             </a-card>
-          </template>
-          
-          <template v-else>
-            <a-card  v-for="(sub,indx) in subscribers" :key="sub.name.first" style="margin-bottom: 2vh" data-aos="fade-up">
-            <a-comment>
-              <template slot="actions">
-                <span>
-                  <a-tooltip title="Like">
-                    <a-icon type="like" :theme="action === 'liked' ? 'filled' : 'outlined'" @click="like"/>
-                  </a-tooltip>
-                  <span style="padding-left: '8px';cursor: 'auto'">
-                    {{likes}}
-                  </span>
-                </span>
-                <span>
-                  <a-tooltip title="Dislike">
-                    <a-icon
-                      type="dislike"
-                      :theme="action === 'disliked' ? 'filled' : 'outlined'"
-                      @click="dislike"
-                    />
-                  </a-tooltip>
-                  <span style="padding-left: '8px';cursor: 'auto'">
-                    {{dislikes}}
-                  </span>
-                </span>
-              </template>
-              <a slot="author">{{sub.name.first}} {{sub.name.last}}</a>
-              <a-avatar
-                :src="sub.picture.thumbnail"
-                alt="Han Solo"
-                slot="avatar"
-              />
-              <p slot="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                <a-row type="flex" justify="center" :gutter="8">
-                  <a-col :span="8" v-for="i in 3" :key="i">
-                    <img :src="`https://picsum.photos/300?random=${indx}${i}`" width="200vw">
-                    </a-col>
-                </a-row>
-              </p>
-              <a-tooltip slot="datetime" :title="formatDate(moment().format('YYYY-MM-DD HH:mm:ss'))">
-                <span>{{moment().fromNow()}}</span>
-              </a-tooltip>
->>>>>>> fbf4972feed9800727fbe752b83816bcfdd1a3ef
           </a-comment>
         </a-card>
 
@@ -235,7 +194,11 @@
               slot="avatar"
             />
             <span slot="content">
-              Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth<br/> <br/>Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).<br/>Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.<br/>Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
+              Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
+              <br />
+              <br />Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
+              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
+              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
               <a-row type="flex" justify="left" :gutter="8">
                 <a-col :span="8">
                   <img
@@ -256,7 +219,6 @@
             </a-tooltip>
           </a-comment>
         </a-card>
-
       </template>
     </a-col>
   </a-row>
