@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(serveStatic(__dirname + "/dist"));
 app.use('/auth', require('./api/routes/auth'))
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_66cb3ndj:3uakod32bsvvfek6e1cv4e8839@ds217678.mlab.com:17678/heroku_66cb3ndj"
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_008vqzv6:70q80o1h0tq6uahs8jglvdki1e@ds033163.mlab.com:33163/heroku_008vqzv6"
 mongoose.connect(MONGODB_URI, {
         promiseLibrary: require('bluebird'),
         useNewUrlParser: true

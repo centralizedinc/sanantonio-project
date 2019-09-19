@@ -36,7 +36,7 @@ import PublicService from "@/components/PublicService";
 import Permits from "@/components/Permits";
 import LocalTaxes from "@/components/Taxes";
 import DownloadableForms from "@/components/DownloadableForms";
-import cover_image from "@/assets/cover.jpg";
+// import cover_image from "@/assets/cover.jpg";
 
 export default {
   components: {
@@ -58,7 +58,8 @@ export default {
         "LocalTaxes",
         "DownloadableForms"
       ],
-      cover_image
+      cover_image:
+        "https://mediaprocessor.websimages.com/fit/1920x1920/sanantonio-quezon.webs.com/San%20Antonio-4.jpg"
     };
   },
   methods: {
