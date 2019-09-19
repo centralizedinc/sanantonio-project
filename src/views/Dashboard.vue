@@ -161,9 +161,10 @@
     >Lucena City</a-layout-footer>
 
     <a-modal
+      class="report-modal"
       :visible="visible"
       @cancel="visible=false"
-      v-bind="report_mode ? '': { footer: null }"
+      v-bind="report_mode > 0 ? '': { footer: null }"
       title="Report Incident"
     >
       <GmapMap
@@ -191,7 +192,7 @@
           :title="`Fire incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="fire_icon"
-          :position="coordinate"
+          :position="coordinate.coordinates"
           :animation="animation"
         />
 
@@ -202,7 +203,7 @@
           :title="`Civil Disturbance: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="civil_disturbance_icon"
-          :position="coordinate"
+          :position="coordinate.coordinates"
           :animation="animation"
         />
 
@@ -213,7 +214,7 @@
           :title="`Flood Incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="flood_icon"
-          :position="coordinate"
+          :position="coordinate.coordinates"
           :animation="animation"
         />
 
@@ -224,7 +225,7 @@
           :title="`Crime Incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="crime_icon"
-          :position="coordinate"
+          :position="coordinate.coordinates"
           :animation="animation"
         />
       </GmapMap>
@@ -232,7 +233,7 @@
       <!-- <a-card>
         <a-card-grid></a-card-grid>
       </a-card>-->
-      <template slot="footer" v-if="report_mode">
+      <template slot="footer" v-if="report_mode > 0">
         <a-button
           key="submit"
           type="primary"
@@ -258,22 +259,43 @@ export default {
       civil_disturbance_icon,
       flood_icon,
       crime_icon,
-      report_mode: false,
+      report_mode: 0,
       loading: false,
       collapsed: false,
       user: {},
       visible: false,
       center: { lat: 13.9413957, lng: 121.6234471 },
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
-      animation: {},
-      fire_coordinates: [],
-      civil_disturbance_coordinates: [],
-      flood_coordinates: [],
-      crime_coordinates: []
+      animation: {}
     };
   },
   created() {
     this.init();
+  },
+  computed: {
+    fire_coordinates() {
+      if (this.report_mode === 0 || this.report_mode === 1)
+        return this.reports.filter(v => v.report_type === 1);
+      else return [];
+    },
+    civil_disturbance_coordinates() {
+      if (this.report_mode === 0 || this.report_mode === 2)
+        return this.reports.filter(v => v.report_type === 2);
+      else return [];
+    },
+    flood_coordinates() {
+      if (this.report_mode === 0 || this.report_mode === 3)
+        return this.reports.filter(v => v.report_type === 3);
+      else return [];
+    },
+    crime_coordinates() {
+      if (this.report_mode === 0 || this.report_mode === 4)
+        return this.reports.filter(v => v.report_type === 4);
+      else return [];
+    },
+    reports() {
+      return this.deepCopy(this.$store.state.reports.reports);
+    }
   },
   watch: {
     coordinates: {
@@ -296,44 +318,19 @@ export default {
       }
     },
     report(num) {
-      this.fire_coordinates = [];
-      this.civil_disturbance_coordinates = [];
-      this.flood_coordinates = [];
-      this.crime_coordinates = [];
       this.visible = true;
       var _self = this;
-      if (num > 0) this.report_mode = true;
-      else this.report_mode = false;
+      this.report_mode = num;
       this.$getLocation().then(coordinates => {
         this.coordinates = coordinates;
         console.log("num :", num);
-        if (!num || num === 0 || num === 1)
-          this.fire_coordinates = this.generateSampleCoordinates(
-            coordinates,
-            5
-          );
-        if (!num || num === 0 || num === 2)
-          this.civil_disturbance_coordinates = this.generateSampleCoordinates(
-            coordinates,
-            5
-          );
-        if (!num || num === 0 || num === 3)
-          this.flood_coordinates = this.generateSampleCoordinates(
-            coordinates,
-            5
-          );
-        if (!num || num === 0 || num === 4)
-          this.crime_coordinates = this.generateSampleCoordinates(
-            coordinates,
-            5
-          );
         this.$gmapApiPromiseLazy().then(() => {
           _self.animation = google.maps.Animation.DROP;
         });
       });
     },
     setCoordinate(e) {
-      if (this.report_mode) {
+      if (this.report_mode > 0) {
         this.coordinates.lat = e.latLng.lat();
         this.coordinates.lng = e.latLng.lng();
       }
@@ -358,6 +355,10 @@ export default {
     },
     submitReport() {
       this.visible = false;
+      this.$store.commit("SEND_REPORTS", {
+        report_type: this.report_mode,
+        coordinates: this.coordinates
+      });
       this.$notification.success({
         message: "Thank you for your concern",
         description: "Your Report has been sent. Stay safe!"
@@ -388,5 +389,9 @@ export default {
 .emergency_btn:hover {
   background: linear-gradient(to bottom, #0575e6, #021b79);
   transform: scale(0.95);
+}
+
+.report-modal .ant-modal-body {
+  padding: 0px;
 }
 </style>
