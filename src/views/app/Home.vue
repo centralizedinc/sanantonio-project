@@ -6,9 +6,7 @@
         <a-tab-pane key="0">
           <template slot="tab">
             <span>
-              <a-avatar
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPcIfiVKrngrFEYE89cWRGk-OQurEm6TTHjtNFDROtKUwKh6U"
-              ></a-avatar>Mayor's Corner
+              <a-avatar :src="constant_helper.mayor_details.avatar"></a-avatar>Mayor's Corner
             </span>
           </template>
         </a-tab-pane>

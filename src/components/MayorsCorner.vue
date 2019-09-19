@@ -35,7 +35,7 @@
                 <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
               </span>
             </template>
-            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
+            <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
             <a-avatar
               src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
               alt="alcala photo"
@@ -92,7 +92,7 @@
                 <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
               </span>
             </template>
-            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
+            <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
             <a-avatar
               src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
               alt="alcala photo"
@@ -143,7 +143,7 @@
                 <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
               </span>
             </template>
-            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
+            <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
             <a-avatar src="https://i.postimg.cc/d3vrh9Jx/images.jpg" alt slot="avatar" />
             <span slot="content">
               PAALALA SA LAHAT:
@@ -195,7 +195,7 @@
                 <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
               </span>
             </template>
-            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
+            <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
             <a-avatar
               src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
               alt="alcala photo"

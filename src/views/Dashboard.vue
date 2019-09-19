@@ -8,10 +8,10 @@
     <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
         <a-col :span="1">
-          <a-avatar src="https://www.lucenacity.gov.ph/img/Lucena_Seal200.png" :size="50"></a-avatar>
+          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
         </a-col>
         <a-col :span="10">
-          <h3 style="color:#ffffff;margin-left:20px ">Lucena City</h3>
+          <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
         </a-col>
         <a-col :span="10">
           <a-input-search placeholder="Search" @search="onSearch" />
@@ -162,7 +162,7 @@
     </a-layout-content>
     <a-layout-footer
       style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff"
-    >Lucena City</a-layout-footer>
+    >{{constant_helper.home_header.label}}</a-layout-footer>
 
     <a-modal
       class="report-modal"
