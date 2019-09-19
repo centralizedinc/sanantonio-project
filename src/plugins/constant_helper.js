@@ -15,5 +15,6 @@ export default {
         logo: 'https://www.lucenacity.gov.ph/img/Lucena_Seal200.png',
         label: "Lucena City"
     },
+    name_display: "Lucena",
     login_background: "https://i.postimg.cc/zBFfRPZh/mayor.jpg"
 }

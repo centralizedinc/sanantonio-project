@@ -3,7 +3,7 @@
     
   <a-row  type="flex" justify="center" :gutter="8" >
       <a-col :span="20" style="margin-top:15vh">
-          <h1 style="color:#FFFFFF">Lucena News</h1>
+          <h1 style="color:#FFFFFF">{{constant_helper.name_display}} News</h1>
           <a-divider></a-divider>
       </a-col>
       <a-col :span="20" style="margin-bottom: 10vh">

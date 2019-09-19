@@ -14,13 +14,13 @@
     <a-table :columns="cols" :dataSource="transac" :loading="loading">
       <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
-        <a slot="action" slot-scope="text" href="javascript:;" @click="view_data">View</a>
+        <a slot="action" href="javascript:;" @click="view_data">View</a>
       </template>
-      <template slot="application.app_type" slot-scope="text, record">
+      <template slot="application.app_type" slot-scope="text">
         <p v-if="text == 1">New</p>
         <p v-else>Renewal</p>
       </template>
-      <template slot="action" slot-scope="text, record, index">
+      <template slot="action" slot-scope="text, record">
         <div>
           <a @click="() => view_data(record)">View</a>
         </div>
@@ -37,7 +37,7 @@
           <div align="center">
             <p>
               Republic of the Philippines
-              <br />City of Lucena
+              <br />City of {{constant_helper.name_display}}
               <br />OFFICE OF THE CITY MAYOR
               <br />
               {{form.application.permit_type}} and Licensing Office
