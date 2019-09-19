@@ -1,151 +1,132 @@
 <template>
-    <a-row>
-        <a-col :span="6">
-        <a-steps direction="vertical" size="small" :current="step_pay">
-            <a-step title="Payment Information" />
-            <a-step title="Billing Details " />
-            <a-step title="Review" />
-            <a-step title="Pay" />
-        </a-steps>
+    <a-row type="flex" justify="center" :gutter="16">
+        <a-col :span="24">
+            <h2>Here's your payment details:</h2>
         </a-col>
-        <a-col :span="18" style="margin-bottom:25px">
-        <a-card style="textAlign:'center'">
-            <a-card v-if="step_pay==0">
-            <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
-                <a-row :gutter="8">
-                <a-col :span="9">
-                    <div align="right">
-                    <img
+        <a-col :span="18">
+            <a-card >
+                <a-row type="flex" justify="end">
+                  <a-col :span="8">
+                      
+                      <h3>Amount</h3>
+                      <h3>Penalties</h3>
+                      <h3>Charges</h3>
+                      <h3>Total Amount</h3>
+                  </a-col>
+                  <a-col :span="12">
+                      <h3>₱ 5,000.00</h3>
+                      <h3>₱ 0.00</h3>
+                      <h3>₱ 0.00</h3>
+                      <h3>₱ 5,000.00</h3>
+                  </a-col>
+                </a-row>
+            </a-card>
+            
+        </a-col>
+        
+        <a-col :span="24">
+            <a-divider></a-divider>
+            <h2>To continue, select one of the payment options:</h2>
+        </a-col>
+        <a-col :span="10">
+            
+            <a-card class="payment_card" @click="selectMethod('CC')">
+                <a-row type="flex" :gutter="16">
+                  <a-col :span="6">
+                      <img
                         src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
                         alt="1055px-7-eleven-logo-tile"
                         border="0"
-                        width="60"
-                        height="60"
+                        width="100%"
                     />
-                    </div>
+                  </a-col>
+                  <a-col :span="18">
+                    <h2 align="left" type="bold" style="color:#FFFFFF">Credit Card</h2>
+                    <h5 align="left" style="color:#FFFFFF">Visa, Master, JCB or American Express</h5>
                 </a-col>
-                <a-col :span="15">
-                    <h2 align="left" type="bold" style="margin-bottom:42px">Credit Card</h2>
-                    <h5 align="left">Visa, Master, JCB or American Express</h5>
-                </a-col>
-                <a-button @click="payment_method(0)">Pay using credit card</a-button>
                 </a-row>
-            </a-card-grid>
-            <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
-                <a-row :gutter="8">
-                <a-col :span="9">
-                    <div align="right">
-                    <img
+            </a-card>
+        </a-col>
+
+        <a-col :span="10">
+            <a-card class="payment_card" @click="selectMethod('EC')">
+                <a-row type="flex" :gutter="16">
+                  <a-col :span="6">
+                      <img
                         src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
                         alt="1055px-7-eleven-logo-tile"
                         border="0"
-                        width="60"
-                        height="60"
+                        width="80%"
                     />
-                    </div>
+                  </a-col>
+                  <a-col :span="18">
+                    <h2 align="left" type="bold" style="color:#FFFFFF">Over the Counter</h2>
+                    <h5 align="left" style="color:#FFFFFF"> Cebuana Lhullier, M Lhuillier,7-11 or Coins.ph</h5>
                 </a-col>
-                <a-col :span="15">
-                    <h2 align="left" type="bold">OVER THE COUNTER</h2>
-                    <h5 align="left">
-                    Cebuana Lhullier, M Lhuillier,
-                    7-11 or Coins.ph
-                    </h5>
-                </a-col>
-                <a-button @click="payment_method(1)">Pay over the counter</a-button>
                 </a-row>
-            </a-card-grid>
-            <!-- ***************************************************** -->
-            <div align="center" v-if="pay_type != null">
-                <h1>{{form.payment_info.desc}}</h1>
-                <h1>₱{{form.payment_info.amount}}</h1>
-                <h1>PAYMENT METHOD</h1>
-                <a-row :gutter="8" v-if="pay_type == 1" style="margin-bottom:25px">
-                <a-col :span="9">
-                    <div align="right">
-                    <img
-                        src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
+            </a-card>
+        </a-col>
+
+
+        <a-modal v-model="show_modal" @ok="submit">
+            <template slot="title">
+                <a-row type="flex" :gutter="16" align="middle">
+                  <a-col :span="4">
+                      <img
+                        :src="payment_method==='CC'?'https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg':'https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg'"
                         alt="1055px-7-eleven-logo-tile"
                         border="0"
-                        width="60"
-                        height="60"
+                        width="100%"
                     />
-                    </div>
-                </a-col>
-                <a-col :span="15">
-                    <h2 align="left" type="bold">OVER THE COUNTER</h2>
-                    <h5 align="left">
-                    Cebuana Lhullier, M Lhuillier,
-                    7-11 or Coins.ph
-                    </h5>
-                </a-col>
+                    
+                  </a-col>
+                  <a-col :span="20"><h3>{{title}}</h3></a-col>
                 </a-row>
-                <a-row :gutter="8" v-else style="margin-bottom:25px">
-                <a-col :span="9">
-                    <div align="right">
-                    <img
-                        src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
-                        alt="1055px-7-eleven-logo-tile"
-                        border="0"
-                        width="60"
-                        height="60"
-                    />
-                    </div>
-                </a-col>
-                <a-col :span="15">
-                    <h2 align="left" type="bold">Credit Card</h2>
-                    <h5 align="left">Visa, Master, JCB or American Express</h5>
-                </a-col>
-                </a-row>
-            </div>
-            </a-card>
-            <a-card v-if="step_pay==1">
-            <h4>Customer Information</h4>
-            <a-input placeholder="Name" v-model="form.billing_info.name"></a-input>
-            <a-input
-                v-if="pay_type == 0"
-                placeholder="Credit Card Number"
-                v-model="form.billing_info.credit_number"
-            ></a-input>
-            <a-input placeholder="E-mail Address" v-model="form.billing_info.email"></a-input>
-            <a-input placeholder="Phone/Mobile" v-model="form.billing_info.contact"></a-input>
-            </a-card>
-            <a-card v-if="step_pay==2">
-            <a-card title="Payment Information">
-                <a-card-grid style="width:50%;textAlign:left">Description</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">Amount</a-card-grid>
-                <a-card-grid
-                style="width:50%;textAlign:'center'"
-                >₱{{form.payment_info.amount}}</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">Payment Method</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
-            </a-card>
-            <a-card title="Billing Details">
-                <a-card-grid style="width:50%;textAlign:left">Name</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
-                <a-card-grid
-                style="width:50%;textAlign:'center'"
-                v-if="pay_type == 0"
-                >Credit Card Number</a-card-grid>
-                <a-card-grid
-                style="width:50%;textAlign:'center'"
-                v-if="pay_type == 0"
-                >{{form.billing_info.credit_number}}</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">E-mail</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
-                <a-card-grid style="width:50%;textAlign:'center'">Phone/Mobile</a-card-grid>
-                <a-card-grid
-                style="width:50%;textAlign:'center'"
-                >{{form.billing_info.contact}}</a-card-grid>
-            </a-card>
-            </a-card>
-            <a-modal v-model="visible" data-backdrop="static" data-keyboard="false">
-            <template slot="footer">
-                <a-button>
-                <a-icon type="download" />Download
-                </a-button>
-                <a-button @click="confirm()">Confirm</a-button>
             </template>
+            <template v-if="payment_method ==='CC'">
+                <a-form>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Credit Card Number">
+                      <a-input placeholder="Enter Credit Card No.">
+                          <a-icon type="credit-card" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="CVC">
+                      <a-input placeholder="Card Verification Code">
+                          <a-icon type="lock" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Valid Until">
+                      <a-month-picker placeholder="Card validity" style="width:100%"></a-month-picker>
+                  </a-form-item>
+                   <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Card Holder Name">
+                      <a-input placeholder="Card Holder Name">
+                          <a-icon type="user" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                </a-form>               
+            </template>
+            <template v-if="payment_method ==='EC'">
+                <a-form>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Customer Name">
+                      <a-input placeholder="Lastname, Firstname Middlename">
+                          <a-icon type="user" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Email Address">
+                      <a-input placeholder="Enter valid email address">
+                          <a-icon type="mail" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                  <a-form-item :labelCol="{span:8}" :wrapperCol="{span:16}" label="Contact Number">
+                      <a-input placeholder="Enter Contact Number ">
+                          <a-icon type="phone" slot="prefix"></a-icon>
+                      </a-input>
+                  </a-form-item>
+                </a-form>
+            </template>
+        </a-modal>
+
+        <a-modal v-model="barcode_modal" title="Confirmation" @ok="success">
             <div align="center">
                 <h2>Amount Due (before fee)</h2>
                 <h1 style="color:#0F82E0">₱1500</h1>
@@ -161,19 +142,51 @@
                 <barcode v-bind:value="barcodeValue">Show this if the rendering fails.</barcode>
                 <h5>3. Complete your payment and you have paid the payment request.</h5>
             </div>
-            </a-modal>
-        </a-card>
-        </a-col>
+        </a-modal>
     </a-row>
 </template>
 
 <script>
+import VueBarcode from "vue-barcode";
 export default {
+    props:['mode'],
+    components:{
+        barcode: VueBarcode
+    },
     data(){
         return{
-            step_pay:0
+            step_pay:0,
+            show_modal:false,
+            barcode_modal:false,
+            payment_method:null,
+            title:null,
+            barcodeValue:"123-4567-890",
+            ref_num:12212-1231231
         }
-        
+    },
+    methods:{
+        selectMethod(method){
+            console.log('method', method)
+            this.show_modal = true;
+            this.payment_method=method
+            this.title = method==='CC'?'Credit Card Payment': 'Over the Counter Payment'
+        },
+        submit(){
+            if(this.payment_method === 'CC'){
+                this.success()
+            }else{
+                this.barcode_modal = true;
+                this.show_modal = false;
+            }
+        },
+        success(){
+            this.$router.push(`/app/${this.mode}`)
+            this.barcode_modal = false;
+            this.$notification.success({
+                message: 'Success!',
+                description: 'Your Application and payment were successful.'
+            })
+        }
     }
 }
 </script>

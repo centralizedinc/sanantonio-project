@@ -37,13 +37,13 @@
                 >Upload a copy of your previous RPT Official Reciept or Tax Declaration</p>
               </a-upload-dragger>
             </template>
-            <template v-else>
-                <payment></payment>
+            <template  v-if="curr_step == 2">
+                <payment mode="taxes"></payment>
             </template>
         </a-form>
       </a-col>
     </a-row>
-    <template>
+    <template v-if="curr_step < 2">
         <a-divider></a-divider>
         <a-row type="flex" justify="end" :gutter="16">
         <a-col :span="4">

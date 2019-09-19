@@ -5,7 +5,7 @@
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="4">
-            <a-avatar shape="square" :size=80 class="card_btn">
+            <a-avatar shape="square" :size=80 class="card_btn"  @click="redirect('real-estate-tax')">
               <a-icon type="home" style="font-size:36px"></a-icon>
             </a-avatar>
           </a-col>
