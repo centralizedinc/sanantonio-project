@@ -1,33 +1,23 @@
 <template>
-  <a-row type="flex" :gutter="8" >
+  <a-row type="flex" :gutter="8">
     <h4>Pay Local Taxes</h4>
     <a-divider style="margin-top:-1vh"></a-divider>
 
-    <a-col :span="6" >
+    <a-col :span="6">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
-            <a-avatar shape="square" :size=40 class="card_btn"  @click="redirect('real-estate-tax')">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              @click="redirect('real-estate-tax')"
+            >
               <a-icon type="home" style="font-size:16px"></a-icon>
             </a-avatar>
           </a-col>
           <a-col :span="16">
-             <span style="font-size:12px">Real Estate Tax</span>             
-          </a-col>
-        </a-row>
-      </a-card>
-    </a-col>
-
-    <a-col :span="6" >
-      <a-card data-aos="fade-up">
-        <a-row type="flex" align="middle" justify="center">
-          <a-col :span="8">
-            <a-avatar shape="square" :size=40 class="card_btn"  @click="redirect('business-permit')">
-              <a-icon type="user" style="font-size:16px"></a-icon>
-            </a-avatar>
-          </a-col>
-          <a-col :span="16">
-             <span style="font-size:12px">Community Tax</span>             
+            <span style="font-size:12px">Real Estate Tax</span>
           </a-col>
         </a-row>
       </a-card>
@@ -37,30 +27,57 @@
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
-            <a-avatar shape="square" :size=40 class="card_btn"  @click="redirect('business-permit')">
-              <a-icon type="snippets" style="font-size:16px"></a-icon>
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              @click="redirect('business-permit')"
+            >
+              <a-icon type="user" style="font-size:16px"></a-icon>
             </a-avatar>
           </a-col>
           <a-col :span="16">
-             <span style="font-size:12px">Occupancy Permit</span>             
+            <span style="font-size:12px">Community Tax</span>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
 
-
-    
-
-    <a-col :span="6" >
+    <a-col :span="6">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
-            <a-avatar shape="square" :size=40 class="card_btn"  @click="redirect('business-permit')">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              @click="redirect('business-permit')"
+            >
+              <a-icon type="snippets" style="font-size:16px"></a-icon>
+            </a-avatar>
+          </a-col>
+          <a-col :span="16">
+            <span style="font-size:12px">Occupancy Permit</span>
+          </a-col>
+        </a-row>
+      </a-card>
+    </a-col>
+
+    <a-col :span="6">
+      <a-card data-aos="fade-up">
+        <a-row type="flex" align="middle" justify="center">
+          <a-col :span="8">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              @click="redirect('business-permit')"
+            >
               <a-icon type="exception" style="font-size:16px"></a-icon>
             </a-avatar>
           </a-col>
           <a-col :span="16">
-             <span style="font-size:12px">Barangay Clearance</span>             
+            <span style="font-size:12px">Barangay Clearance</span>
           </a-col>
         </a-row>
       </a-card>
@@ -75,9 +92,9 @@
 </template>
 
 <script>
-import Transactions from '@/components/taxes/Transactions'
+import Transactions from "@/components/taxes/Transactions";
 export default {
-  components:{
+  components: {
     Transactions
   },
   methods: {

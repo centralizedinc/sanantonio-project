@@ -92,9 +92,9 @@
             </a-avatar>
           </a-col>
           <a-col :span="18">
-            <h3>Apply for Barangay Clearance</h3>
+            <h3>Apply for Sanitary Permit</h3>
             <a-divider style="margin-top:-1vh"></a-divider>
-            <p>An Occupancy Permit is a document issued by Department of Building Official that serves as a proof that the structure built completed all the building work and suitable for occupation.</p>
+            <p>Food and Non-food business establishments are required to secure sanitary permit to make sure they observe the standard of the Sanitary Code of the Philippines</p>
           </a-col>
         </a-row>
       </a-card>
