@@ -402,7 +402,8 @@
           </template>
 
           <template v-if="step_curr==4">
-            <a-row>
+            <payment mode="permits" :details="form"></payment>
+            <!-- <a-row>
               <a-col :span="6">
                 <a-steps direction="vertical" size="small" :current="step_pay">
                   <a-step title="Payment Information" />
@@ -457,8 +458,9 @@
                         <a-button @click="payment_method(1)">Pay over the counter</a-button>
                       </a-row>
                     </a-card-grid>
-                    <!-- ***************************************************** -->
-                    <div align="center" v-if="pay_type != null">
+            -->
+            <!-- ***************************************************** -->
+            <!-- <div align="center" v-if="pay_type != null">
                       <h1>{{form.payment_info.desc}}</h1>
                       <h1>₱{{form.payment_info.amount}}</h1>
                       <h1>PAYMENT METHOD</h1>
@@ -567,7 +569,7 @@
                   </a-modal>
                 </a-card>
               </a-col>
-            </a-row>
+            </a-row>-->
           </template>
         </a-form>
       </a-col>
@@ -586,10 +588,12 @@
 <script>
 import VueBarcode from "vue-barcode";
 import axios from "axios";
+import Payment from "@/components/Payment";
 
 export default {
   components: {
-    barcode: VueBarcode
+    barcode: VueBarcode,
+    Payment
   },
   data() {
     return {
@@ -676,8 +680,8 @@ export default {
           contact: null
         },
         progress: {
-          status: "On Progress",
-          current_task: "Payment",
+          status: "FOR PAYMENT",
+          current_task: "FOR PAYMENT",
           previous_task: ""
         }
       },
