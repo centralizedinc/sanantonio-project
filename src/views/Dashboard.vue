@@ -217,7 +217,10 @@
           :animation="animation"
         />
       </GmapMap>
-      
+
+      <!-- <a-card>
+        <a-card-grid></a-card-grid>
+      </a-card> -->
       <!-- <template slot="footer">
         <a-button
           key="submit"
