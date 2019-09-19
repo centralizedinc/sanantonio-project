@@ -269,6 +269,7 @@
                 ></a-input>
               </a-form-item>
             </template>
+
             <a-divider orientation="left">Business Activities</a-divider>
             <!-- ///////////////////////////////////////////////////////////////////////// -->
             <!-- <a-table :columns="cols" :dataSource="activities"></a-table> -->
@@ -317,10 +318,23 @@
             <!-- </template>
             </a-table>-->
             <!-- ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] -->
-            <a-input style="padding: 10px" placeholder="Line of Business" v-model="line_business"></a-input>
-            <a-input placeholder="Capitalization" v-model="capital"></a-input>
-            <a-input placeholder="Gross Sales/Receipts" v-model="receipts"></a-input>
-            <a-button class="editable-add-btn" @click="addBusinessActivities" v-if="!editing">Add</a-button>
+            <a-input
+              style="margin-bottom: 10px;"
+              placeholder="Line of Business"
+              v-model="line_business"
+            ></a-input>
+            <a-input style="margin-bottom: 10px;" placeholder="Capitalization" v-model="capital"></a-input>
+            <a-input
+              style="margin-bottom: 10px;"
+              placeholder="Gross Sales/Receipts"
+              v-model="receipts"
+            ></a-input>
+            <a-button
+              style="margin-bottom: 10px;"
+              class="editable-add-btn"
+              @click="addBusinessActivities"
+              v-if="!editing"
+            >Add</a-button>
             <a-button class="editable-add-btn" @click="saveEdit" v-if="editing">Edit</a-button>
             <a-button class="editable-add-btn" @click="onCancel" v-if="editing">Cancel</a-button>
 
@@ -345,7 +359,8 @@
 
             <!-- ///////////////////////////////////////////////////////////////////////// -->
             <a-form-item
-              label="Mode of Pyament"
+              style="margin-top: 10px;"
+              label="Mode of Payment"
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
