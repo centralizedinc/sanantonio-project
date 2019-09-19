@@ -160,7 +160,12 @@
       style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff"
     >Lucena City</a-layout-footer>
 
-    <a-modal :visible="visible" @cancel="visible=false" :footer="null" title="Report Incident">
+    <a-modal
+      :visible="visible"
+      @cancel="visible=false"
+      v-bind="report_mode ? '': { footer: null }"
+      title="Report Incident"
+    >
       <GmapMap
         id="map"
         ref="map"
@@ -169,9 +174,15 @@
         map-type-id="terrain"
         draggable="true"
         style="width: 100%; height: 300px"
+        @click="setCoordinate"
       >
         <!-- Current Location -->
-        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
+        <GmapMarker
+          :draggable="true"
+          @dragend="setCoordinate"
+          :position="coordinates"
+          :animation="animation"
+        />
 
         <!-- Fire -->
         <GmapMarker
@@ -221,14 +232,14 @@
       <!-- <a-card>
         <a-card-grid></a-card-grid>
       </a-card>-->
-      <!-- <template slot="footer">
+      <template slot="footer" v-if="report_mode">
         <a-button
           key="submit"
           type="primary"
           :loading="loading"
           @click="submitReport"
         >Confirm and Submit</a-button>
-      </template>-->
+      </template>
     </a-modal>
   </a-layout>
 </template>
@@ -247,10 +258,12 @@ export default {
       civil_disturbance_icon,
       flood_icon,
       crime_icon,
+      report_mode: false,
       loading: false,
       collapsed: false,
       user: {},
       visible: false,
+      center: { lat: 13.9413957, lng: 121.6234471 },
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
       animation: {},
       fire_coordinates: [],
@@ -261,6 +274,14 @@ export default {
   },
   created() {
     this.init();
+  },
+  watch: {
+    coordinates: {
+      handler(val) {
+        this.center = val;
+      },
+      deep: true
+    }
   },
   methods: {
     init() {
@@ -281,6 +302,8 @@ export default {
       this.crime_coordinates = [];
       this.visible = true;
       var _self = this;
+      if (num > 0) this.report_mode = true;
+      else this.report_mode = false;
       this.$getLocation().then(coordinates => {
         this.coordinates = coordinates;
         console.log("num :", num);
@@ -308,6 +331,12 @@ export default {
           _self.animation = google.maps.Animation.DROP;
         });
       });
+    },
+    setCoordinate(e) {
+      if (this.report_mode) {
+        this.coordinates.lat = e.latLng.lat();
+        this.coordinates.lng = e.latLng.lng();
+      }
     },
     generateSampleCoordinates(coordinate, count_range) {
       var coordinates = [];
