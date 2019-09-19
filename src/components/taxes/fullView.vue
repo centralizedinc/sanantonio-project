@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import Transactions from '@/components/permits/Transactions'
+import Transactions from '@/components/taxes/Transactions'
 export default {
   components:{
     Transactions
