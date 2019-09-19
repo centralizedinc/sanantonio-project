@@ -36,11 +36,7 @@
               </span>
             </template>
             <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
-            <a-avatar
-              src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
-              alt="alcala photo"
-              slot="avatar"
-            />
+            <a-avatar :src="constant_helper.mayor_details.avatar" slot="avatar" />
             <span slot="content">
               Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
               <br />
@@ -93,11 +89,7 @@
               </span>
             </template>
             <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
-            <a-avatar
-              src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
-              alt="alcala photo"
-              slot="avatar"
-            />
+            <a-avatar :src="constant_helper.mayor_details.avatar" slot="avatar" />
             <span slot="content">
               INGAT PO TAYO AT MAGING ALERTO:
               <br />
@@ -144,7 +136,7 @@
               </span>
             </template>
             <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
-            <a-avatar src="https://i.postimg.cc/d3vrh9Jx/images.jpg" alt slot="avatar" />
+            <a-avatar :src="constant_helper.mayor_details.avatar" alt slot="avatar" />
             <span slot="content">
               PAALALA SA LAHAT:
               <br />
@@ -196,11 +188,7 @@
               </span>
             </template>
             <a slot="author">Mayor {{constant_helper.mayor_details.name}}</a>
-            <a-avatar
-              src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
-              alt="alcala photo"
-              slot="avatar"
-            />
+            <a-avatar :src="constant_helper.mayor_details.avatar" slot="avatar" />
             <span slot="content">
               PABATID: Ang Northern Quezon kasama po ang ating lungsod ay nananatiling na signal no. 1 ayon sa latest weather bulletin ng PAGASA kaya sa bisa pa din po ng E.O. No. 26 series of 2012 ay nananatiling sa mga pre-elementary or nursery at kinder lang po ang walang pasok bukas, Agosto 28, 2019.
               <br />
