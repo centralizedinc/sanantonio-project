@@ -3,8 +3,12 @@
     <a-row>
       <a-col :span="24">
         <a-steps size="small" :current="step_curr">
-          <a-step title="Application Details"></a-step>
-          <a-step title="Business Details"></a-step>
+          <a-step title="Application">
+            <span slot="description">Details</span>
+          </a-step>
+          <a-step title="Business">
+            <span slot="description">Details</span>
+          </a-step>
           <a-step title="Requirements"></a-step>
           <a-step title="Insurance"></a-step>
           <a-step title="Payments"></a-step>
@@ -12,7 +16,7 @@
         <a-divider></a-divider>
       </a-col>
       <a-col :span="24">
-        <a-form>
+        <a-form :layout="formLayout">
           <!-- application details -->
           <template v-if="step_curr==0">
             <a-form-item label="Application" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
@@ -90,21 +94,35 @@
             <a-form-item label="Email Address" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Business Email" v-model="form.business.email"></a-input>
             </a-form-item>
-            <a-form-item label="Business Address" :label-col="{ span: 8 }">
+            <a-form-item
+              label="Business Address"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16 }"
+            >
+              <a-textarea
+                placeholder="Business Address"
+                v-model="form.business.business_address"
+                autosize
+              />
+            </a-form-item>
+            <!-- <a-form-item label="Business Address" :label-col="{ span: 8 }">
               <a-textarea
                 rows="3"
                 placeholder="Full Business Address"
                 style="width: 550px"
                 v-model="form.business.business_address"
-              ></a-textarea>
-            </a-form-item>
+              ></a-input>
+            </a-form-item>-->
             <a-form-item
-              label="Name of Application/Owner/Manager"
+              label="Name of Application"
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16}"
             >
-              <a-input placeholder="Surname, First name, MI" v-model="form.business.amo.name"></a-input>
-              <div align="center">
+              <a-input
+                placeholder="Owner/Manager Surname, First name, MI"
+                v-model="form.business.amo.name"
+              ></a-input>
+              <div align="left">
                 <a-checkbox
                   @change="sameAddress"
                   defaultChecked
@@ -162,8 +180,13 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              <a-input-number :defaultValue="1" v-model="form.business.employees_no.professional" />Professional
               <a-input-number
+                style="margin-right: 10px"
+                :defaultValue="1"
+                v-model="form.business.employees_no.professional"
+              />Professional
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
                 :defaultValue="1"
                 v-model="form.business.employees_no.non_professional"
               />Non-Professional
@@ -179,11 +202,23 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              Land
-              <a-input-number v-model="form.business.property_pin.land" />Building
-              <a-input-number v-model="form.business.property_pin.building" />Machinery
-              <a-input-number v-model="form.business.property_pin.machinery" />
+              <a-input-number
+                style="margin-right: 10px"
+                placeholder="Land"
+                v-model="form.business.property_pin.land"
+              />
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
+                placeholder="Building"
+                v-model="form.business.property_pin.building"
+              />
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
+                placeholder="Machinery"
+                v-model="form.business.property_pin.machinery"
+              />
             </a-form-item>
+
             <template v-if="form.business.business_type==1">
               <a-form-item
                 label="Lessor's Name"
@@ -234,54 +269,8 @@
                 ></a-input>
               </a-form-item>
             </template>
+
             <a-divider orientation="left">Business Activities</a-divider>
-            <!-- ///////////////////////////////////////////////////////////////////////// -->
-            <!-- <a-table :columns="cols" :dataSource="activities"></a-table> -->
-            <!-- <a-button class="editable-add-btn" @click="handleAdd">Add</a-button>
-            <a-table :columns="columns" :dataSource="dataSource">-->
-            <!-- <template slot="line_business" slot-scope="text, record">
-                <editable-cell :text="text" @change="onCellChange(record.key, 'line_business', $event)" />
-            </template>-->
-            <!-- <template
-                v-for="col in ['line_business', 'capital', 'receipts']"
-                :slot="col"
-                slot-scope="text, record, index"
-              >
-                <div :key="col">
-                  <a-input
-                    v-if="record.editable"
-                    style="margin: -5px 0"
-                    :value="text"
-                    @change="e => handleChange(e.target.value, record.key, col)"
-                  />
-                  <template v-else>{{text}}</template>
-                </div>
-              </template>
-              <template slot="operation" slot-scope="text, record, index">
-                <div class="editable-row-operations">
-                  <a-popconfirm
-                    v-if="dataSource.length"
-                    title="Sure to delete?"
-                    @confirm="() => onDelete(record.key)"
-                  >
-                    <a href="javascript:;">Delete</a>
-                  </a-popconfirm>
-            </div>-->
-            <!-- <div class="editable-row-operations">
-                  <span v-if="record.editable">
-                    <a @click="() => save(record.key)">Save</a>
-                    <p>&nbsp;</p>
-                    <a-popconfirm title="Sure to cancel?" @confirm="() => cancel(record.key)">
-                      <a>Cancel</a>
-                    </a-popconfirm>
-                  </span>
-                  <span v-else>
-                    <a @click="() => edit(record.key)">Edit</a>
-                  </span>
-            </div>-->
-            <!-- </template>
-            </a-table>-->
-            <!-- ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] -->
             <a-input placeholder="Line of Business" v-model="line_business"></a-input>
             <a-input placeholder="Capitalization" v-model="capital"></a-input>
             <a-input placeholder="Gross Sales/Receipts" v-model="receipts"></a-input>
@@ -310,7 +299,8 @@
 
             <!-- ///////////////////////////////////////////////////////////////////////// -->
             <a-form-item
-              label="Mode of Pyament"
+              style="margin-top: 10px;"
+              label="Mode of Payment"
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
@@ -402,172 +392,7 @@
           </template>
 
           <template v-if="step_curr==4">
-            <a-row>
-              <a-col :span="6">
-                <a-steps direction="vertical" size="small" :current="step_pay">
-                  <a-step title="Payment Information" />
-                  <a-step title="Billing Details " />
-                  <a-step title="Review" />
-                  <a-step title="Pay" />
-                </a-steps>
-              </a-col>
-              <a-col :span="18" style="margin-bottom:25px">
-                <a-card style="textAlign:'center'">
-                  <a-card v-if="step_pay==0">
-                    <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
-                      <a-row :gutter="8">
-                        <a-col :span="9">
-                          <div align="right">
-                            <img
-                              src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
-                              alt="1055px-7-eleven-logo-tile"
-                              border="0"
-                              width="60"
-                              height="60"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col :span="15">
-                          <h2 align="left" type="bold" style="margin-bottom:42px">Credit Card</h2>
-                          <h5 align="left">Visa, Master, JCB or American Express</h5>
-                        </a-col>
-                        <a-button @click="payment_method(0)">Pay using credit card</a-button>
-                      </a-row>
-                    </a-card-grid>
-                    <a-card-grid style="width:50%;textAlign:'center'" v-show="pay_type == null">
-                      <a-row :gutter="8">
-                        <a-col :span="9">
-                          <div align="right">
-                            <img
-                              src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
-                              alt="1055px-7-eleven-logo-tile"
-                              border="0"
-                              width="60"
-                              height="60"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col :span="15">
-                          <h2 align="left" type="bold">OVER THE COUNTER</h2>
-                          <h5 align="left">
-                            Cebuana Lhullier, M Lhuillier,
-                            7-11 or Coins.ph
-                          </h5>
-                        </a-col>
-                        <a-button @click="payment_method(1)">Pay over the counter</a-button>
-                      </a-row>
-                    </a-card-grid>
-                    <!-- ***************************************************** -->
-                    <div align="center" v-if="pay_type != null">
-                      <h1>{{form.payment_info.desc}}</h1>
-                      <h1>₱{{form.payment_info.amount}}</h1>
-                      <h1>PAYMENT METHOD</h1>
-                      <a-row :gutter="8" v-if="pay_type == 1" style="margin-bottom:25px">
-                        <a-col :span="9">
-                          <div align="right">
-                            <img
-                              src="https://i.ibb.co/h127LnF/1055px-7-eleven-logo-tile.jpg"
-                              alt="1055px-7-eleven-logo-tile"
-                              border="0"
-                              width="60"
-                              height="60"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col :span="15">
-                          <h2 align="left" type="bold">OVER THE COUNTER</h2>
-                          <h5 align="left">
-                            Cebuana Lhullier, M Lhuillier,
-                            7-11 or Coins.ph
-                          </h5>
-                        </a-col>
-                      </a-row>
-                      <a-row :gutter="8" v-else style="margin-bottom:25px">
-                        <a-col :span="9">
-                          <div align="right">
-                            <img
-                              src="https://i.ibb.co/Kq1BBwZ/1200px-Visa-tile.jpg"
-                              alt="1055px-7-eleven-logo-tile"
-                              border="0"
-                              width="60"
-                              height="60"
-                            />
-                          </div>
-                        </a-col>
-                        <a-col :span="15">
-                          <h2 align="left" type="bold">Credit Card</h2>
-                          <h5 align="left">Visa, Master, JCB or American Express</h5>
-                        </a-col>
-                      </a-row>
-                    </div>
-                  </a-card>
-                  <a-card v-if="step_pay==1">
-                    <h4>Customer Information</h4>
-                    <a-input placeholder="Name" v-model="form.billing_info.name"></a-input>
-                    <a-input
-                      v-if="pay_type == 0"
-                      placeholder="Credit Card Number"
-                      v-model="form.billing_info.credit_number"
-                    ></a-input>
-                    <a-input placeholder="E-mail Address" v-model="form.billing_info.email"></a-input>
-                    <a-input placeholder="Phone/Mobile" v-model="form.billing_info.contact"></a-input>
-                  </a-card>
-                  <a-card v-if="step_pay==2">
-                    <a-card title="Payment Information">
-                      <a-card-grid style="width:50%;textAlign:left">Description</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.desc}}</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">Amount</a-card-grid>
-                      <a-card-grid
-                        style="width:50%;textAlign:'center'"
-                      >₱{{form.payment_info.amount}}</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">Payment Method</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">{{form.payment_info.method}}</a-card-grid>
-                    </a-card>
-                    <a-card title="Billing Details">
-                      <a-card-grid style="width:50%;textAlign:left">Name</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.name}}</a-card-grid>
-                      <a-card-grid
-                        style="width:50%;textAlign:'center'"
-                        v-if="pay_type == 0"
-                      >Credit Card Number</a-card-grid>
-                      <a-card-grid
-                        style="width:50%;textAlign:'center'"
-                        v-if="pay_type == 0"
-                      >{{form.billing_info.credit_number}}</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">E-mail</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">{{form.billing_info.email}}</a-card-grid>
-                      <a-card-grid style="width:50%;textAlign:'center'">Phone/Mobile</a-card-grid>
-                      <a-card-grid
-                        style="width:50%;textAlign:'center'"
-                      >{{form.billing_info.contact}}</a-card-grid>
-                    </a-card>
-                  </a-card>
-                  <a-modal v-model="visible" data-backdrop="static" data-keyboard="false">
-                    <template slot="footer">
-                      <a-button>
-                        <a-icon type="download" />Download
-                      </a-button>
-                      <a-button @click="confirm()">Confirm</a-button>
-                    </template>
-                    <div align="center">
-                      <h2>Amount Due (before fee)</h2>
-                      <h1 style="color:#0F82E0">₱1500</h1>
-                      <h3>Payment Instructions:</h3>
-                      <h5>1. Go to the nearest 7-Eleven store.</h5>
-                      <h5>
-                        2. Request for a 7-Connect payment at the cashier
-                        <br />
-                        with Reference Number: {{form.reference_no}}
-                      </h5>
-                      <h2>OR</h2>
-                      <h3>SCAN BARCODE</h3>
-                      <barcode v-bind:value="barcodeValue">Show this if the rendering fails.</barcode>
-                      <h5>3. Complete your payment and you have paid the payment request.</h5>
-                    </div>
-                  </a-modal>
-                </a-card>
-              </a-col>
-            </a-row>
+            <payment mode="permits" :details="form"></payment>
           </template>
         </a-form>
       </a-col>
@@ -586,13 +411,16 @@
 <script>
 import VueBarcode from "vue-barcode";
 import axios from "axios";
+import Payment from "@/components/Payment";
 
 export default {
   components: {
-    barcode: VueBarcode
+    barcode: VueBarcode,
+    Payment
   },
   data() {
     return {
+      formLayout: "vertical",
       insurance: {
         name: "",
         fee: 0
@@ -676,8 +504,8 @@ export default {
           contact: null
         },
         progress: {
-          status: "On Progress",
-          current_task: "Payment",
+          status: "FOR PAYMENT",
+          current_task: "FOR PAYMENT",
           previous_task: ""
         }
       },
