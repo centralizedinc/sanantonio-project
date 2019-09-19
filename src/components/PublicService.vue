@@ -195,7 +195,7 @@ export default {
     },
     postMessage() {
       const index = this.subscribers.findIndex(
-        sub => sub.name.last === this.active_user.lname
+        sub => sub.email && sub.email === this.active_user.email
       );
       if (index > -1) {
         this.subscribers[index].post.push({
@@ -214,6 +214,7 @@ export default {
             last: this.active_user.lname
           },
           avatar: this.active_user.avatar,
+          email: this.active_user.email,
           post: [
             {
               name: {

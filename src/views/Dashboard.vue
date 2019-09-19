@@ -84,59 +84,71 @@
               <p>Emergency Hotline</p>
               <a-row>
                 <a-col :span="12">
-                  <a-card
-                    style="background-color:#1A1693; cursor:pointer"
-                    class="emergency_btn"
-                    @click="report(1)"
-                  >
-                    <a-row type="flex" justify="center">
-                      <a-col :span="12">
-                        <a-icon type="fire" style="color:#ffffff;font-size:24px"></a-icon>
-                      </a-col>
-                    </a-row>
-                  </a-card>
+                  <a-tooltip>
+                    <span slot="title">Fire</span>
+                    <a-card
+                      style="background-color:#1A1693; cursor:pointer"
+                      class="emergency_btn"
+                      @click="report(1)"
+                    >
+                      <a-row type="flex" justify="center">
+                        <a-col :span="12">
+                          <a-icon type="fire" style="color:#ffffff;font-size:24px"></a-icon>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-tooltip>
                 </a-col>
                 <a-col :span="12">
-                  <a-card
-                    style="background-color:#1A1693; cursor:pointer"
-                    class="emergency_btn"
-                    @click="report(1)"
-                  >
-                    <a-row type="flex" justify="center">
-                      <a-col :span="12">
-                        <a-icon type="sound" style="color:#ffffff;font-size:24px"></a-icon>
-                      </a-col>
-                    </a-row>
-                  </a-card>
+                  <a-tooltip>
+                    <span slot="title">Civil Disturbance</span>
+                    <a-card
+                      style="background-color:#1A1693; cursor:pointer"
+                      class="emergency_btn"
+                      @click="report(2)"
+                    >
+                      <a-row type="flex" justify="center">
+                        <a-col :span="12">
+                          <a-icon type="sound" style="color:#ffffff;font-size:24px"></a-icon>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-tooltip>
                 </a-col>
                 <a-col :span="12">
-                  <a-card
-                    style="background-color:#1A1693; cursor:pointer"
-                    class="emergency_btn"
-                    @click="report(1)"
-                  >
-                    <a-row type="flex" justify="center">
-                      <a-col :span="12">
-                        <a-icon type="alert" style="color:#ffffff;font-size:24px"></a-icon>
-                      </a-col>
-                    </a-row>
-                  </a-card>
+                  <a-tooltip>
+                    <span slot="title">Flood</span>
+                    <a-card
+                      style="background-color:#1A1693; cursor:pointer"
+                      class="emergency_btn"
+                      @click="report(3)"
+                    >
+                      <a-row type="flex" justify="center">
+                        <a-col :span="12">
+                          <a-icon type="alert" style="color:#ffffff;font-size:24px"></a-icon>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-tooltip>
                 </a-col>
                 <a-col :span="12">
-                  <a-card
-                    style="background-color:#1A1693; cursor:pointer"
-                    class="emergency_btn"
-                    @click="report(1)"
-                  >
-                    <a-row type="flex" justify="center">
-                      <a-col :span="12">
-                        <a-icon type="safety" style="color:#ffffff;font-size:24px"></a-icon>
-                      </a-col>
-                    </a-row>
-                  </a-card>
+                  <a-tooltip>
+                    <span slot="title">Crime</span>
+                    <a-card
+                      style="background-color:#1A1693; cursor:pointer"
+                      class="emergency_btn"
+                      @click="report(4)"
+                    >
+                      <a-row type="flex" justify="center">
+                        <a-col :span="12">
+                          <a-icon type="safety" style="color:#ffffff;font-size:24px"></a-icon>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-tooltip>
                 </a-col>
                 <a-col :span="24" style="margin-top:2vh">
-                  <a-button block ghost type="primary" @click="report(1)">View Incident Reports</a-button>
+                  <a-button block ghost type="primary" @click="report(0)">View Incident Reports</a-button>
                 </a-col>
               </a-row>
             </a-card>
@@ -148,7 +160,7 @@
       style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff"
     >Lucena City</a-layout-footer>
 
-    <a-modal :visible="visible" @cancel="visible=false" title="Report Incident">
+    <a-modal :visible="visible" @cancel="visible=false" :footer="null" title="Report Incident">
       <GmapMap
         id="map"
         ref="map"
@@ -158,42 +170,90 @@
         draggable="true"
         style="width: 100%; height: 300px"
       >
-        <!-- <GmapMarker :draggable="true" :position="coordinates" :icon="fire_icon" :animation="animation" /> -->
+        <!-- Current Location -->
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
 
+        <!-- Fire -->
         <GmapMarker
-          v-for="(coordinate, index) in sample_coordinates"
+          v-for="(coordinate, index) in fire_coordinates"
           :key="index"
+          :title="`Fire incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="fire_icon"
           :position="coordinate"
+          :animation="animation"
+        />
+
+        <!-- Civil Disturbance -->
+        <GmapMarker
+          v-for="(coordinate, index) in civil_disturbance_coordinates"
+          :key="index"
+          :title="`Civil Disturbance: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="civil_disturbance_icon"
+          :position="coordinate"
+          :animation="animation"
+        />
+
+        <!-- Flood -->
+        <GmapMarker
+          v-for="(coordinate, index) in flood_coordinates"
+          :key="index"
+          :title="`Flood Incident: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="flood_icon"
+          :position="coordinate"
+          :animation="animation"
+        />
+
+        <!-- Crime -->
+        <GmapMarker
+          v-for="(coordinate, index) in crime_coordinates"
+          :key="index"
+          :title="`Crime Incident: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="crime_icon"
+          :position="coordinate"
+          :animation="animation"
         />
       </GmapMap>
-      <template slot="footer">
+      
+      <!-- <template slot="footer">
         <a-button
           key="submit"
           type="primary"
           :loading="loading"
           @click="submitReport"
         >Confirm and Submit</a-button>
-      </template>
+      </template> -->
     </a-modal>
   </a-layout>
 </template>
 
 <script>
-import fire_icon from "@/assets/fire_icon.png";
+// import fire_icon from "@/assets/fire_icon.png";
+import fire_icon from "@/assets/fire_icon_20.png";
+import civil_disturbance_icon from "@/assets/civil_disturbance_icon_20.png";
+import flood_icon from "@/assets/flood_icon_20.png";
+import crime_icon from "@/assets/crime_icon_20.png";
 
 export default {
   data() {
     return {
       fire_icon,
+      civil_disturbance_icon,
+      flood_icon,
+      crime_icon,
       loading: false,
       collapsed: false,
       user: {},
       visible: false,
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
       animation: {},
-      sample_coordinates: []
+      fire_coordinates: [],
+      civil_disturbance_coordinates: [],
+      flood_coordinates: [],
+      crime_coordinates: []
     };
   },
   created() {
@@ -212,26 +272,57 @@ export default {
       }
     },
     report(num) {
+      this.fire_coordinates = [];
+      this.civil_disturbance_coordinates = [];
+      this.flood_coordinates = [];
+      this.crime_coordinates = [];
       this.visible = true;
       var _self = this;
       this.$getLocation().then(coordinates => {
         this.coordinates = coordinates;
-        console.log('coordinates :', coordinates);
-        const sample_coordinates = [
-          {
-            lat: coordinates.lat + 0.9,
-            lang: coordinates.lang + 0.9,
-            accuracy: coordinates.accuracy,
-            altitude: coordinates.altitude,
-            altitudeAccuracy: coordinates.altitudeAccuracy
-          }
-        ];
-        console.log('sample_coordinates :', sample_coordinates);
-        this.sample_coordinates = sample_coordinates;
+        console.log('num :', num);
+        if (!num || num === 0 || num === 1)
+          this.fire_coordinates = this.generateSampleCoordinates(
+            coordinates,
+            5
+          );
+        if (!num || num === 0 || num === 2)
+          this.civil_disturbance_coordinates = this.generateSampleCoordinates(
+            coordinates,
+            5
+          );
+        if (!num || num === 0 || num === 3)
+          this.flood_coordinates = this.generateSampleCoordinates(
+            coordinates,
+            5
+          );
+        if (!num || num === 0 || num === 4)
+          this.crime_coordinates = this.generateSampleCoordinates(
+            coordinates,
+            5
+          );
         this.$gmapApiPromiseLazy().then(() => {
           _self.animation = google.maps.Animation.DROP;
         });
       });
+    },
+    generateSampleCoordinates(coordinate, count_range) {
+      var coordinates = [];
+      var cnt = 0;
+      while (cnt < Math.floor(Math.random() * (count_range || 5))) {
+        const lat = this.getRandomInRange(0.05, -0.05),
+          lng = this.getRandomInRange(0.05, -0.05);
+        coordinates.push({
+          lat: coordinate.lat + lat,
+          lng: coordinate.lng + lng,
+          date_created: new Date()
+        });
+        cnt++;
+      }
+      return coordinates;
+    },
+    getRandomInRange(from, to) {
+      return (Math.random() * (to - from) + from) * 1;
     },
     submitReport() {
       this.visible = false;
