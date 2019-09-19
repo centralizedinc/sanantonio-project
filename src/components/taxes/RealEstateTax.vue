@@ -67,12 +67,20 @@ export default {
   components: {
     Payment
   },
+  created() {
+    this.$store.commit("SET_PAYMENT", {
+      application_fee: "5,500.00",
+      insurance: "0.00",
+      convenience_fee: "50.00",
+      total: "5,550.00"
+    });
+  },
   data() {
     return {
       curr_step: 0,
       estate_tax: {
         tax_type: "Real Estate Tax",
-        amount: "5,000.00"
+        amount: "5,550.00"
       }
     };
   }

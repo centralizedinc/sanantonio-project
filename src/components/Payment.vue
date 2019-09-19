@@ -7,16 +7,16 @@
       <a-card>
         <a-row type="flex" justify="end">
           <a-col :span="8">
-            <h3>Amount</h3>
-            <h3>Penalties</h3>
-            <h3>Charges</h3>
+            <h3>Application Fee</h3>
+            <h3>Insurance</h3>
+            <h3>Convenience Fee</h3>
             <h3>Total Amount</h3>
           </a-col>
           <a-col :span="12">
-            <h3>₱ 5,000.00</h3>
-            <h3>₱ 0.00</h3>
-            <h3>₱ 0.00</h3>
-            <h3>₱ 5,000.00</h3>
+            <h3>₱ {{payment_details.application_fee}}</h3>
+            <h3>₱ {{payment_details.insurance}}</h3>
+            <h3>₱ {{payment_details.convenience_fee}}</h3>
+            <h3>₱ {{payment_details.total}}</h3>
           </a-col>
         </a-row>
       </a-card>
@@ -126,7 +126,7 @@
     <a-modal v-model="barcode_modal" title="Confirmation" @ok="success">
       <div align="center">
         <h2>Amount Due (before fee)</h2>
-        <h1 style="color:#0F82E0">₱ 5,000.00</h1>
+        <h1 style="color:#0F82E0">₱ {{payment_details.total}}</h1>
         <h3>Payment Instructions:</h3>
         <h5>1. Go to the nearest 7-Eleven store.</h5>
         <h5>
@@ -152,6 +152,7 @@ export default {
   },
   data() {
     return {
+      payment_details:{},
       step_pay: 0,
       show_modal: false,
       barcode_modal: false,
@@ -160,6 +161,9 @@ export default {
       barcodeValue: "123-4567-890",
       ref_num: 12212 - 1231231
     };
+  },
+  created(){
+    this.payment_details = this.$store.state.payment.details;
   },
   methods: {
     selectMethod(method) {
