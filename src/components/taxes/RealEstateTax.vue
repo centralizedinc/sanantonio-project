@@ -13,17 +13,21 @@
         <a-form>
           <template v-if="curr_step == 0">
             <a-form-item label="TCT/OCT No." :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-              <a-input placeholder="Enter Number"></a-input>
+              <a-input placeholder="Enter Number" v-model="estate_tax.title_no"></a-input>
             </a-form-item>
             <a-form-item
               label="Property Location"
               :label-col="{ span: 8}"
               :wrapper-col="{ span: 16 }"
             >
-              <a-textarea :rows="3" placeholder="Enter Address"></a-textarea>
+              <a-textarea :rows="3" placeholder="Enter Address" v-model="estate_tax.address"></a-textarea>
             </a-form-item>
             <a-form-item label="Property Owner" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-              <a-input :rows="3" placeholder="Lastname, Firstname Middlename"></a-input>
+              <a-input
+                :rows="3"
+                placeholder="Lastname, Firstname Middlename"
+                v-model="estate_tax.name"
+              ></a-input>
             </a-form-item>
           </template>
           <template v-if="curr_step == 1">
@@ -37,20 +41,15 @@
               >Upload a copy of your previous RPT Official Reciept or Tax Declaration</p>
             </a-upload-dragger>
           </template>
-          <template v-else-if="curr_step == 2">
-            <payment></payment>
+          <template v-if="curr_step == 2">
+            <payment mode="taxes" :details="estate_tax"></payment>
           </template>
         </a-form>
       </a-col>
     </a-row>
-    <template>
+    <template v-if="curr_step < 2">
       <a-divider></a-divider>
       <a-row type="flex" justify="end" :gutter="16">
-        <a-col :span="4">
-          <a-button block>
-            <a-icon type="left" @click="curr_step--"></a-icon>Back
-          </a-button>
-        </a-col>
         <a-col :span="4">
           <a-button block type="primary" @click="curr_step++">
             Next
@@ -65,6 +64,7 @@
 <script>
 import Payment from "@/components/Payment";
 export default {
+<<<<<<< HEAD
   components: {
     Payment
   },
@@ -74,6 +74,22 @@ export default {
     };
   }
 };
+=======
+    components:{
+        Payment
+    },
+    data(){
+        return {
+            curr_step:0,
+            estate_tax:{
+              tax_type: 'Real Estate Tax',
+              amount:'5,000.00',              
+            }
+        }
+    }
+
+}
+>>>>>>> ffa6256ff6feed4a218ba3e20e5ee150be54ef6f
 </script>
 
 <style>
