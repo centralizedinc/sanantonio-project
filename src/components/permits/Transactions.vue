@@ -49,56 +49,20 @@
             </p>
           </div>
         </a-row>
-        <!-- <p>Permit Details</p>
-        <p>{{form.application.permit_type}}</p>-->
         <a-row>
-          <!-- <a-col :span="12">
-          <a-form-item label="Permit Type: " :label-col="{ span: 8 }">-->
-          <!-- <a-input
-              disabled="true"
-              v-model="form.application.permit_type"
-          ></a-input>-->
-          <!-- <u>{{form.application.permit_type}}</u>
-            </a-form-item>
-          </a-col>-->
-
           <a-col :span="12">
             <p class="inset">Date of Application in PBR: {{form.application.pbr_date}}</p>
-            <!-- <p>Application: {{form.application.app_type}}</p> -->
-            <!-- <a-form-item label="Application">
-                <p></p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12">
-            <!-- <p class="dashed">Date of Application in PBR: {{form.application.pbr_date}}</p> -->
             <p class="inset">Date of Application in LGU: {{form.application.lgu_date}}</p>
-            <!-- <a-form-item label="pbr_date" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.pbr_date}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
-          <!-- <a-col :span="12">
-            <a-form-item label="lgu_date" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.lgu_date}}</p>
-            </a-form-item>
-          </a-col>-->
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Reference No./B.I.N.: {{form.application.reference_no}}</p>
-
-            <!-- <a-form-item label="reference_no" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.reference_no}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">DTI/SEC/CDA Registration No.: {{form.application.registration_no}}</p>
-            <!-- <a-form-item
-              label="registration_no"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.application.registration_no}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
@@ -112,31 +76,17 @@
                 <a-radio :value="3">Corporation</a-radio>
               </a-radio-group>
             </p>
-
-            <!-- <a-form-item label="ownership" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.ownership}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="5" style="margin-top:-15px">
             <p class="inset">TIN: {{form.business.tin}}</p>
-            <!-- <a-form-item label="tin" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.tin}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="5" style="margin-top:-15px">
             <p class="inset">SSS No.: {{form.business.sss}}</p>
-            <!-- <a-form-item label="sss" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.sss}}</p>
-            </a-form-item>-->
-            <!-- <description-item title="Business Name: ">{{form.business_name}}</description-item> -->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Name: {{form.business.business_name}}</p>
-            <!-- <a-form-item label="business_name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_name}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Name of Applicant/Owner/Manager: {{form.business.amo.name}}</p>
@@ -145,13 +95,6 @@
         <a-row type="flex">
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Address: {{form.business.business_address}}</p>
-            <!-- <a-form-item
-              label="business_address"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.business_address}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's Address: {{form.business.amo.address}}</p>
@@ -160,52 +103,25 @@
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Contact No.: {{form.business.contact}}</p>
-            <!-- <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.contact}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's Contact: {{form.business.amo.contact}}</p>
-            <!-- <a-form-item
-              label="applicant/manager/owner contact"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.amo.contact}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business E-mail: {{form.business.email}}</p>
-            <!-- <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.email}}</p>
-            </a-form-item>-->
-            <!-- <description-item title="Business Address">{{form.business_address}}</description-item> -->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's E-mail: {{form.business.amo.email}}</p>
-            <!-- <a-form-item
-              label="applicant/manager/owner email"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.amo.email}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="6" style="margin-top:-15px">
             <p class="inset">Business Area (in sq m): {{form.business.business_area}}</p>
-            <!-- <a-form-item label="business_area" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_area}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="6" style="margin-top:-15px">
             <p class="inset">No. of Owners: {{form.businessowner_no}}</p>
-            <!-- <a-form-item label="owner_no" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.businessowner_no}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">
@@ -213,23 +129,7 @@
               <u>{{form.business.employees_no.professional}}</u> Professional
               <u>{{form.business.employees_no.non_professional}}</u> Non-Professional
             </p>
-            <!-- <a-form-item
-              label="employees_no professional"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.employees_no.professional}}</p>
-            </a-form-item>-->
           </a-col>
-          <!-- <a-col :span="6">
-            <a-form-item
-              label="employees_no non_professional"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.employees_no.non_professional}}</p>
-            </a-form-item>
-          </a-col>-->
         </a-row>
         <a-row>
           <a-col :span="24" style="margin-top:-15px">
@@ -239,9 +139,6 @@
                 <a-radio :value="2">Owned</a-radio>
               </a-radio-group>If place of business is RENTED, please identify the following
             </p>
-            <!-- <a-form-item label="business_type" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_type}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
