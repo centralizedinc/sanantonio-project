@@ -3,16 +3,16 @@
 </template>
 
 <script>
-import mainView from "@/components/permits/main";
-import fullView from "@/components/permits/fullView";
-import BusinessPermit from "@/components/permits/BusinessPermit";
-import Transactions from "@/components/permits/Transactions";
+import mainView from "@/components/taxes/main";
+import fullView from "@/components/taxes/fullView";
+import RealEstateTax from "@/components/taxes/RealEstateTax";
+import Transactions from "@/components/taxes/Transactions";
 export default {
   props:['full'],
   components: {
     mainView,
     fullView,
-    BusinessPermit,
+    RealEstateTax,
     Transactions
   },
   data() {

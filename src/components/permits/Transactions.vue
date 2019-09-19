@@ -1,6 +1,17 @@
 <template>
-  <a-card title="hello">
-    <a-table :columns="cols" :dataSource="transac">
+  <a-card data-aos="fade-up">
+    <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
+      <a-col :span="22">
+        <a-input-search placeholder="Search" @search="onSearch" />
+      </a-col>
+      <a-col :span="2">
+        <a-button type="primary">
+          <a-icon type="plus"></a-icon>
+        </a-button>
+      </a-col>
+    </a-row>
+    <a-divider></a-divider>
+    <a-table :columns="cols" :dataSource="transac" :loading="loading">
       <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
         <a slot="action" slot-scope="text" href="javascript:;" @click="view_data">View</a>
@@ -14,7 +25,6 @@
           <a @click="() => view_data(record)">View</a>
         </div>
       </template>
-      <template slot="title">All Permit Transaction</template>
     </a-table>
     <a-drawer width="75%" placement="right" :closable="false" @close="onClose" :visible="draw_show">
       <a-menu v-model="current" mode="horizontal">
@@ -39,56 +49,20 @@
             </p>
           </div>
         </a-row>
-        <!-- <p>Permit Details</p>
-        <p>{{form.application.permit_type}}</p>-->
         <a-row>
-          <!-- <a-col :span="12">
-          <a-form-item label="Permit Type: " :label-col="{ span: 8 }">-->
-          <!-- <a-input
-              disabled="true"
-              v-model="form.application.permit_type"
-          ></a-input>-->
-          <!-- <u>{{form.application.permit_type}}</u>
-            </a-form-item>
-          </a-col>-->
-
           <a-col :span="12">
             <p class="inset">Date of Application in PBR: {{form.application.pbr_date}}</p>
-            <!-- <p>Application: {{form.application.app_type}}</p> -->
-            <!-- <a-form-item label="Application">
-                <p></p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12">
-            <!-- <p class="dashed">Date of Application in PBR: {{form.application.pbr_date}}</p> -->
             <p class="inset">Date of Application in LGU: {{form.application.lgu_date}}</p>
-            <!-- <a-form-item label="pbr_date" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.pbr_date}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
-          <!-- <a-col :span="12">
-            <a-form-item label="lgu_date" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.lgu_date}}</p>
-            </a-form-item>
-          </a-col>-->
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Reference No./B.I.N.: {{form.application.reference_no}}</p>
-
-            <!-- <a-form-item label="reference_no" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.application.reference_no}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">DTI/SEC/CDA Registration No.: {{form.application.registration_no}}</p>
-            <!-- <a-form-item
-              label="registration_no"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.application.registration_no}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
@@ -102,31 +76,17 @@
                 <a-radio :value="3">Corporation</a-radio>
               </a-radio-group>
             </p>
-
-            <!-- <a-form-item label="ownership" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.ownership}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="5" style="margin-top:-15px">
             <p class="inset">TIN: {{form.business.tin}}</p>
-            <!-- <a-form-item label="tin" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.tin}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="5" style="margin-top:-15px">
             <p class="inset">SSS No.: {{form.business.sss}}</p>
-            <!-- <a-form-item label="sss" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.sss}}</p>
-            </a-form-item>-->
-            <!-- <description-item title="Business Name: ">{{form.business_name}}</description-item> -->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Name: {{form.business.business_name}}</p>
-            <!-- <a-form-item label="business_name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_name}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Name of Applicant/Owner/Manager: {{form.business.amo.name}}</p>
@@ -135,13 +95,6 @@
         <a-row type="flex">
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Address: {{form.business.business_address}}</p>
-            <!-- <a-form-item
-              label="business_address"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.business_address}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's Address: {{form.business.amo.address}}</p>
@@ -150,52 +103,25 @@
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business Contact No.: {{form.business.contact}}</p>
-            <!-- <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.contact}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's Contact: {{form.business.amo.contact}}</p>
-            <!-- <a-form-item
-              label="applicant/manager/owner contact"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.amo.contact}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Business E-mail: {{form.business.email}}</p>
-            <!-- <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.email}}</p>
-            </a-form-item>-->
-            <!-- <description-item title="Business Address">{{form.business_address}}</description-item> -->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">Applicant's/Owner's/Manager's E-mail: {{form.business.amo.email}}</p>
-            <!-- <a-form-item
-              label="applicant/manager/owner email"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.amo.email}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="6" style="margin-top:-15px">
             <p class="inset">Business Area (in sq m): {{form.business.business_area}}</p>
-            <!-- <a-form-item label="business_area" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_area}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="6" style="margin-top:-15px">
             <p class="inset">No. of Owners: {{form.businessowner_no}}</p>
-            <!-- <a-form-item label="owner_no" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.businessowner_no}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top:-15px">
             <p class="inset">
@@ -203,23 +129,7 @@
               <u>{{form.business.employees_no.professional}}</u> Professional
               <u>{{form.business.employees_no.non_professional}}</u> Non-Professional
             </p>
-            <!-- <a-form-item
-              label="employees_no professional"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.employees_no.professional}}</p>
-            </a-form-item>-->
           </a-col>
-          <!-- <a-col :span="6">
-            <a-form-item
-              label="employees_no non_professional"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.employees_no.non_professional}}</p>
-            </a-form-item>
-          </a-col>-->
         </a-row>
         <a-row>
           <a-col :span="24" style="margin-top:-15px">
@@ -229,40 +139,20 @@
                 <a-radio :value="2">Owned</a-radio>
               </a-radio-group>If place of business is RENTED, please identify the following
             </p>
-            <!-- <a-form-item label="business_type" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.business_type}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <!-- if rented -->
           <a-col :span="12" style="margin-top: -15px">
             <p class="inset">Lessor's Name: {{form.business.rented.lessor}}</p>
-            <!-- <a-form-item label="rented lessor" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.rented.lessor}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top: -15px">
             <p class="inset">Monthly Rental: {{form.business.rented.monthly_rental}}</p>
-            <!-- <a-form-item
-              label="rented monthly_rental"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.rented.monthly_rental}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="24" style="margin-top: -15px">
             <p class="inset">Lessor's Address: {{form.business.rented.lessor_address}}</p>
-            <!-- <a-form-item
-              label="rented lessor_address"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.rented.lessor_address}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
@@ -298,9 +188,6 @@
           </a-col>
         </a-row>
         <a-row v-for="i in form.business.business_activities.length" :key="i=0">
-          <!-- <a-table :columns="columns" :dataSource="form.business.business_activities"> -->
-          <!-- <template slot="name" slot-scope="name">{{name.first}} {{name.last}}</template> -->
-          <!-- </a-table> -->
           <a-col :span="8" style="margin-top: -15px">
             <p class="inset">{{form.business.business_activities[i].line_business}}</p>
           </a-col>
@@ -311,16 +198,6 @@
             <p class="inset">{{form.business.business_activities[i].receipts}}</p>
           </a-col>
         </a-row>
-
-        <!-- <a-col :span="12" style="margin-top: -25px">
-            <a-form-item
-              label="business_activities"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.business_activities}}</p>
-            </a-form-item>
-        </a-col>-->
         <a-row>
           <!-- payment -->
           <a-col :span="24" style="margin-top: -15px">
@@ -332,16 +209,7 @@
               </a-radio-group>No. of Quarters
               <u>{{form.business.payment.qrtly}}</u>
             </p>
-            <!-- <a-form-item label="payment mode" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.payment.mode}}</p>
-            </a-form-item>-->
           </a-col>
-          <!-- <a-col :span="12" style="margin-top: -15px">
-            <p class="inset">E-mail Address: {{form.business.rented.lessor_email}}</p>
-            <a-form-item label="payment qrtly" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.payment.qrtly}}</p>
-            </a-form-item>
-          </a-col>-->
         </a-row>
         <a-row>
           <div align="right">
@@ -350,22 +218,6 @@
             </a-button>
           </div>
         </a-row>
-        <!-- <a-row> -->
-        <!-- documents -->
-        <!-- <a-col :span="12">
-            <a-form-item
-              label="uploaded documents"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.documents}}</p>
-            </a-form-item>
-        </a-col>-->
-
-        <!-- <a-col :span="12">
-            <description-item title="">{{}}</description-item>
-        </a-col>-->
-        <!-- </a-row> -->
       </a-card>
       <a-card style="textAlign:'center'" v-show="current =='insurance'">
         <div align="center">
@@ -410,62 +262,6 @@
             <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.total}}</a-card-grid>
           </a-card>
         </div>
-
-        <!-- business insurance
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance provider"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.provider}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance app fee"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.app_fee}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance lrf"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.lrf}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance interest"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.interest}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance surcharge"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.surcharge}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance total"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.total}}</p>
-          </a-form-item>
-        </a-col>-->
       </a-card>
       <a-card style="textAlign:'center'" v-show="current =='payment'">
         <div align="center">
@@ -495,54 +291,14 @@
               <p>Status:</p>
             </a-card-grid>
             <a-card-grid style="width:50%;textAlign:'center'">
-              <p v-if="form.progress.current_task != 'Payment'" text-color="success">Paid</p>
-              <p v-else text-color="error">UnPaid</p>
+              <p
+                v-if="form.progress.current_task != 'FOR APPROVAL'"
+                text-color="success"
+              >FOR APPROVAL</p>
+              <p v-else text-color="error">FOR PAYMENT</p>
             </a-card-grid>
           </a-card>
         </div>
-        <!-- payment info -->
-        <!-- <a-col :span="12">
-          <a-form-item label="description" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.desc}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="amount" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.amount}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="method" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.method}}</p>
-          </a-form-item>
-        </a-col>
-        <!-- billing info-->
-        <!-- <a-col :span="12">
-          <a-form-item label="name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.name}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.email}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.contact}}</p>
-          </a-form-item>
-        </a-col>-->
-        <!-- progress-->
-        <!-- <a-col :span="12">
-          <a-form-item label="status" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.progress.status}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="current_task" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.progress.current_task}}</p>
-          </a-form-item>
-        </a-col>-->
       </a-card>
     </a-drawer>
   </a-card>
@@ -555,6 +311,9 @@ import axios from "axios";
 export default {
   data() {
     return {
+      searching: null,
+      loading: false,
+      store_handler: [],
       current: ["permit"],
       form: {
         application: {
@@ -649,42 +408,7 @@ export default {
           scopedSlots: { customRender: "receipts" }
         }
       ],
-      transac: [
-        // {
-        //   ref_no: 1,
-        //   permit: "Business Permit",
-        //   type: "Initial",
-        //   status: "On Process",
-        //   current_task: "Payment",
-        //   pbr_date: "09/05/2019",
-        //   lgu_date: "09/05/2019",
-        //   reg_no: "01",
-        //   ownership: "owned",
-        //   tin: 123456789,
-        //   sss: 123456789,
-        //   business_name: "negosyo",
-        //   contact_num: 321,
-        //   email: "email@email.email",
-        //   business_address: "location"
-        // },
-        // {
-        //   reference_no: 2,
-        //   permit: "Business Permit",
-        //   type: "Initial",s
-        //   status: "On Process",
-        //   current_task: "Payment",
-        //   pbr_date: "09/05/2019",
-        //   lgu_date: "09/05/2019",
-        //   reg_no: "01",
-        //   ownership: "owned",
-        //   tin: 123456789,
-        //   sss: 123456789,
-        //   business_name: "negosyo",
-        //   contact_num: 321,
-        //   email: "email@email.email",
-        //   business_address: "location"
-        // }
-      ],
+      transac: [],
       cols: [
         {
           title: "Permit",
@@ -714,14 +438,34 @@ export default {
   },
   created() {
     console.log();
-    axios.get("permit/apply").then(data => {
-      console.log("get all saved data: " + JSON.stringify(data));
-      data.data.forEach(element => {
-        this.transac.push(element);
-      });
-    });
+    // this.loading = true;
+    // axios.get("permit/apply").then(results => {
+    //   this.loading = false;
+    //   this.transac = results.data;
+    // });
+
+    this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+    this.store_handler = this.$store.state.permit.permit;
+    console.log("transac data: " + JSON.stringify(this.transac));
   },
   methods: {
+    onSearch(value) {
+      console.log("on search data value: " + JSON.stringify(value));
+      console.log("on search data transac: " + JSON.stringify(this.transac));
+      this.transac.splice(0, this.transac.length);
+      // if (this.searching === null && this.searching === "") {
+      //   this.transac.pop(this.transac);
+      // } else {
+      this.store_handler.forEach(element => {
+        console.log("element data: " + JSON.stringify(element));
+        console.log("value data: " + JSON.stringify(value));
+        if (element.reference_no === value) {
+          console.log("element meron: " + JSON.stringify(element));
+          this.transac.push(element);
+        }
+      });
+      // }
+    },
     view_data(data) {
       this.form = data;
       console.log("viewed item: " + JSON.stringify(data));

@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="16">
+  <a-row type="flex" :gutter="16" data-aos="fade-left">
     <!-- <a-col :span="12">
         <a-card title="Create Post">
             <a-row type="flex" :gutter="8">
@@ -25,17 +25,22 @@
               <a-skeleton active avatar :paragraph="{rows: 0}" :title="{width:0}" />
             </a-col>
           </div>
-          <a-col :span="1" v-for="sub in subscribers" :key="sub.login.uuid" v-else>
+          <a-col :span="1" v-for="(sub, i) in subscribers" :key="`subscribers${i}`" v-else>
             <a-tooltip placement="top" :title="`${sub.name.first} ${sub.name.last}`">
               <a-badge status="success">
-                <a-avatar :src="sub.picture.thumbnail"></a-avatar>
+                <a-avatar :src="sub.avatar"></a-avatar>
               </a-badge>
             </a-tooltip>
           </a-col>
           <a-col :span="24">
             <a-divider></a-divider>
             <p>Contribute to the community</p>
-            <a-textarea :rows="3" placeholder="Write a post here..."></a-textarea>
+            <a-textarea
+              :rows="3"
+              placeholder="Write a post here..."
+              v-model="message"
+              @keypress.enter="postMessage"
+            ></a-textarea>
           </a-col>
         </a-row>
         <a-row type="flex" :gutter="8" justify="end" style="margin-top:2vh">
@@ -45,7 +50,7 @@
             </a-button>
           </a-col>
           <a-col :span="4">
-            <a-button block type="primary">
+            <a-button block type="primary" @click="postMessage">
               <a-icon type="upload"></a-icon>Post
             </a-button>
           </a-col>
@@ -61,7 +66,12 @@
         </div>
       </template>
       <template v-else>
-        <a-card v-for="(sub,indx) in subscribers" :key="sub.name.first" style="margin-bottom: 2vh">
+        <a-card
+          v-for="(sub,indx) in subscribers_post"
+          :key="`message${indx}`"
+          style="margin-bottom: 2vh"
+          data-aos="fade-up"
+        >
           <a-comment>
             <template slot="actions">
               <span>
@@ -72,31 +82,28 @@
                     @click="like"
                   />
                 </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{likes}}</span>
-              </span>
-              <span>
-                <a-tooltip title="Dislike">
-                  <a-icon
-                    type="dislike"
-                    :theme="action === 'disliked' ? 'filled' : 'outlined'"
-                    @click="dislike"
-                  />
-                </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
+                <span style="padding-left: '8px';cursor: 'auto'">{{sub.likes}}</span>
               </span>
             </template>
-            <a slot="author">{{sub.name.first}} {{sub.name.last}}</a>
-            <a-avatar :src="sub.picture.thumbnail" alt="Han Solo" slot="avatar" />
+            <a slot="author">{{getUser(sub.id).name.first}} {{getUser(sub.id).name.last}}</a>
+            <a-avatar :src="getUser(sub.id).avatar" alt="Han Solo" slot="avatar" />
             <p slot="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              <a-row type="flex" justify="center" :gutter="8">
-                <a-col :span="8" v-for="i in 3" :key="i">
-                  <img :src="`https://picsum.photos/300?random=${indx}${i}`" width="200vw" />
-                </a-col>
-              </a-row>
+              {{sub.message}}
+              <!-- <p v-if="sub.message">{{sub.message}}</p>
+              <p v-else>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <a-row type="flex" justify="center" :gutter="8">
+                  <a-col :span="8" v-for="i in 3" :key="i">
+                    <img :src="`https://picsum.photos/300?random=${indx}${i}`" width="200vw" />
+                  </a-col>
+                </a-row>
+              </p>-->
             </p>
-            <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
-              <span>{{moment().fromNow()}}</span>
+            <a-tooltip
+              slot="datetime"
+              :title="formatDate(moment(sub.date_created).format('YYYY-MM-DD HH:mm:ss'))"
+            >
+              <span>{{moment(sub.date_created).fromNow()}}</span>
             </a-tooltip>
           </a-comment>
         </a-card>
@@ -111,13 +118,38 @@ import moment from "moment";
 export default {
   data() {
     return {
-      subscribers: [],
       loading: false,
-      moment
+      moment,
+      message: "",
+      temp_data: {
+        name: {
+          first: "Wan",
+          last: "Dela Cruz"
+        },
+        avatar: "https://randomuser.me/api/portraits/thumb/women/31.jpg",
+        post: []
+      }
     };
   },
-  created() {
-    this.init();
+  // created() {
+  //   this.init();
+  // },
+  computed: {
+    active_user() {
+      return this.$store.state.user_session.user;
+    },
+    subscribers_post() {
+      const post = this.deepCopy(this.$store.state.public_service.messages);
+      const post_data = post.sort(
+        (a, b) =>
+          new Date(b.date_created).getTime() -
+          new Date(a.date_created).getTime()
+      );
+      return post_data;
+    },
+    subscribers() {
+      return this.deepCopy(this.$store.state.public_service.subscribers);
+    }
   },
   methods: {
     init() {
@@ -127,7 +159,21 @@ export default {
         .then(results => {
           console.log("::::", JSON.stringify(results));
           this.loading = false;
-          this.subscribers = results.data.results;
+          const subscribers = results.data.results.map(v => {
+            var sub = {
+              name: v.name,
+              avatar: v.picture.thumbnail,
+              post: [
+                {
+                  name: v.name,
+                  avatar: v.picture.thumbnail,
+                  date_created: new Date()
+                }
+              ]
+            };
+            return sub;
+          });
+          this.subscribers = subscribers;
         })
         .catch(err => {
           console.log(err);
@@ -136,6 +182,29 @@ export default {
 
           // })
         });
+    },
+    postMessage() {
+      this.$store.commit("POST_MESSAGE", {
+        details: {
+          id: this.active_user.email,
+          name: {
+            first: this.active_user.fname,
+            last: this.active_user.lname
+          },
+          avatar: this.active_user.avatar
+        },
+        post: {
+          id: this.active_user.email,
+          message: this.message,
+          date_created: new Date(),
+          likes: 0
+        }
+      });
+      this.message = "";
+    },
+    like() {},
+    getUser(id) {
+      return this.subscribers.find(x => x.id === id);
     }
   }
 };

@@ -1,22 +1,36 @@
 <template>
   <div>
     <div
-      style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
-  background-size: cover"
+      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+  background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">
-        <a-col :push="1" :span="12" style="margin-top:20vh">
-          <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
-          <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
-          <p
-            style="margin-top:2vh; color:#ffffff"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button>
+        <a-col
+          data-aos="fade-up"
+          data-aos-duration="50000"
+          :push="1"
+          :span="7"
+          style="margin-top:20vh; margin-left:52vh"
+        >
+          <div
+            class="textShadow"
+            style="font-size: 50px; color:#fbf49d; "
+          >Ease of Doing Business Portal</div>
+          <div
+            style="font-size: 20px; color:#0ba4de; letter-spacing: 1em; text-shadow: -5px 2px 2px #00000"
+          >{{constant_helper.home_header.label}}</div>
+          <br />
+          <span style="margin-top:2vh ; color:#e4e2e2 " class="textShadow">
+            Ease of Doing Business Portal of {{constant_helper.home_header.label}} is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
+            <br />
+            <br />
+            {{constant_helper.home_header.label}} created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy for complete transparency.
+          </span>
         </a-col>
         <a-col :push="2" :span="8" style="margin-top:20vh;">
           <a-card style="background: rgba(59, 79, 99, 0.62)">
             <template slot="title">
-              <div style="color:#ffffff">Enter Crendetials</div>
+              <div style="color:#ffffff">Enter Credentials</div>
             </template>
             <a-form>
               <a-form-item>
@@ -69,25 +83,25 @@
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :span="8">
+      <a-col :span="8" data-aos="fade-up" data-aos-duration="30000">
+        <a-card title=" Report Emergency/Calamity">
+          To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.
+          <a-divider></a-divider>
+          <a-button type="primary">Report</a-button>
+        </a-card>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up" data-aos-duration="30000">
         <a-card title="News/Announcements">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</p>
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/news')">Read More</a-button>
         </a-card>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="8" data-aos="fade-up" data-aos-duration="30000">
         <a-card title="Permits and Certificates">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non. Lectus mauris ultrices eros in cursus turpis. Consectetur a erat nam at lectus. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus sed. Ac turpis egestas maecenas pharetra. Donec pretium vulputate sapien nec. Scelerisque viverra mauris in aliquam.
+          In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
-        </a-card>
-      </a-col>
-      <a-col :span="8">
-        <a-card title=" Report Emergency/Calamity">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis a cras semper auctor neque. Pharetra diam sit amet nisl suscipit adipiscing bibendum est. Sed risus ultricies tristique nulla aliquet enim tortor at auctor. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Congue nisi vitae suscipit tellus mauris a. Viverra adipiscing at in tellus integer feugiat. Etiam sit amet nisl purus in. Curabitur gravida arcu ac tortor dignissim. Magna fermentum iaculis eu non diam phasellus vestibulum.
-          <a-divider></a-divider>
-          <a-button type="primary">Report</a-button>
         </a-card>
       </a-col>
     </a-row>
@@ -97,17 +111,18 @@
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh;"
     >
-      <a-col :span="24">
+      <a-col :span="24" data-aos="fade-up">
         <h1>News/Announcements</h1>
         <a-divider></a-divider>
       </a-col>
-      <a-col :span="14">
-        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      <a-col :span="14" data-aos="fade-up">
+        <div>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</div>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="8" data-aos="fade-up">
         <img
           src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/icloud/macos-mojave-ios12-macbook-ipad-pro-iphone-x-set-up-icloud-drive-hero.jpg"
           width="100%"
+          alt
         />
       </a-col>
     </a-row>
@@ -117,20 +132,19 @@
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :span="24">
+      <a-col :span="24" data-aos="fade-up">
         <h1>Permits and Certificates</h1>
         <a-divider></a-divider>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="8" data-aos="fade-up">
         <img
           width="100%"
           src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
           alt
         />
       </a-col>
-      <a-col :span="14">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus at urna condimentum mattis pellentesque id nibh tortor id. Pharetra pharetra massa massa ultricies. Eu turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Interdum consectetur libero id faucibus nisl tincidunt eget. Sapien pellentesque habitant morbi tristique. Quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci. Facilisis gravida neque convallis a cras semper auctor. Vitae nunc sed velit dignissim. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.</p>
-        <p>Malesuada fames ac turpis egestas integer eget aliquet. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Tortor consequat id porta nibh venenatis cras sed. Adipiscing at in tellus integer feugiat scelerisque varius morbi. Cursus mattis molestie a iaculis at. Facilisis mauris sit amet massa vitae tortor condimentum lacinia. Neque egestas congue quisque egestas diam in arcu cursus euismod. Pharetra magna ac placerat vestibulum lectus. Sit amet tellus cras adipiscing enim eu turpis egestas. Viverra tellus in hac habitasse.</p>
+      <a-col :span="14" data-aos="fade-up">
+        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
       </a-col>
     </a-row>
     <a-row
@@ -139,15 +153,14 @@
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh; margin-bottom:10vh"
     >
-      <a-col :span="24">
+      <a-col :span="24" data-aos="fade-up">
         <h1>Report Emergency/Calamity</h1>
         <a-divider></a-divider>
       </a-col>
-      <a-col :span="14">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu turpis egestas pretium aenean. Interdum varius sit amet mattis vulputate enim nulla. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Odio tempor orci dapibus ultrices in iaculis nunc. Tempor id eu nisl nunc mi ipsum faucibus vitae aliquet. Ac feugiat sed lectus vestibulum mattis. Aliquet nec ullamcorper sit amet. Feugiat vivamus at augue eget arcu. Faucibus et molestie ac feugiat sed lectus vestibulum. Tristique nulla aliquet enim tortor at auctor urna. Id eu nisl nunc mi ipsum faucibus vitae aliquet nec. Arcu non odio euismod lacinia at quis risus. Eget sit amet tellus cras adipiscing enim eu turpis egestas. A cras semper auctor neque vitae tempus quam. Vitae justo eget magna fermentum iaculis eu non diam phasellus.</p>
-        <p>Laoreet suspendisse interdum consectetur libero id faucibus. Morbi tristique senectus et netus et malesuada. Mi bibendum neque egestas congue. Neque sodales ut etiam sit amet nisl purus in mollis. Vitae et leo duis ut diam quam nulla. Convallis posuere morbi leo urna molestie. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Platea dictumst quisque sagittis purus sit amet volutpat consequat mauris. Id consectetur purus ut faucibus pulvinar elementum integer. Id aliquet lectus proin nibh nisl. Adipiscing diam donec adipiscing tristique risus nec.</p>
+      <a-col :span="14" data-aos="fade-up">
+        <p>To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.</p>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="8" data-aos="fade-up">
         <img
           width="100%"
           src="https://bjango.com/images/mac/skalapreview2/skala-preview-hero.jpg"
@@ -196,34 +209,37 @@ export default {
 </script>
 <!-- Load Facebook SDK for JavaScript -->
 <script>
-      (function(d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
-    </script>
+(function(d, s, id) {
+  var js,
+    fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+  fjs.parentNode.insertBefore(js, fjs);
+})(document, "script", "facebook-jssdk");
+</script>
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId: "314648529334246",
-          xfbml: true,
-          version: "v4.0"
-        });
-      };
+window.fbAsyncInit = function() {
+  FB.init({
+    appId: "314648529334246",
+    xfbml: true,
+    version: "v4.0"
+  });
+};
 
-      (function(d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
-    </script>
+(function(d, s, id) {
+  var js,
+    fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+  fjs.parentNode.insertBefore(js, fjs);
+})(document, "script", "facebook-jssdk");
+</script>
 <style>
+.textShadow {
+  text-shadow: -2px 5px 4px #000000;
+}
 </style>
