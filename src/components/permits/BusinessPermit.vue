@@ -16,7 +16,7 @@
         <a-divider></a-divider>
       </a-col>
       <a-col :span="24">
-        <a-form>
+        <a-form :layout="formLayout">
           <!-- application details -->
           <template v-if="step_curr==0">
             <a-form-item label="Application" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
@@ -94,21 +94,35 @@
             <a-form-item label="Email Address" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Business Email" v-model="form.business.email"></a-input>
             </a-form-item>
-            <a-form-item label="Business Address" :label-col="{ span: 8 }">
+            <a-form-item
+              label="Business Address"
+              :label-col="{ span: 8 }"
+              :wrapper-col="{ span: 16 }"
+            >
+              <a-textarea
+                placeholder="Business Address"
+                v-model="form.business.business_address"
+                autosize
+              />
+            </a-form-item>
+            <!-- <a-form-item label="Business Address" :label-col="{ span: 8 }">
               <a-textarea
                 rows="3"
                 placeholder="Full Business Address"
                 style="width: 550px"
                 v-model="form.business.business_address"
-              ></a-textarea>
-            </a-form-item>
+              ></a-input>
+            </a-form-item>-->
             <a-form-item
-              label="Name of Application/Owner/Manager"
+              label="Name of Application"
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16}"
             >
-              <a-input placeholder="Surname, First name, MI" v-model="form.business.amo.name"></a-input>
-              <div align="center">
+              <a-input
+                placeholder="Owner/Manager Surname, First name, MI"
+                v-model="form.business.amo.name"
+              ></a-input>
+              <div align="left">
                 <a-checkbox
                   @change="sameAddress"
                   defaultChecked
@@ -166,8 +180,13 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              <a-input-number :defaultValue="1" v-model="form.business.employees_no.professional" />Professional
               <a-input-number
+                style="margin-right: 10px"
+                :defaultValue="1"
+                v-model="form.business.employees_no.professional"
+              />Professional
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
                 :defaultValue="1"
                 v-model="form.business.employees_no.non_professional"
               />Non-Professional
@@ -183,11 +202,23 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              Land
-              <a-input-number v-model="form.business.property_pin.land" />Building
-              <a-input-number v-model="form.business.property_pin.building" />Machinery
-              <a-input-number v-model="form.business.property_pin.machinery" />
+              <a-input-number
+                style="margin-right: 10px"
+                placeholder="Land"
+                v-model="form.business.property_pin.land"
+              />
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
+                placeholder="Building"
+                v-model="form.business.property_pin.building"
+              />
+              <a-input-number
+                style="margin-left: 20px; margin-right: 10px"
+                placeholder="Machinery"
+                v-model="form.business.property_pin.machinery"
+              />
             </a-form-item>
+
             <template v-if="form.business.business_type==1">
               <a-form-item
                 label="Lessor's Name"
@@ -286,7 +317,7 @@
             <!-- </template>
             </a-table>-->
             <!-- ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] -->
-            <a-input placeholder="Line of Business" v-model="line_business"></a-input>
+            <a-input style="padding: 10px" placeholder="Line of Business" v-model="line_business"></a-input>
             <a-input placeholder="Capitalization" v-model="capital"></a-input>
             <a-input placeholder="Gross Sales/Receipts" v-model="receipts"></a-input>
             <a-button class="editable-add-btn" @click="addBusinessActivities" v-if="!editing">Add</a-button>
@@ -597,6 +628,7 @@ export default {
   },
   data() {
     return {
+      formLayout: "vertical",
       insurance: {
         name: "",
         fee: 0
