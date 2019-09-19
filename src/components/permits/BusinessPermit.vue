@@ -264,10 +264,23 @@
             </template>
 
             <a-divider orientation="left">Business Activities</a-divider>
-            <a-input placeholder="Line of Business" v-model="line_business"></a-input>
-            <a-input placeholder="Capitalization" v-model="capital"></a-input>
-            <a-input placeholder="Gross Sales/Receipts" v-model="receipts"></a-input>
-            <a-button class="editable-add-btn" @click="addBusinessActivities" v-if="!editing">Add</a-button>
+            <a-input
+              style="margin-bottom: 10px"
+              placeholder="Line of Business"
+              v-model="line_business"
+            ></a-input>
+            <a-input style="margin-bottom: 10px" placeholder="Capitalization" v-model="capital"></a-input>
+            <a-input
+              style="margin-bottom: 10px"
+              placeholder="Gross Sales/Receipts"
+              v-model="receipts"
+            ></a-input>
+            <a-button
+              style="margin-bottom: 10px"
+              class="editable-add-btn"
+              @click="addBusinessActivities"
+              v-if="!editing"
+            >Add</a-button>
             <a-button class="editable-add-btn" @click="saveEdit" v-if="editing">Edit</a-button>
             <a-button class="editable-add-btn" @click="onCancel" v-if="editing">Cancel</a-button>
 
@@ -334,10 +347,10 @@
           <template v-if="step_curr==3">
             <a-row :gutter="8" style="margin-bottom:50px">
               <a-col :span="12">
-                <a-button block @click="insured(1)">AIG</a-button>
-                <a-button block @click="insured(2)">AXA Philippines</a-button>
-                <a-button block @click="insured(3)">Malayan</a-button>
-                <a-button block @click="insured(4)">MAPRE Philippines</a-button>
+                <a-button class="insuranceButtons" block @click="insured(1)">AIG</a-button>
+                <a-button class="insuranceButtons" block @click="insured(2)">AXA Philippines</a-button>
+                <a-button class="insuranceButtons" block @click="insured(3)">Malayan</a-button>
+                <a-button class="insuranceButtons" block @click="insured(4)">MAPRE Philippines</a-button>
                 <!-- <a-card title="Card Title" :style="{ marginTop: '16px' }">
                   <a-card-grid style="width:50%;textAlign:left">
                     <p>
@@ -824,4 +837,9 @@ export default {
 </script>
 
 <style>
+.insuranceButtons {
+  height: 103px;
+  margin-bottom: 20px;
+  background-color: #f7ef9b;
+}
 </style>

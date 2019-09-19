@@ -44,7 +44,11 @@
               <a-col :span="24">
                 <a-row type="flex" justify="center">
                   <a-col :span="12">
-                    <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+                    <h3 style="color:#FFFFFF">
+                      {{user.fname}}
+                      <br />
+                      {{user.lname}}
+                    </h3>
                   </a-col>
                 </a-row>
               </a-col>
