@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      style="background-image:url('https://www.lucenacity.gov.ph/images/banner7.jpg'); height:100%;background-repeat: no-repeat;
+      style="background-image:url('https://i.postimg.cc/zBFfRPZh/mayor.jpg'); height:100%;background-repeat: no-repeat;
   background-size: cover"
     >
       <a-row style="height:100vh" type="flex" justify="start">
@@ -9,17 +9,23 @@
           data-aos="fade-up"
           data-aos-duration="50000"
           :push="1"
-          :span="12"
-          style="margin-top:20vh"
+          :span="7"
+          style="margin-top:20vh; margin-left:52vh"
         >
-          <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
-          <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
-          <p style="margin-top:2vh ; color:#e4e2e2" class="textShadow">
+          <div
+            class="textShadow"
+            style="font-size: 50px; color:#fbf49d; "
+          >Ease of Doing Business Portal</div>
+          <div
+            style="font-size: 20px; color:#0ba4de; letter-spacing: 1em; text-shadow: -5px 2px 2px #00000"
+          >LUCENA CITY</div>
+          <br />
+          <span style="margin-top:2vh ; color:#e4e2e2 " class="textShadow">
             Ease of Doing Business Portal of Lucena City is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
             <br />
             <br />Lucena City created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy for complete transparency.
-          </p>
-          <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button>
+          </span>
+          <!-- <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button> -->
         </a-col>
         <a-col :push="2" :span="8" style="margin-top:20vh;">
           <a-card style="background: rgba(59, 79, 99, 0.62)">
@@ -211,6 +217,6 @@ window.fbAsyncInit = function() {
 
 <style>
 .textShadow {
-  text-shadow: 2px 2px 4px #000000;
+  text-shadow: -2px 5px 4px #000000;
 }
 </style>
