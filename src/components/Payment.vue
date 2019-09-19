@@ -180,7 +180,12 @@ export default {
             }
         },
         success(){
-            this.$router.push(`/app/${this.mode}`)
+            if(this.$route.name === 'permits' || this.$route.name === 'taxes'){
+                this.$router.push('/')
+            }else{
+                this.$router.push(`/app/${this.mode}`)
+            }
+            
             this.barcode_modal = false;
             this.$notification.success({
                 message: 'Success!',
