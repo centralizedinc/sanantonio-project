@@ -129,7 +129,7 @@
         <a-modal v-model="barcode_modal" title="Confirmation" @ok="success">
             <div align="center">
                 <h2>Amount Due (before fee)</h2>
-                <h1 style="color:#0F82E0">₱1500</h1>
+                <h1 style="color:#0F82E0">₱ 5,000.00</h1>
                 <h3>Payment Instructions:</h3>
                 <h5>1. Go to the nearest 7-Eleven store.</h5>
                 <h5>
@@ -149,7 +149,7 @@
 <script>
 import VueBarcode from "vue-barcode";
 export default {
-    props:['mode'],
+    props:['mode', 'details'],
     components:{
         barcode: VueBarcode
     },
@@ -173,10 +173,12 @@ export default {
         },
         submit(){
             if(this.payment_method === 'CC'){
+                this.details.status="PAID"
                 this.success()
             }else{
                 this.barcode_modal = true;
                 this.show_modal = false;
+                this.details.status="FOR PAYMENT"
             }
         },
         success(){
@@ -187,6 +189,7 @@ export default {
             }
             
             this.barcode_modal = false;
+            this.$store.commit('ADD_TAXES', this.details)
             this.$notification.success({
                 message: 'Success!',
                 description: 'Your Application and payment were successful.'

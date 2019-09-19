@@ -13,13 +13,13 @@
         <a-form>
             <template v-if="curr_step == 0">
                 <a-form-item label="TCT/OCT No." :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-                <a-input placeholder="Enter Number"></a-input>
+                <a-input placeholder="Enter Number" v-model="estate_tax.title_no"></a-input>
                 </a-form-item>
                 <a-form-item label="Property Location" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-                <a-textarea :rows="3" placeholder="Enter Address"></a-textarea> 
+                <a-textarea :rows="3" placeholder="Enter Address" v-model="estate_tax.address"></a-textarea> 
                 </a-form-item>
                 <a-form-item label="Property Owner" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-                <a-input :rows="3" placeholder="Lastname, Firstname Middlename"></a-input> 
+                <a-input :rows="3" placeholder="Lastname, Firstname Middlename" v-model="estate_tax.name"></a-input> 
                 </a-form-item>
             </template>
             <template v-if="curr_step == 1">
@@ -38,7 +38,7 @@
               </a-upload-dragger>
             </template>
             <template  v-if="curr_step == 2">
-                <payment mode="taxes"></payment>
+                <payment mode="taxes" :details="estate_tax"></payment>
             </template>
         </a-form>
       </a-col>
@@ -66,7 +66,11 @@ export default {
     },
     data(){
         return {
-            curr_step:0
+            curr_step:0,
+            estate_tax:{
+              tax_type: 'Real Estate Tax',
+              amount:'5,000.00',              
+            }
         }
     }
 
