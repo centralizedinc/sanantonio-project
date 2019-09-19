@@ -394,8 +394,11 @@
               <p>Status:</p>
             </a-card-grid>
             <a-card-grid style="width:50%;textAlign:'center'">
-              <p v-if="form.progress.current_task != 'Payment'" text-color="success">Paid</p>
-              <p v-else text-color="error">UnPaid</p>
+              <p
+                v-if="form.progress.current_task != 'FOR APPROVAL'"
+                text-color="success"
+              >FOR APPROVAL</p>
+              <p v-else text-color="error">FOR PAYMENT</p>
             </a-card-grid>
           </a-card>
         </div>

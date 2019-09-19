@@ -73,8 +73,8 @@ var initialState = {
                 contact: "123456798"
             },
             progress: {
-                status: "For Payment",
-                current_task: "Payment",
+                status: "FOR PAYMENT",
+                current_task: "FOR PAYMENT",
                 previous_task: ""
             }
         },
@@ -152,8 +152,8 @@ var initialState = {
                 contact: "123456798"
             },
             progress: {
-                status: "For Approval",
-                current_task: "Payment",
+                status: "FOR APPROVAL",
+                current_task: "FOR APPROVAL",
                 previous_task: ""
             }
         }
