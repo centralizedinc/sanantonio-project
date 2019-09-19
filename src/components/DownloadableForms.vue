@@ -25,16 +25,16 @@
                 href="../assets/logo.png"
                 download="applicationform.pdf"
                 type="link"
-              >Application for Copy of Birth Certificate</a-button>
+              >Application for Birth Certificate</a-button>
             </a-col>
             <a-col :span="24">
-              <a-button type="link">Application for Copy of Marriage Contract</a-button>
+              <a-button type="link">Application for Marriage Contract</a-button>
             </a-col>
             <a-col :span="24">
               <a-button type="link">Application for Marriage License</a-button>
             </a-col>
             <a-col :span="24">
-              <a-button type="link">Application form for Copy of Death Certificate</a-button>
+              <a-button type="link">Application form for Death Certificate</a-button>
             </a-col>
           </a-row>
         </a-collapse-panel>

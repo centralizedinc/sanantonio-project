@@ -15,9 +15,9 @@
           <div style="font-size: 52px; color:#ffffff; ">Lucena City</div>
           <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
           <p style="margin-top:2vh ; color:#e4e2e2" class="textShadow">
-            Ease of Doing Business Portal of Lucena City is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act.
+            Ease of Doing Business Portal of Lucena City is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
             <br />
-            <br />Lucena City created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy to reduce corruption.
+            <br />Lucena City created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy for complete transparency.
           </p>
           <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button>
         </a-col>
