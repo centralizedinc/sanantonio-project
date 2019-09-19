@@ -2,13 +2,12 @@
   <a-card data-aos="fade-up">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
       <a-col :span="22">
-         <a-input-search
-            placeholder="Search"
-            @search="onSearch"
-          />
+        <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :span="2">
-        <a-button type="primary" ><a-icon type="plus"></a-icon></a-button>
+        <a-button type="primary">
+          <a-icon type="plus"></a-icon>
+        </a-button>
       </a-col>
     </a-row>
     <a-divider></a-divider>
@@ -249,31 +248,14 @@
           <!-- if rented -->
           <a-col :span="12" style="margin-top: -15px">
             <p class="inset">Lessor's Name: {{form.business.rented.lessor}}</p>
-            <!-- <a-form-item label="rented lessor" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.rented.lessor}}</p>
-            </a-form-item>-->
           </a-col>
           <a-col :span="12" style="margin-top: -15px">
             <p class="inset">Monthly Rental: {{form.business.rented.monthly_rental}}</p>
-            <!-- <a-form-item
-              label="rented monthly_rental"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.rented.monthly_rental}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="24" style="margin-top: -15px">
             <p class="inset">Lessor's Address: {{form.business.rented.lessor_address}}</p>
-            <!-- <a-form-item
-              label="rented lessor_address"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.rented.lessor_address}}</p>
-            </a-form-item>-->
           </a-col>
         </a-row>
         <a-row>
@@ -309,9 +291,6 @@
           </a-col>
         </a-row>
         <a-row v-for="i in form.business.business_activities.length" :key="i=0">
-          <!-- <a-table :columns="columns" :dataSource="form.business.business_activities"> -->
-          <!-- <template slot="name" slot-scope="name">{{name.first}} {{name.last}}</template> -->
-          <!-- </a-table> -->
           <a-col :span="8" style="margin-top: -15px">
             <p class="inset">{{form.business.business_activities[i].line_business}}</p>
           </a-col>
@@ -322,16 +301,6 @@
             <p class="inset">{{form.business.business_activities[i].receipts}}</p>
           </a-col>
         </a-row>
-
-        <!-- <a-col :span="12" style="margin-top: -25px">
-            <a-form-item
-              label="business_activities"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.business.business_activities}}</p>
-            </a-form-item>
-        </a-col>-->
         <a-row>
           <!-- payment -->
           <a-col :span="24" style="margin-top: -15px">
@@ -343,16 +312,7 @@
               </a-radio-group>No. of Quarters
               <u>{{form.business.payment.qrtly}}</u>
             </p>
-            <!-- <a-form-item label="payment mode" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.payment.mode}}</p>
-            </a-form-item>-->
           </a-col>
-          <!-- <a-col :span="12" style="margin-top: -15px">
-            <p class="inset">E-mail Address: {{form.business.rented.lessor_email}}</p>
-            <a-form-item label="payment qrtly" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <p>{{form.business.payment.qrtly}}</p>
-            </a-form-item>
-          </a-col>-->
         </a-row>
         <a-row>
           <div align="right">
@@ -361,22 +321,6 @@
             </a-button>
           </div>
         </a-row>
-        <!-- <a-row> -->
-        <!-- documents -->
-        <!-- <a-col :span="12">
-            <a-form-item
-              label="uploaded documents"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16 }"
-            >
-              <p>{{form.documents}}</p>
-            </a-form-item>
-        </a-col>-->
-
-        <!-- <a-col :span="12">
-            <description-item title="">{{}}</description-item>
-        </a-col>-->
-        <!-- </a-row> -->
       </a-card>
       <a-card style="textAlign:'center'" v-show="current =='insurance'">
         <div align="center">
@@ -421,62 +365,6 @@
             <a-card-grid style="width:50%;textAlign:'center'">₱{{form.business_insurance.total}}</a-card-grid>
           </a-card>
         </div>
-
-        <!-- business insurance
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance provider"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.provider}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance app fee"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.app_fee}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance lrf"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.lrf}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance interest"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.interest}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance surcharge"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.surcharge}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item
-            label="business insurance total"
-            :label-col="{ span: 8 }"
-            :wrapper-col="{ span: 16 }"
-          >
-            <p>{{form.business_insurance.total}}</p>
-          </a-form-item>
-        </a-col>-->
       </a-card>
       <a-card style="textAlign:'center'" v-show="current =='payment'">
         <div align="center">
@@ -511,49 +399,6 @@
             </a-card-grid>
           </a-card>
         </div>
-        <!-- payment info -->
-        <!-- <a-col :span="12">
-          <a-form-item label="description" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.desc}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="amount" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.amount}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="method" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.payment_info.method}}</p>
-          </a-form-item>
-        </a-col>
-        <!-- billing info-->
-        <!-- <a-col :span="12">
-          <a-form-item label="name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.name}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="email" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.email}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="contact" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.billing_info.contact}}</p>
-          </a-form-item>
-        </a-col>-->
-        <!-- progress-->
-        <!-- <a-col :span="12">
-          <a-form-item label="status" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.progress.status}}</p>
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-form-item label="current_task" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-            <p>{{form.progress.current_task}}</p>
-          </a-form-item>
-        </a-col>-->
       </a-card>
     </a-drawer>
   </a-card>
@@ -566,7 +411,9 @@ import axios from "axios";
 export default {
   data() {
     return {
-      loading:false,
+      searching: null,
+      loading: false,
+      store_handler: [],
       current: ["permit"],
       form: {
         application: {
@@ -661,8 +508,7 @@ export default {
           scopedSlots: { customRender: "receipts" }
         }
       ],
-      transac: [
-      ],
+      transac: [],
       cols: [
         {
           title: "Permit",
@@ -692,14 +538,34 @@ export default {
   },
   created() {
     console.log();
-    this.loading = true;
-    axios.get("permit/apply")
-    .then(results => {
-      this.loading = false;
-      this.transac = results.data
-    });
+    // this.loading = true;
+    // axios.get("permit/apply").then(results => {
+    //   this.loading = false;
+    //   this.transac = results.data;
+    // });
+
+    this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+    this.store_handler = this.$store.state.permit.permit;
+    console.log("transac data: " + JSON.stringify(this.transac));
   },
   methods: {
+    onSearch(value) {
+      console.log("on search data value: " + JSON.stringify(value));
+      console.log("on search data transac: " + JSON.stringify(this.transac));
+      this.transac.splice(0, this.transac.length);
+      // if (this.searching === null && this.searching === "") {
+      //   this.transac.pop(this.transac);
+      // } else {
+      this.store_handler.forEach(element => {
+        console.log("element data: " + JSON.stringify(element));
+        console.log("value data: " + JSON.stringify(value));
+        if (element.reference_no === value) {
+          console.log("element meron: " + JSON.stringify(element));
+          this.transac.push(element);
+        }
+      });
+      // }
+    },
     view_data(data) {
       this.form = data;
       console.log("viewed item: " + JSON.stringify(data));
