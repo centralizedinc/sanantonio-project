@@ -50,7 +50,7 @@
                     </a-col>
                 </a-row>
               </p>
-              <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
+              <a-tooltip slot="datetime" :title="formatDate(moment().format('YYYY-MM-DD HH:mm:ss'))">
                 <span>{{moment().fromNow()}}</span>
               </a-tooltip>
           </a-comment>

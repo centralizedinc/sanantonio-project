@@ -176,7 +176,7 @@
         <!-- Fire -->
         <GmapMarker
           v-for="(coordinate, index) in fire_coordinates"
-          :key="index"
+          :key="`fire${index}`"
           :title="`Fire incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="fire_icon"
@@ -187,7 +187,7 @@
         <!-- Civil Disturbance -->
         <GmapMarker
           v-for="(coordinate, index) in civil_disturbance_coordinates"
-          :key="index"
+          :key="`civil${index}`"
           :title="`Civil Disturbance: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="civil_disturbance_icon"
@@ -198,7 +198,7 @@
         <!-- Flood -->
         <GmapMarker
           v-for="(coordinate, index) in flood_coordinates"
-          :key="index"
+          :key="`flood${index}`"
           :title="`Flood Incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="flood_icon"
@@ -209,7 +209,7 @@
         <!-- Crime -->
         <GmapMarker
           v-for="(coordinate, index) in crime_coordinates"
-          :key="index"
+          :key="`crime${index}`"
           :title="`Crime Incident: Reported as of ${formatDate(coordinate.date_created)}`"
           :draggable="false"
           :icon="crime_icon"
@@ -220,7 +220,7 @@
 
       <!-- <a-card>
         <a-card-grid></a-card-grid>
-      </a-card> -->
+      </a-card>-->
       <!-- <template slot="footer">
         <a-button
           key="submit"
@@ -228,7 +228,7 @@
           :loading="loading"
           @click="submitReport"
         >Confirm and Submit</a-button>
-      </template> -->
+      </template>-->
     </a-modal>
   </a-layout>
 </template>
@@ -283,7 +283,7 @@ export default {
       var _self = this;
       this.$getLocation().then(coordinates => {
         this.coordinates = coordinates;
-        console.log('num :', num);
+        console.log("num :", num);
         if (!num || num === 0 || num === 1)
           this.fire_coordinates = this.generateSampleCoordinates(
             coordinates,
