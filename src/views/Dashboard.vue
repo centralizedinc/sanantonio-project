@@ -31,7 +31,7 @@
       <a-row type="flex" justify="center">
         <a-col :span="4" style="margin-right:1vw">
           <a-card
-            style="margin-top:10vh; margin-bottom:2vh; background: linear-gradient(to right, #0575e6, #021b79);"
+            style="margin-top:10vh; margin-bottom:2vh; background: linear-gradient(to bottom, #870000, #190a05);"
           >
             <a-row type="flex" justify="center">
               <a-col :span="8">
@@ -161,7 +161,7 @@
       </a-row>
     </a-layout-content>
     <a-layout-footer
-      style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff"
+      style="background: linear-gradient(to left, #870000, #190a05); color: #ffffff"
     >{{constant_helper.home_header.label}}</a-layout-footer>
 
     <a-modal
@@ -391,7 +391,7 @@ export default {
 
 <style>
 .emergency_btn:hover {
-  background: linear-gradient(to bottom, #0575e6, #021b79);
+  background: linear-gradient(to bottom, #870000, #190a05);
   transform: scale(0.95);
 }
 

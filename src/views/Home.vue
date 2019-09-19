@@ -42,7 +42,7 @@
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
-    <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
+    <a-layout-footer style="background: linear-gradient(to left, #870000, #190a05); color: #ffffff">
       <a-row>
         <a-col :span="24">
           <h1 style="color:#ffffff">Get in touch</h1>
@@ -359,7 +359,7 @@ export default {
       if (this.topLocation < 50) {
         return "background: transparent";
       } else {
-        return "background: linear-gradient(to right, #0575e6, #021b79)";
+        return "background: linear-gradient(to right, #870000, #190a05);";
       }
     }
   }
