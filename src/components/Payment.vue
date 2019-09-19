@@ -27,7 +27,7 @@
       <h2>To continue, select one of the payment options:</h2>
     </a-col>
     <a-col :span="10">
-      <a-card class="payment_card" @click="selectMethod('CC')">
+      <a-card bodyStyle="height: 25vh" class="payment_card borderStyle" @click="selectMethod('CC')">
         <a-row type="flex" :gutter="16">
           <a-col :span="6">
             <img
@@ -46,7 +46,7 @@
     </a-col>
 
     <a-col :span="10">
-      <a-card class="payment_card" @click="selectMethod('EC')">
+      <a-card bodyStyle="height: 25vh" class="payment_card borderStyle" @click="selectMethod('EC')">
         <a-row type="flex" :gutter="16">
           <a-col :span="6">
             <img
@@ -212,4 +212,7 @@ export default {
 </script>
 
 <style>
+.borderStyle {
+  border-radius: 20px;
+}
 </style>

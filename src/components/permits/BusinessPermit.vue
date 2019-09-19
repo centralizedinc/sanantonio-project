@@ -113,15 +113,8 @@
                 v-model="form.business.business_address"
               ></a-input>
             </a-form-item>-->
-            <a-form-item
-              label="Name of Application"
-              :label-col="{ span: 8 }"
-              :wrapper-col="{ span: 16}"
-            >
-              <a-input
-                placeholder="Owner/Manager Surname, First name, MI"
-                v-model="form.business.amo.name"
-              ></a-input>
+            <a-form-item label="Business Name" :label-col="{ span: 8 }" :wrapper-col="{ span: 16}">
+              <a-input placeholder="Business Name" v-model="form.business.amo.name"></a-input>
               <div align="left">
                 <a-checkbox
                   @change="sameAddress"
@@ -345,7 +338,7 @@
                 <a-button block @click="insured(2)">AXA Philippines</a-button>
                 <a-button block @click="insured(3)">Malayan</a-button>
                 <a-button block @click="insured(4)">MAPRE Philippines</a-button>
-                <a-card title="Card Title" :style="{ marginTop: '16px' }">
+                <!-- <a-card title="Card Title" :style="{ marginTop: '16px' }">
                   <a-card-grid style="width:50%;textAlign:left">
                     <p>
                       Lorem ipsum
@@ -364,7 +357,7 @@
                       At vero eos et accusam
                     </p>
                   </a-card-grid>
-                </a-card>
+                </a-card>-->
               </a-col>
               <a-col :span="12">
                 <a-card title="Payment Details">

@@ -9,17 +9,23 @@
           data-aos="fade-up"
           data-aos-duration="50000"
           :push="1"
-          :span="12"
-          style="margin-top:20vh"
+          :span="7"
+          style="margin-top:20vh; margin-left:52vh"
         >
-          <div style="font-size: 52px; color:#ffffff; ">{{constant_helper.home_header.label}}</div>
-          <div style="font-size: 42px; color:#ffffff;">Ease of Doing Business Portal</div>
-          <p style="margin-top:2vh ; color:#e4e2e2" class="textShadow">
-            Ease of Doing Business Portal of Lucena City is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act.
+          <div
+            class="textShadow"
+            style="font-size: 50px; color:#fbf49d; "
+          >Ease of Doing Business Portal</div>
+          <div
+            style="font-size: 20px; color:#0ba4de; letter-spacing: 1em; text-shadow: -5px 2px 2px #00000"
+          >{{constant_helper.home_header.label}}</div>
+          <br />
+          <span style="margin-top:2vh ; color:#e4e2e2 " class="textShadow">
+            Ease of Doing Business Portal of {{constant_helper.home_header.label}} is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
             <br />
-            <br />Lucena City created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy to reduce corruption.
-          </p>
-          <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button>
+            <br />{{constant_helper.home_header.label}} created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy for complete transparency.
+          </span>
+          <!-- <a-button style="margin-top:5vh" size="large" type="primary">Read More</a-button> -->
         </a-col>
         <a-col :push="2" :span="8" style="margin-top:20vh;">
           <a-card style="background: rgba(59, 79, 99, 0.62)">
@@ -86,14 +92,14 @@
       </a-col>
       <a-col :span="8" data-aos="fade-up" data-aos-duration="30000">
         <a-card title="News/Announcements">
-          <p>Stay updated with all the latest and official News and Announcements of Lucena City.</p>
+          <p>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</p>
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/news')">Read More</a-button>
         </a-card>
       </a-col>
       <a-col :span="8" data-aos="fade-up" data-aos-duration="30000">
         <a-card title="Permits and Certificates">
-          In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of Lucena City is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
+          In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
         </a-card>
@@ -110,7 +116,7 @@
         <a-divider></a-divider>
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <div>Stay updated with all the latest and official News and Announcements of Lucena City.</div>
+        <div>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</div>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
         <img
@@ -137,7 +143,7 @@
         />
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of Lucena City is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
+        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
       </a-col>
     </a-row>
     <a-row
@@ -211,6 +217,6 @@ window.fbAsyncInit = function() {
 
 <style>
 .textShadow {
-  text-shadow: 2px 2px 4px #000000;
+  text-shadow: -2px 5px 4px #000000;
 }
 </style>
