@@ -557,7 +557,7 @@
                       <h5>
                         2. Request for a 7-Connect payment at the cashier
                         <br />
-                        with Reference Number: {{ref_num}}
+                        with Reference Number: {{form.reference_no}}
                       </h5>
                       <h2>OR</h2>
                       <h3>SCAN BARCODE</h3>
@@ -606,6 +606,7 @@ export default {
       pay_type: null,
       // **************************************
       form: {
+        reference_no: null,
         application: {
           permit_type: "Business Permit",
           app_type: null,
@@ -786,6 +787,15 @@ export default {
       console.log("visible status: " + JSON.stringify(this.visible));
       this.visible = true;
     }
+  },
+  created() {
+    var result = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    this.form.reference_no = result;
   },
   methods: {
     payment_method(data) {
@@ -980,10 +990,13 @@ export default {
         };
         this.form.business.amo = amo;
       }
-      axios.post("permit/apply", this.form).then(save_permit => {
-        console.log("saved permit" + JSON.stringify(save_permit));
-        this.redirect("mainView");
-      });
+      this.$store.dispatch("GET_PERMIT", this.form);
+
+      this.redirect("mainView");
+      // axios.post("permit/apply", this.form).then(save_permit => {
+      //   console.log("saved permit" + JSON.stringify(save_permit));
+      //   this.redirect("mainView");
+      // });
     }
   }
 };

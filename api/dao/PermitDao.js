@@ -17,6 +17,19 @@ class PermitDao {
                     console.log("error this")
                     reject(err)
                 })
+
+
+        })
+    }
+    /**
+     * 
+     * @param {*} ref_no 
+     */
+    static getSearch(ref_no) {
+        return model.findOne({
+            application: {
+
+            }
         })
     }
 }

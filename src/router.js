@@ -9,26 +9,26 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component:Home,
-      children:[
+      component: Home,
+      children: [
         {
-          path:'',
-          name:'home',
+          path: '',
+          name: 'home',
           component: Landing
         },
         {
-          path:'news',
-          name:'news',
+          path: 'news',
+          name: 'news',
           component: () => import(/* webpackChunkName: "news" */ './views/News.vue'),
         },
         {
-          path:'permits',
-          name:'permits',
+          path: 'permits',
+          name: 'permits',
           component: () => import(/* webpackChunkName: "news" */ './views/Permits.vue'),
         },
         {
-          path:'taxes',
-          name:'taxes',
+          path: 'taxes',
+          name: 'taxes',
           component: () => import(/* webpackChunkName: "news" */ './views/Taxes.vue'),
         }
       ]
@@ -41,23 +41,28 @@ export default new Router({
     {
       path: '/app',
       component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
-      children:[
+      children: [
         {
-          path:'',
-          component:() => import('./views/app/Home')
+          path: '',
+          component: () => import('./views/app/Home')
         },
         {
-          path:'permits',
-          component:() => import('@/components/permits/Transactions')
+          path: 'permits',
+          component: () => import('@/components/permits/Transactions')
         },
         {
-          path:'taxes',
-          component:() => import('@/components/taxes/Transactions')
+          path: 'taxes',
+          component: () => import('@/components/taxes/Transactions')
         }
       ]
+    },
+    {
+      path: '/chatbot/reports/:type',
+      name: 'Map Reports',
+      component: () => import('./views/chatbot/ViewMapReports.vue'),
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
 })
