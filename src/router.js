@@ -59,7 +59,7 @@ export default new Router({
     {
       path: '/chatbot/reports/:type',
       name: 'Map Reports',
-      component: () => import('./views/chatbot/ViewMapReports.vue'),
+      component: () => import('./views/chatbot/SendReports.vue'),
     }
   ],
   scrollBehavior(to, from, savedPosition) {

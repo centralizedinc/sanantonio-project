@@ -3,14 +3,21 @@
     <GmapMap
       id="map"
       ref="map"
-      :center="{lat:coordinates.lat, lng:coordinates.lng}"
+      :center="center"
       :zoom="16"
       map-type-id="terrain"
       draggable="true"
       style="width: 100%; height: 300px"
+      @click="mapClick"
     >
       <!-- Current Location -->
-      <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
+      <GmapMarker
+        :draggable="true"
+        :position="coordinates"
+        @dragend="markerDragEnd"
+        :animation="marker_animation"
+        @animation_changed="resetAnimation"
+      />
 
       <!-- Fire -->
       <GmapMarker
@@ -21,7 +28,14 @@
         :icon="fire_icon"
         :position="coordinate"
         :animation="animation"
-      />
+        @click="coordinate.open=!coordinate.open"
+      >
+        <GmapInfoWindow v-if="coordinate.open" @closeclick="coordinate.open=false">
+          <b>Fire incident</b>
+          : Reported as of
+          <b>{{formatDate(coordinate.date_created)}}</b>
+        </GmapInfoWindow>
+      </GmapMarker>
 
       <!-- Civil Disturbance -->
       <GmapMarker
@@ -72,8 +86,10 @@ export default {
       civil_disturbance_icon,
       flood_icon,
       crime_icon,
+      center: { lat: 13.9413957, lng: 121.6234471 },
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
-      animation: {},
+      marker_animation: 0,
+      animation: 0,
       fire_coordinates: [],
       civil_disturbance_coordinates: [],
       flood_coordinates: [],
@@ -82,6 +98,14 @@ export default {
   },
   created() {
     this.report(this.$route.params.type);
+  },
+  watch: {
+    coordinates: {
+      handler(val) {
+        this.center = val;
+      },
+      deep: true
+    }
   },
   methods: {
     report(num) {
@@ -93,23 +117,23 @@ export default {
       var _self = this;
       this.$getLocation().then(coordinates => {
         this.coordinates = coordinates;
-        console.log('num :', num);
-        if (num === 1 || num === '1')
+        console.log("num :", num);
+        if (num === 1 || num === "1")
           this.fire_coordinates = this.generateSampleCoordinates(
             coordinates,
             5
           );
-        else if (num === 2 || num === '2')
+        else if (num === 2 || num === "2")
           this.civil_disturbance_coordinates = this.generateSampleCoordinates(
             coordinates,
             5
           );
-        else if (num === 3 || num === '3')
+        else if (num === 3 || num === "3")
           this.flood_coordinates = this.generateSampleCoordinates(
             coordinates,
             5
           );
-        else if (num === 4 || num === '4')
+        else if (num === 4 || num === "4")
           this.crime_coordinates = this.generateSampleCoordinates(
             coordinates,
             5
@@ -146,7 +170,8 @@ export default {
         coordinates.push({
           lat: coordinate.lat + lat,
           lng: coordinate.lng + lng,
-          date_created: new Date()
+          date_created: new Date(),
+          open: false
         });
         cnt++;
       }
@@ -154,7 +179,23 @@ export default {
     },
     getRandomInRange(from, to) {
       return (Math.random() * (to - from) + from) * 1;
-    }
+    },
+    mapClick(e) {
+      this.coordinates.lat = e.latLng.lat();
+      this.coordinates.lng = e.latLng.lng();
+      this.marker_animation = google.maps.Animation.DROP;
+    },
+    markerDragEnd(e) {
+      this.coordinates.lat = e.latLng.lat();
+      this.coordinates.lng = e.latLng.lng();
+      this.marker_animation = google.maps.Animation.DROP;
+    },
+    resetAnimation(e) {
+      setTimeout(function (params) {
+        this.marker_animation = 0;
+      }, 1000)
+    },
+    sendReport() {}
   }
 };
 </script>

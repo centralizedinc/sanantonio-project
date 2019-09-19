@@ -42,6 +42,63 @@
               slot="avatar"
             />
             <span slot="content">
+              Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
+              <br />
+              <br />Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
+              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
+              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
+              <a-row type="flex" justify="left" :gutter="8">
+                <a-col :span="8">
+                  <img
+                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/68884204_2402329830086417_5705499891048906752_n.jpg?_nc_cat=103&_nc_eui2=AeFWytHMYWs9zuKVSc66Uz4Vzxg5Fa29apiz6GRPbvDohFtrWnZSmJNQh7yRh9lXN8vJ70zZcgSgIats1MEQGjUq3E5gCFVUe0iLMyNjwEYzNw&_nc_oc=AQlhm_Ata0vUbn2X4lBylqa7US5UVX1_R0jPJglrMgZ_P_n_NMHEHPkTbako7qARnwI&_nc_ht=scontent.fmnl4-1.fna&oh=dfdb597ffcc9803311c6ee9595137e38&oe=5E0B2330"
+                    width="200vw"
+                  />
+                </a-col>
+                <a-col :span="8">
+                  <img
+                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/69328402_2402330370086363_5505522112053379072_n.jpg?_nc_cat=104&_nc_eui2=AeGxNBzkgXSgg5qIiVqLY1NEpKyT_tTkR37ksGgeoILMALw5WvfDNzXaWwkYZkq1XM9XdXGr110D0N0mPkMnUSkM2KviNV3JJ0lmG5dAuziRfg&_nc_oc=AQkDxwmp8bmZljizqeHvaM2tcuRak12oFLQQkfQDT3AbvWxIxvZhvr1iwFZCrAF1wm0&_nc_ht=scontent.fmnl4-1.fna&oh=8cb72f822d8666af514b9e815f2a9d99&oe=5E05A32B"
+                    width="200vw"
+                  />
+                </a-col>
+              </a-row>
+            </span>
+            <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
+              <span>{{moment().fromNow()}}</span>
+            </a-tooltip>
+          </a-comment>
+        </a-card>
+
+        <a-card style="margin-bottom: 2vh">
+          <a-comment>
+            <template slot="actions">
+              <span>
+                <a-tooltip title="Like">
+                  <a-icon
+                    type="like"
+                    :theme="action === 'liked' ? 'filled' : 'outlined'"
+                    @click="like"
+                  />
+                </a-tooltip>
+                <span style="padding-left: '8px';cursor: 'auto'">{{likes}}</span>
+              </span>
+              <span>
+                <a-tooltip title="Dislike">
+                  <a-icon
+                    type="dislike"
+                    :theme="action === 'disliked' ? 'filled' : 'outlined'"
+                    @click="dislike"
+                  />
+                </a-tooltip>
+                <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
+              </span>
+            </template>
+            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
+            <a-avatar
+              src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
+              alt="alcala photo"
+              slot="avatar"
+            />
+            <span slot="content">
               INGAT PO TAYO AT MAGING ALERTO:
               <br />
               <br />NDRRMC (4:30PM, 13Sept2019)
@@ -56,7 +113,7 @@
                 </a-col>
               </a-row>
             </span>
-            <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
+            <a-tooltip slot="datetime" :title="formatDate(moment().format('YYYY-MM-DD HH:mm:ss'))">
               <span>{{moment().fromNow()}}</span>
             </a-tooltip>
           </a-comment>
@@ -162,63 +219,6 @@
             </a-tooltip>
           </a-comment>
         </a-card>
-
-        <a-card style="margin-bottom: 2vh">
-          <a-comment>
-            <template slot="actions">
-              <span>
-                <a-tooltip title="Like">
-                  <a-icon
-                    type="like"
-                    :theme="action === 'liked' ? 'filled' : 'outlined'"
-                    @click="like"
-                  />
-                </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{likes}}</span>
-              </span>
-              <span>
-                <a-tooltip title="Dislike">
-                  <a-icon
-                    type="dislike"
-                    :theme="action === 'disliked' ? 'filled' : 'outlined'"
-                    @click="dislike"
-                  />
-                </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
-              </span>
-            </template>
-            <a slot="author">Mayor Roderick "Don Don" Alcala</a>
-            <a-avatar
-              src="https://i.postimg.cc/d3vrh9Jx/images.jpg"
-              alt="alcala photo"
-              slot="avatar"
-            />
-            <span slot="content">
-              Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
-              <br />
-              <br />Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
-              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
-              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
-              <a-row type="flex" justify="left" :gutter="8">
-                <a-col :span="8">
-                  <img
-                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/68884204_2402329830086417_5705499891048906752_n.jpg?_nc_cat=103&_nc_eui2=AeFWytHMYWs9zuKVSc66Uz4Vzxg5Fa29apiz6GRPbvDohFtrWnZSmJNQh7yRh9lXN8vJ70zZcgSgIats1MEQGjUq3E5gCFVUe0iLMyNjwEYzNw&_nc_oc=AQlhm_Ata0vUbn2X4lBylqa7US5UVX1_R0jPJglrMgZ_P_n_NMHEHPkTbako7qARnwI&_nc_ht=scontent.fmnl4-1.fna&oh=dfdb597ffcc9803311c6ee9595137e38&oe=5E0B2330"
-                    width="200vw"
-                  />
-                </a-col>
-                <a-col :span="8">
-                  <img
-                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/69328402_2402330370086363_5505522112053379072_n.jpg?_nc_cat=104&_nc_eui2=AeGxNBzkgXSgg5qIiVqLY1NEpKyT_tTkR37ksGgeoILMALw5WvfDNzXaWwkYZkq1XM9XdXGr110D0N0mPkMnUSkM2KviNV3JJ0lmG5dAuziRfg&_nc_oc=AQkDxwmp8bmZljizqeHvaM2tcuRak12oFLQQkfQDT3AbvWxIxvZhvr1iwFZCrAF1wm0&_nc_ht=scontent.fmnl4-1.fna&oh=8cb72f822d8666af514b9e815f2a9d99&oe=5E05A32B"
-                    width="200vw"
-                  />
-                </a-col>
-              </a-row>
-            </span>
-            <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
-              <span>{{moment().fromNow()}}</span>
-            </a-tooltip>
-          </a-comment>
-        </a-card>
       </template>
     </a-col>
   </a-row>
@@ -231,7 +231,7 @@ export default {
     return {
       subscribers: [],
       moment,
-      likes: 526,
+      likes: 845,
       dislikes: 0,
       action: null,
       loading: false
