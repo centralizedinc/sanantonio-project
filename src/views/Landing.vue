@@ -168,15 +168,6 @@
         />
       </a-col>
     </a-row>
-    <!-- <div id="fb-root"></div>
-    <div
-      class="fb-customerchat"
-      attribution="setup_tool"
-      page_id="109048890468083"
-      theme_color="#0084ff"
-      logged_in_greeting="Hi! I'm Mayor Alcala, How can I help you?"
-      logged_out_greeting="Hi! I'm Mayor Alcala, How can I help you?"
-    ></div> -->
   </div>
 </template>
 
@@ -208,7 +199,6 @@ export default {
   }
 };
 </script>
-<!-- Load Facebook SDK for JavaScript -->
    
 <style>
 .textShadow {
