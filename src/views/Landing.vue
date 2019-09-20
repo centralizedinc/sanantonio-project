@@ -49,7 +49,7 @@
                   />
                 </a-input>
               </a-form-item>
-              <a-button size="large" block ghost>Login</a-button>
+              <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
               <a-divider></a-divider>
               <p style="color:white">Login using facebook or google accounts</p>
               <a-row type="flex" gutter="16">
