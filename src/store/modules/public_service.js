@@ -37,12 +37,12 @@ function initialState() {
             id: 1
         }, {
             date_created: new Date(),
-            message: 'Maraming salamat po Mayor sa pagpapagawa nyo tricycle application para sa Lucena. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Erick Wagan  !',
+            message: 'Maraming salamat po Mayor sa pagpapagawa nyo tricycle application para sa San Antonio. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Erick Wagan  !',
             likes: 532,
             id: 2
         }, {
             date_created: new Date(),
-            message: 'Thank po Mayor Erick Wagan for doing a great job in Lucena City. Godbless you ! ',
+            message: 'Thank po Mayor Erick Wagan for doing a great job in San Antonio. Godbless you ! ',
             likes: 831,
             id: 3
         }, {
