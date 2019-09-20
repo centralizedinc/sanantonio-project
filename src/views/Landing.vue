@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+      :style="`background-image:url('${bg_image}'); height:100%;background-repeat: no-repeat;
   background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">
@@ -49,7 +49,7 @@
                   />
                 </a-input>
               </a-form-item>
-              <a-button size="large" block ghost>Login</a-button>
+              <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
               <a-divider></a-divider>
               <p style="color:white">Login using facebook or google accounts</p>
               <a-row type="flex" gutter="16">
@@ -172,10 +172,12 @@
 </template>
 
 <script>
+import bg_image from '@/assets/landing.jpg'
 export default {
   data() {
     return {
-      reveal: false
+      reveal: false,
+      bg_image
     };
   },
   methods: {
