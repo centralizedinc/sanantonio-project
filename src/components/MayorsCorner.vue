@@ -40,9 +40,9 @@
             <span slot="content">
               Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
               <br />
-              <br />Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
-              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
-              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
+              <br />Bilang isang lider po mula sa ating Lungsod ng San Antonio, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
+              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsod ng San Antonio ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
+              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng San Antonio.
               <a-row type="flex" justify="left" :gutter="8">
                 <a-col :span="8">
                   <img
@@ -192,7 +192,7 @@
             <span slot="content">
               PABATID: Ang Northern Quezon kasama po ang ating lungsod ay nananatiling na signal no. 1 ayon sa latest weather bulletin ng PAGASA kaya sa bisa pa din po ng E.O. No. 26 series of 2012 ay nananatiling sa mga pre-elementary or nursery at kinder lang po ang walang pasok bukas, Agosto 28, 2019.
               <br />
-              <br />Mag-ingat po at manatiling handa ang bawat pamilyang Lucenahin!
+              <br />Mag-ingat po at manatiling handa ang bawat pamilyang San Antonio!
               <a-row type="flex" justify="left" :gutter="8">
                 <a-col :span="8">
                   <img
