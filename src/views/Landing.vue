@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+      :style="`background-image:url('${bg_image}'); height:100%;background-repeat: no-repeat;
   background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">
@@ -172,10 +172,12 @@
 </template>
 
 <script>
+import bg_image from '@/assets/landing.jpg'
 export default {
   data() {
     return {
-      reveal: false
+      reveal: false,
+      bg_image
     };
   },
   methods: {
