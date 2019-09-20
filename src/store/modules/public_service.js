@@ -32,22 +32,22 @@ function initialState() {
         }],
         messages: [{
             date_created: new Date(),
-            message: 'Keep up the good work and more power . God bless . Thank you very much Mayor Dondon Alcala !',
+            message: 'Keep up the good work and more power . God bless . Thank you very much Mayor Erick Wagan !',
             likes: 421,
             id: 1
         }, {
             date_created: new Date(),
-            message: 'Maraming salamat po Mayor sa pagpapagawa nyo tricycle application para sa Lucena. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Dondon Alcala !',
+            message: 'Maraming salamat po Mayor sa pagpapagawa nyo tricycle application para sa Lucena. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Erick Wagan  !',
             likes: 532,
             id: 2
         }, {
             date_created: new Date(),
-            message: 'Thank po Mayor Dondon Alcala for doing a great job in Lucena City. Godbless you ! ',
+            message: 'Thank po Mayor Erick Wagan for doing a great job in Lucena City. Godbless you ! ',
             likes: 831,
             id: 3
         }, {
             date_created: new Date(),
-            message: 'GO MAYOR DONDON,in everything you do,I am for you.Will continue praying for your well being.🙏🙏🙏',
+            message: 'GO MAYOR ERICK WAGAN,in everything you do,I am for you.Will continue praying for your well being.🙏🙏🙏',
             likes: 719,
             id: 4
         }]
