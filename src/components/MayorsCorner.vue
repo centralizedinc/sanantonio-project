@@ -47,13 +47,13 @@
                 <a-col :span="8">
                   <img
                     src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/68884204_2402329830086417_5705499891048906752_n.jpg?_nc_cat=103&_nc_eui2=AeFWytHMYWs9zuKVSc66Uz4Vzxg5Fa29apiz6GRPbvDohFtrWnZSmJNQh7yRh9lXN8vJ70zZcgSgIats1MEQGjUq3E5gCFVUe0iLMyNjwEYzNw&_nc_oc=AQlhm_Ata0vUbn2X4lBylqa7US5UVX1_R0jPJglrMgZ_P_n_NMHEHPkTbako7qARnwI&_nc_ht=scontent.fmnl4-1.fna&oh=dfdb597ffcc9803311c6ee9595137e38&oe=5E0B2330"
-                    width="200vw"
+                    width="200vw" alt=""
                   />
                 </a-col>
                 <a-col :span="8">
                   <img
                     src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/69328402_2402330370086363_5505522112053379072_n.jpg?_nc_cat=104&_nc_eui2=AeGxNBzkgXSgg5qIiVqLY1NEpKyT_tTkR37ksGgeoILMALw5WvfDNzXaWwkYZkq1XM9XdXGr110D0N0mPkMnUSkM2KviNV3JJ0lmG5dAuziRfg&_nc_oc=AQkDxwmp8bmZljizqeHvaM2tcuRak12oFLQQkfQDT3AbvWxIxvZhvr1iwFZCrAF1wm0&_nc_ht=scontent.fmnl4-1.fna&oh=8cb72f822d8666af514b9e815f2a9d99&oe=5E05A32B"
-                    width="200vw"
+                    width="200vw" alt=""
                   />
                 </a-col>
               </a-row>
@@ -100,7 +100,7 @@
                 <a-col :span="8">
                   <img
                     src="https://i.postimg.cc/8PGxP99m/Screen-Shot-2019-09-19-at-12-25-23-PM.png"
-                    width="200vw"
+                    width="200vw" alt=""
                   />
                 </a-col>
               </a-row>
@@ -149,11 +149,11 @@
                 <a-col :span="8">
                   <img
                     src="https://cdn.pixabay.com/photo/2015/10/18/19/11/fish-995050_960_720.png"
-                    width="200vw"
+                    width="200vw" alt=""
                   />
                 </a-col>
                 <a-col :span="8">
-                  <img src="https://image.flaticon.com/icons/svg/1661/1661940.svg" width="200vw" />
+                  <img src="https://image.flaticon.com/icons/svg/1661/1661940.svg" width="200vw" alt=""/>
                 </a-col>
               </a-row>
             </span>
@@ -197,7 +197,7 @@
                 <a-col :span="8">
                   <img
                     src="https://i2.wp.com/outoftownblog.com/wp-content/uploads/2018/07/Guidelines-on-the-Suspension-of-Classes-When-Typhoons-and-Other-Calamities-Occur.jpg?resize=600%2C450&ssl=1"
-                    width="450vw"
+                    width="450vw" alt=""
                   />
                 </a-col>
               </a-row>
