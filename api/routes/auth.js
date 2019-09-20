@@ -5,8 +5,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 passport.use(new FacebookStrategy({
-    clientID: "2389720377982988",
-    clientSecret: "cb8f2158e103ddb3cc7595b96a2f231e",
+    clientID: process.env.VUE_APP_FB_CLIENT_ID || "792808124468010",
+    clientSecret: process.env.VUE_APP_FB_CLIENT_SECRET || "7328f4662bfc1005b5eb0c3833bd72c7",
     callbackURL: `${process.env.VUE_APP_BASE_API_URI}/auth/facebook/callback`,
     enableProof: true,
     profileFields: ['id', 'displayName', 'photos', 'email', 'gender', 'first_name', 'last_name', 'middle_name']
@@ -17,8 +17,8 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.use('google', new GoogleStrategy({
-    clientID: '271549267606-fd6h2lphs0lft2ldg7m22mufau4lo9jq.apps.googleusercontent.com',
-    clientSecret: 'ZpwIOSXOLx7hfVn1RCTUbpXR',
+    clientID: process.env.VUE_APP_GOOGLE_CLIENT_ID || '958762272484-1qrbogfpk6p6qudob282dcvi99d4hh2l.apps.googleusercontent.com',
+    clientSecret: process.env.VUE_APP_GOOGLE_CLIENT_SECRET || 'rrnW2XuHxyiOOYHkKWKnjasO',
     callbackURL: `${process.env.VUE_APP_BASE_API_URI}/auth/google/callback`
 },
     function (google_access_token, refreshToken, profile, done) {

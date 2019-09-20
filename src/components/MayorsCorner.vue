@@ -11,7 +11,7 @@
       </template>
 
       <template v-else>
-        <a-card style="margin-bottom: 2vh">
+        <!-- <a-card style="margin-bottom: 2vh">
           <a-comment>
             <template slot="actions">
               <span>
@@ -62,7 +62,7 @@
               <span>{{moment().fromNow()}}</span>
             </a-tooltip>
           </a-comment>
-        </a-card>
+        </a-card> -->
 
         <a-card style="margin-bottom: 2vh">
           <a-comment>
